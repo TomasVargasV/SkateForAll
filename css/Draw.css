@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    min-height: 100vh;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+    background-color: #111;
+    
+}
+  .logo {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .logo-red {
+    color: #ff3c3c;
+  }
+  
+  .logo-white {
+    color: #ffffff;
+    margin-left: 5px;
+  }
+  
+  nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+  }
+  
+  main.main-dark {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+    gap: 30px;
+  }
+  
+  .empresa-info {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .empresa-card {
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* <-- aqui está o ajuste */
+    text-align: center;
+  }
+  
+  
+  .empresa-logo {
+    background-color: #ffffff20;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .empresa-logo img {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+  
+  .sorteio-info {
+    flex: 2;
+    min-width: 300px;
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .sorteio-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .destaque {
+    color: #ff3c3c;
+    font-weight: bold;
+  }
+  
+  .video-placeholder {
+    background-color: #333c45;
+    height: 200px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .play-icon {
+    color: #999;
+    font-size: 50px;
+  }
+  
+  .btn-sorteio {
+    background-color: #ff3c3c;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+  
+  .btn-sorteio:hover {
+    background-color: #e32b2b;
+  }
+  
+  @media (max-width: 900px) {
+    main.main-dark {
+      flex-direction: column;
+    }
+  
+    .empresa-card, .sorteio-info {
+      width: 100%;
+      padding: 30px 20px;
+    }
+  
+    .empresa-logo {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .empresa-logo img {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .sorteio-info h1 {
+      font-size: 20px;
+    }
+}
