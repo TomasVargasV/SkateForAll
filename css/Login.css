@@ -1,0 +1,158 @@
+body{
+    background-color: #111;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: #111;
+    
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+.logo img {
+    height: 100px; 
+    width: 160px; 
+}
+
+
+.login-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .login-image {
+    flex: 1;
+    max-width: 40%;
+}
+
+.login-image img {
+    width: 100%;
+    height: auto;
+    max-height: 110vh;
+    object-fit: cover;
+    animation: fadeIn 1.5s ease forwards;
+}
+  
+  .login-box {
+    flex: 1;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-box h2 {
+    font-size: 2rem;
+    color: #E63946;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  
+  .form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-group input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .btn-login {
+    padding: 0.75rem;
+    background-color: #E63946;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-color: #d62828;
+  }
+  
+  .esqueci-senha {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .esqueci-senha:hover {
+    color: #E63946;
+  }
+  .btn-register {
+    padding: 0.75rem;
+    background-color: #E63946;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-register:hover {
+    background-color: #d62828;
+  }
+  
+  /* ANIMAÇÃO ENTRADA */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+  }
+  
+  /* RESPONSIVO */
+  @media (max-width: 768px) {
+    .login-wrapper {
+      flex-direction: column;
+    }
+  
+    .login-image {
+      height: 200px;
+    }
+  
+    .login-box {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
