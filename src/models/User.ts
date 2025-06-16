@@ -3,7 +3,6 @@ import {
     BeforeInsert, BeforeUpdate
 } from "typeorm";
 import bcrypt from "bcryptjs";
-import { Donation } from "../models/Donation"; // ajuste o caminho conforme a estrutura do seu projeto
 
 @Entity()
 export class User {
@@ -30,12 +29,6 @@ export class User {
 
     @Column({length: 50})
     state: string;
-
-    @OneToMany(() => Donation, donation => donation.donor)
-    donationsMade!: Donation[];
-
-    @OneToMany(() => Donation, donation => donation.recipient)
-    donationsReceived!: Donation[];
 
     constructor(name: string, email: string, password: string, phone: string, address: string, state: string) {
         this.name = name;
