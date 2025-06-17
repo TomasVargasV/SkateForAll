@@ -1,50 +1,46 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.card');
     const overlay = document.querySelector('.overlay');
-    const closeButtons = document.querySelectorAll('.close-btn');
+    let expandedCardClone = null;
 
     cards.forEach(card => {
         const button = card.querySelector('.card-btn');
 
         button.addEventListener('click', () => {
-            // Close any other open cards
-            cards.forEach(c => {
-                if (c !== card && c.classList.contains('expanded')) {
-                    c.classList.remove('expanded');
-                }
-            });
+            if (expandedCardClone) {
+                closeCard(expandedCardClone);
+            }
 
-            // Expand the clicked card
-            card.classList.add('expanded');
+            const clone = card.cloneNode(true);
+            clone.classList.add('expanded');
+            document.body.appendChild(clone);
             overlay.classList.add('active');
-
-            // Prevent scrolling on the background
             document.body.style.overflow = 'hidden';
+            expandedCardClone = clone;
+
+            const closeButton = clone.querySelector('.close-btn');
+            closeButton.addEventListener('click', function () {
+                closeCard(clone);
+            });
         });
     });
 
-    // Close functionality
-    function closeCard() {
-        cards.forEach(card => {
-            card.classList.remove('expanded');
-        });
+    function closeCard(clone) {
+        clone.remove();
         overlay.classList.remove('active');
         document.body.style.overflow = 'auto';
+        expandedCardClone = null;
     }
 
-    // Close when clicking overlay
-    overlay.addEventListener('click', closeCard);
-
-    // Close when clicking close button
-    closeButtons.forEach(button => {
-        button.addEventListener('click', closeCard);
+    overlay.addEventListener('click', () => {
+        if (expandedCardClone) {
+            closeCard(expandedCardClone);
+        }
     });
 
-    // Close when pressing Escape key
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeCard();
+        if (e.key === 'Escape' && expandedCardClone) {
+            closeCard(expandedCardClone);
         }
     });
 });

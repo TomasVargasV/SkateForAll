@@ -30,28 +30,24 @@
         </nav>
     </header>
 
-    <!-- <section class="banner">
+    <section class="banner">
         <img src="../img/bannerSkatista06.jpg" alt="Skatista">
         <div class="banner-text">
             <h2>DOE SKATES,<br>TRANSFORME VIDAS</h2>
             <a href="../html/registerScream.html" class="btn-doar">DOAR AGORA</a>
         </div>
-    </section> -->
-
-
-
+    </section>
 
     <div class="cards-container">
-        <!-- Card 1 -->
         <div class="card">
-            <div class="tag">Popular</div>
             <div class="card-image">
                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Mountain Landscape">
             </div>
             <div class="card-content">
                 <h3 class="card-title"><i class="fas fa-mountain"></i> Mountain Adventure</h3>
                 <div class="card-description">
-                    <p>Experience breathtaking mountain views on our guided tours. Our expert guides will take you through scenic trails while sharing knowledge about local flora and fauna.</p>
+                    <p>Experience breathtaking mountain views on our guided tours. Our expert guides will take you
+                        through scenic trails while sharing knowledge about local flora and fauna.</p>
                     <p>Package includes:</p>
                     <ul>
                         <li>3-day guided hiking tour</li>
@@ -59,23 +55,23 @@
                         <li>All meals included</li>
                         <li>Safety equipment provided</li>
                     </ul>
-                    <p>Perfect for both beginners and experienced hikers. We provide customized routes based on your fitness level and preferences.</p>
+                    <p>Perfect for both beginners and experienced hikers. We provide customized routes based on your
+                        fitness level and preferences.</p>
                 </div>
                 <button class="card-btn"><i class="fas fa-info-circle"></i> View Details</button>
             </div>
             <div class="close-btn">×</div>
         </div>
-        
-        <!-- Card 2 -->
+
         <div class="card">
-            <div class="tag">New</div>
             <div class="card-image">
                 <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206" alt="Beach Vacation">
             </div>
             <div class="card-content">
                 <h3 class="card-title"><i class="fas fa-umbrella-beach"></i> Tropical Getaway</h3>
                 <div class="card-description">
-                    <p>Relax on pristine beaches with crystal clear waters. Our tropical resorts offer the perfect blend of relaxation and adventure.</p>
+                    <p>Relax on pristine beaches with crystal clear waters. Our tropical resorts offer the perfect blend
+                        of relaxation and adventure.</p>
                     <p>Package includes:</p>
                     <ul>
                         <li>5 nights in luxury beachfront villa</li>
@@ -83,23 +79,23 @@
                         <li>Snorkeling and kayaking equipment</li>
                         <li>Sunset cruise experience</li>
                     </ul>
-                    <p>Optional activities include scuba diving certification courses and guided island tours. Enjoy spa treatments with ocean views and fresh seafood dinners on the beach.</p>
+                    <p>Optional activities include scuba diving certification courses and guided island tours. Enjoy spa
+                        treatments with ocean views and fresh seafood dinners on the beach.</p>
                 </div>
                 <button class="card-btn"><i class="fas fa-info-circle"></i> View Details</button>
             </div>
             <div class="close-btn">×</div>
         </div>
-        
-        <!-- Card 3 -->
+
         <div class="card">
-            <div class="tag">Featured</div>
             <div class="card-image">
                 <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d" alt="City Exploration">
             </div>
             <div class="card-content">
                 <h3 class="card-title"><i class="fas fa-city"></i> Urban Experience</h3>
                 <div class="card-description">
-                    <p>Discover vibrant cities with our curated urban experiences. From historic landmarks to modern architecture, we'll show you the best each city has to offer.</p>
+                    <p>Discover vibrant cities with our curated urban experiences. From historic landmarks to modern
+                        architecture, we'll show you the best each city has to offer.</p>
                     <p>Features include:</p>
                     <ul>
                         <li>Guided tours of cultural landmarks</li>
@@ -107,44 +103,16 @@
                         <li>Food tasting experiences</li>
                         <li>Personalized itinerary planning</li>
                     </ul>
-                    <p>Our urban experts will help you navigate the city like a local, with insider tips on hidden gems and must-see attractions. Experience the nightlife, arts, and culinary scenes that make each city unique.</p>
+                    <p>Our urban experts will help you navigate the city like a local, with insider tips on hidden gems
+                        and must-see attractions. Experience the nightlife, arts, and culinary scenes that make each
+                        city unique.</p>
                 </div>
                 <button class="card-btn"><i class="fas fa-info-circle"></i> View Details</button>
             </div>
             <div class="close-btn">×</div>
         </div>
     </div>
-    
     <div class="overlay"></div>
-
-    <!-- <section class="produtos">
-        <div class="card">
-            <img src="../img/skateMontado01.webp" alt="Skate" class="card-img">
-            <div class="card-info">
-                <p class="card-title">Skate</p>
-                <button class="card-opener">+</button>
-            </div>
-            <div class="card-description">
-                <p>
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                </p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="../img/truckIndependent01.jpg" alt="Truck" class="card-img">
-            <div class="card-info">
-                <p class="card-title">Truck</p>
-                <button class="card-opener">+</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="../img/rodas02.jpg" alt="Roda" class="card-img">
-            <div class="card-info">
-                <p class="card-title">Roda</p>
-                <button class="card-opener">+</button>
-            </div>
-        </div>
-    </section> -->
 
     <section class="sobre">
         <div class="sobre-conteudo">
@@ -173,71 +141,7 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.card');
-            const overlay = document.querySelector('.overlay');
-            const closeButtons = document.querySelectorAll('.close-btn');
-            let expandedCard = null;
-            
-            cards.forEach(card => {
-                const button = card.querySelector('.card-btn');
-                
-                button.addEventListener('click', () => {
-                    // Close any other open card first
-                    if (expandedCard) {
-                        closeCard(expandedCard);
-                    }
-                    
-                    // Expand the clicked card
-                    expandCard(card);
-                });
-            });
-            
-            // Expand card function
-            function expandCard(card) {
-                expandedCard = card;
-                card.classList.add('expanded');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            // Close card function
-            function closeCard(card) {
-                card.classList.remove('expanded');
-                overlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                expandedCard = null;
-            }
-            
-            // Close when clicking overlay
-            overlay.addEventListener('click', () => {
-                if (expandedCard) {
-                    closeCard(expandedCard);
-                }
-            });
-            
-            // Close when clicking close button
-            closeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const card = this.closest('.card');
-                    if (card && card.classList.contains('expanded')) {
-                        closeCard(card);
-                    }
-                });
-            });
-            
-            // Close when pressing Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && expandedCard) {
-                    closeCard(expandedCard);
-                }
-            });
-        });
-    </script>
-
-
 </body>
+<script src="../src//js/card-expander.js"></script>
 <script src="../src/js/homeScreen.js"></script>
-
 </html>
