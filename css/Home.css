@@ -20,8 +20,8 @@ header {
 
 
 .logo img {
-    height: 100px; /* Ajuste conforme o tamanho que você quiser */
-    width: 160px; /* Mantém a proporção da imagem */
+    height: 100px; 
+    width: 160px; 
 }
 
 
@@ -170,19 +170,11 @@ nav a:hover {
     max-height: 90vh;
     z-index: 1000;
     animation: expandCard 0.4s ease forwards;
-    transition: none !important;
 }
 
 .card.expanded .card-description {
     max-height: 500px;
     padding-top: 15px;
-    overflow-y: auto;
-    opacity: 1;
-    transition: max-height 0.5s ease, opacity 0.3s ease 0.2s;
-}
-
-.card.expanded .card-btn {
-    background: linear-gradient(to right, #36d1dc, #5b86e5);
 }
 
 .overlay {
@@ -211,7 +203,7 @@ nav a:hover {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #ff4b2b;
+    background: red;
     color: white;
     display: flex;
     align-items: center;
@@ -219,18 +211,11 @@ nav a:hover {
     font-size: 1.5rem;
     cursor: pointer;
     opacity: 0;
-    transition: all 0.3s ease;
     z-index: 1001;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card.expanded .close-btn {
     opacity: 1;
-}
-
-.close-btn:hover {
-    transform: rotate(90deg);
-    background: #ff2b1d;
 }
 
 @keyframes expandCard {
@@ -243,28 +228,6 @@ nav a:hover {
         opacity: 1;
     }
 }
-
-@media (max-width: 768px) {
-    .cards-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .card.expanded {
-        width: 95%;
-        max-height: 85vh;
-    }
-    
-    h1 {
-        font-size: 2.2rem;
-    }
-}
-
-
-
-
-
-
-
 
 
 
