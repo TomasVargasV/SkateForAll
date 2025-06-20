@@ -8,20 +8,23 @@ body {
     font-family: Arial, sans-serif;
     background-color: #111;
     color: white;
+    /* padding-left: 100px;
+    padding-right: 100px; */
 }
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px 40px;
     background-color: #111;
-    
+
 }
 
 
 .logo img {
-    height: 100px; 
-    width: 160px; 
+    height: 100px;
+    width: 160px;
 }
 
 
@@ -45,7 +48,7 @@ nav a:hover {
 .banner {
     position: relative;
     width: 100%;
-    height: 500px; 
+    height: 500px;
     overflow: hidden;
 }
 
@@ -90,13 +93,20 @@ nav a:hover {
 
 .cards-container {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    display: flex;
+    gap: 30px;
     padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    flex-wrap: wrap;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 400px;
     border-radius: 15px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.95);
@@ -113,9 +123,9 @@ nav a:hover {
 }
 
 .card-image img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 .card-content {
@@ -125,12 +135,10 @@ nav a:hover {
 }
 
 .card-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #222;
     display: flex;
+    font-size: 1.5rem;
+    color: #222;
     align-items: center;
-    gap: 10px;
 }
 
 .card-description {
@@ -138,6 +146,14 @@ nav a:hover {
     line-height: 1.6;
     max-height: 0;
     overflow: hidden;
+}
+
+.card-subtitle{
+    margin-bottom: 10px;
+}
+
+.card-obs{
+    margin-top: 10px;
 }
 
 .card-btn {
@@ -223,101 +239,12 @@ nav a:hover {
         transform: translate(-50%, -50%) scale(0.9);
         opacity: 0.7;
     }
+
     100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
 }
-
-
-
-
-
-/* .produtos {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 40px 20px;
-    flex-wrap: wrap;
-    background-color: #000;
-}
-
-.card{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    padding: 20px;
-    border-radius: 10px;
-    border-top: 4px solid red;
-    background-color: #111;
-
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #ff4d4d, #ff9966);
-}
-
-.card-img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.card-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.card-title{
-    width: 100%;
-}
-
-.card-opener{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: none;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    font-size: xx-large;
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-description {
-    max-height: 0;
-    overflow: hidden;
-    color: #ccc;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    padding: 0 5px;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-}
-
-.card.active .card-description {
-    max-height: 200px;
-    padding: 15px 5px;
-} */
-
 
 footer {
     background-color: #353535;
@@ -350,6 +277,7 @@ footer {
         align-items: center;
     }
 }
+
 .sobre {
     background-color: #000;
     padding: 60px 20px;
@@ -383,7 +311,7 @@ footer {
     line-height: 1.6;
     margin-bottom: 15px;
     color: #ccc;
-    
+
 }
 
 .sobre-imagem {
@@ -396,7 +324,7 @@ footer {
     width: 100%;
     max-width: 500px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -408,5 +336,38 @@ footer {
     .sobre-texto h2 {
         font-size: 28px;
     }
-    
+
+}
+
+/* Estilo para o novo botão de detalhes */
+.detail-btn {
+    background: green;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+    display: none; /* Inicialmente oculto */
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-btn:hover {
+    background: darkgreen;
+    transform: translateY(-3px);
+}
+
+/* Mostrar o botão de detalhes apenas no card expandido */
+.card.expanded .detail-btn {
+    display: flex;
+}
+
+/* Ocultar o botão normal no card expandido */
+.card.expanded .card-btn {
+    display: none;
 }
