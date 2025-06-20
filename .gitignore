@@ -136,5 +136,4 @@ dist
 .pnp.*
 # Ignorar arquivos de configuração e dependências
 package-lock.json
-package.json
 tsconfig.json
