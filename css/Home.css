@@ -39,6 +39,18 @@ nav a {
     transition: 0.3s;
 }
 
+.logoutBtn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.logoutBtn:hover {
+    color: red;
+}
+
 nav a:hover {
     color: red;
 }
@@ -146,11 +158,11 @@ nav a:hover {
     overflow: hidden;
 }
 
-.card-subtitle{
+.card-subtitle {
     margin-bottom: 10px;
 }
 
-.card-obs{
+.card-obs {
     margin-top: 10px;
 }
 
@@ -243,96 +255,6 @@ nav a:hover {
         opacity: 1;
     }
 }
-
-
-
-
-
-/* .produtos {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 40px 20px;
-    flex-wrap: wrap;
-    background-color: #000;
-}
-
-.card{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    padding: 20px;
-    border-radius: 10px;
-    border-top: 4px solid red;
-    background-color: #111;
-
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #ff4d4d, #ff9966);
-}
-
-.card-img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.card-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.card-title{
-    width: 100%;
-}
-
-.card-opener{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: none;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    font-size: xx-large;
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-description {
-    max-height: 0;
-    overflow: hidden;
-    color: #ccc;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    padding: 0 5px;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-}
-
-.card.active .card-description {
-    max-height: 200px;
-    padding: 15px 5px;
-} */
-
 
 footer {
     background-color: #353535;
@@ -427,9 +349,8 @@ footer {
 
 }
 
-/* Estilo para o novo botão de detalhes */
 .detail-btn {
-    background: green;
+    background: red;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -440,22 +361,71 @@ footer {
     margin-top: 20px;
     align-self: flex-start;
     transition: all 0.3s ease;
-    display: none; /* Inicialmente oculto */
+    display: none;
     align-items: center;
-    gap: 8px;
 }
 
 .detail-btn:hover {
-    background: darkgreen;
     transform: translateY(-3px);
 }
 
-/* Mostrar o botão de detalhes apenas no card expandido */
 .card.expanded .detail-btn {
     display: flex;
 }
 
-/* Ocultar o botão normal no card expandido */
 .card.expanded .card-btn {
     display: none;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.dropdown-toggle:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-toggle i {
+    font-size: 24px;
+    color: #333;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    margin-top: 10px;
+}
+
+.dropdown-menu.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
