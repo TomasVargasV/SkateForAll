@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #111;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  header {
+    background-color: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    height: 100px;
+  }
+  
+  .logo img {
+    height: 100px;
+    width: 100px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+  
+  nav ul li a,
+  nav ul li {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a:hover,
+  nav ul li:hover {
+    color: red;
+  }
+  
+  #noLogin {
+    display: none;
+  }
+  
+  /* Container do perfil */
+  .profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
+  
+  .profile-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: red;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+  }
+  
+  form input:disabled {
+    background-color: #222;
+    color: #aaa;
+  }
+  
+  .botoes {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .botoes button {
+    flex: 1 1 45%;
+    padding: 12px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .botoes button:hover {
+    background-color: #cc0000;
+  }
+  
+  .botoes button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 20px;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .profile-container {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .botoes button {
+      flex: 1 1 100%;
+    }
+  }
+  

@@ -5,7 +5,7 @@ import {
 import bcrypt from "bcryptjs";
 
 @Entity()
-export class User {
+export class Company {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -13,7 +13,16 @@ export class User {
     name: string;
 
     @Column({ unique: true })
+    CNPJ: number;
+
+    @Column({ unique: true })
     email: string;
+
+    @Column({ length: 100 })
+    phone: string;
+
+    @Column({ length: 100 })
+    BusinessAddress: string;
 
     @Column()
     password: string;
@@ -21,23 +30,14 @@ export class User {
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
-    @Column({ length: 100 })
-    phone: string;
 
-    @Column({ length: 100 })
-    address: string;
-
-    @Column({length: 50})
-    state: string;
-
-
-    constructor(name: string, email: string, password: string, phone: string, address: string, state: string) {
+    constructor(name: string,CNPJ:number, email: string, password: string, phone: string, BusinessAddress: string) {
         this.name = name;
+        this.CNPJ = CNPJ;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.address = address;
-        this.state = state;
+        this.BusinessAddress = BusinessAddress;
         }
 
     @BeforeInsert()
