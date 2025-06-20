@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="../css/Home.css">
 </head>
+
 <body>
 
     <header>
@@ -15,17 +17,15 @@
         </div>
         <nav id="noLogin">
             <ul>
-                <li><a href="../html/selectLogin.html">Login</a></li>
-                <li><a href="../html/selectRegister.html">Cadastre-se</a></li>
-                <li><a href="../html/selectRegister.html">Sorteios</a></li>
+                <li><a href="../html/loginScreen.html">Login</a></li>
+                <li><a href="../html/registerScream.html">Cadastre-se</a></li>
             </ul>
         </nav>
         <nav id="login">
             <ul>
-                
-                <li><a href="../html/registerUser.html">Sorteios</a></li>
-                <li><a href="userProfile.html">Perfil</a></li>
-                <li id="logoutBtn" title="Sair da conta" style="cursor: pointer;">Sair do Perfil</li>
+
+                <li><a href="../html/registerScream.html">Doar</a></li>
+                <li><a href="#">Anúncios</a></li>
             </ul>
         </nav>
     </header>
@@ -33,31 +33,12 @@
     <section class="banner">
         <img src="../img/bannerSkatista06.jpg" alt="Skatista">
         <div class="banner-text">
-            <h2>PATROCÍNIOS</h2>
+            <h2>DOE SKATES,<br>TRANSFORME VIDAS</h2>
+            <a href="../html/registerScream.html" class="btn-doar">DOAR AGORA</a>
         </div>
     </section>
 
-    <section class="produtos">
-        <div class="card">
-            <div class="card-image">
-                <img src="../img/truckIndependent01.jpg" alt="Truck independent">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Truck independent</h3>
-                <div class="card-description">
-                    <h3 class="card-subtitle">Esse truck é brabo</h3>
-                    <h4>Sorteio inclui:</h4>
-                    <ul>
-                        <li>2 trucks santa cruz</li>
-                        <li>3 bala fini</li>
-                    </ul>
-                    <p class="card-obs">Serão sorteados kits</p>
-                </div>
-                <button class="card-btn">View Details</button>
-                <button class="detail-btn">Ver Detalhes</button>
-            </div>
-            <div class="close-btn">×</div>
-        </div>
+    <div class="cards-container">
         <div class="card">
             <div class="card-image">
                 <img src="../img/truckIndependent01.jpg" alt="Truck independent">
@@ -138,34 +119,23 @@
             </div>
             <div class="close-btn">×</div>
         </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="../img/truckIndependent01.jpg" alt="Truck independent">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Truck independent</h3>
-                <div class="card-description">
-                    <h3 class="card-subtitle">Esse truck é brabo</h3>
-                    <h4>Sorteio inclui:</h4>
-                    <ul>
-                        <li>2 trucks santa cruz</li>
-                        <li>3 bala fini</li>
-                    </ul>
-                    <p class="card-obs">Serão sorteados 5 kits</p>
-                </div>
-                <button class="card-btn">View Details</button>
-                <button class="detail-btn">Ver Detalhes</button>
-            </div>
-            <div class="close-btn">×</div>
-        </div>
-    </section>
+    </div>
+    <div class="overlay"></div>
+
     <section class="sobre">
         <div class="sobre-conteudo">
             <div class="sobre-texto">
                 <h2>Saiba mais sobre o nosso projeto</h2>
-                <p>A ideia deste projeto surgiu a partir de um Projeto Integrador, realizado durante o curso de Desenvolvimento de Sistemas no Senac RS. Nosso grupo — formado por Cauã Aquiles, Gabriel de Graaf e Maurício Steffen — no início estavamos totalmente perdidos e sem ideias para o PI. No entanto, alguns membros já haviam tido experiências com o mundo do skate, e foi daí que nasceu o <strong>Skate For All.</strong></p>
-                <p>Nosso objetivo é transformar vidas através do esporte, arrecadando skates e peças para doar a jovens que sonham em ter seu primeiro skate, promovendo inclusão, diversão e saúde.</p>
-                <p>Com a sua ajuda, podemos levar esperança e novas oportunidades através do skate. Venha fazer parte desse movimento!</p>
+                <p>A ideia deste projeto surgiu a partir de um Projeto Integrador, realizado durante o curso de
+                    Desenvolvimento de Sistemas no Senac RS. Nosso grupo — formado por Cauã Aquiles, Gabriel de Graaf e
+                    Maurício Steffen — no início estavamos totalmente perdidos e sem ideias para o PI. No entanto,
+                    alguns membros já haviam tido experiências com o mundo do skate, e foi daí que nasceu o
+                    <strong>Skate For All.</strong>
+                </p>
+                <p>Nosso objetivo é transformar vidas através do esporte, arrecadando skates e peças para doar a jovens
+                    que sonham em ter seu primeiro skate, promovendo inclusão, diversão e saúde.</p>
+                <p>Com a sua ajuda, podemos levar esperança e novas oportunidades através do skate. Venha fazer parte
+                    desse movimento!</p>
             </div>
             <div class="sobre-imagem">
                 <img src="../img/jovemSkate.jpg" alt="imagemSobre">
@@ -180,6 +150,7 @@
     </footer>
 
 </body>
+<script src="../src//js/card-expander.js"></script>
 <script src="../src/js/homeScreen.js"></script>
 
 </html>
