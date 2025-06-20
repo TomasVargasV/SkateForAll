@@ -94,10 +94,10 @@ export class UserController {
 
   static async update(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
-      const { name, email, password, createdAt } = req.body;
+      const id = req.user.id;
+      const { name, email,phone, address, password } = req.body;
 
-      const fieldsToUpdate = { name, email, password, createdAt};
+      const fieldsToUpdate = { name, email, phone, address, password};
       const updated = await repo.updateUser(id, fieldsToUpdate);
 
       if (!updated) {

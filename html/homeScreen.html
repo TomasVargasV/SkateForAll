@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="../css/Home.css">
 </head>
-
 <body>
 
     <header>
@@ -17,15 +15,17 @@
         </div>
         <nav id="noLogin">
             <ul>
-                <li><a href="../html/loginScreen.html">Login</a></li>
-                <li><a href="../html/registerScream.html">Cadastre-se</a></li>
+                <li><a href="../html/selectLogin.html">Login</a></li>
+                <li><a href="../html/selectRegister.html">Cadastre-se</a></li>
+                <li><a href="../html/selectRegister.html">Sorteios</a></li>
             </ul>
         </nav>
         <nav id="login">
             <ul>
-
-                <li><a href="../html/registerScream.html">Doar</a></li>
-                <li><a href="#">Anúncios</a></li>
+                
+                <li><a href="../html/registerUser.html">Sorteios</a></li>
+                <li><a href="userProfile.html">Perfil</a></li>
+                <li id="logoutBtn" title="Sair da conta" style="cursor: pointer;">Sair do Perfil</li>
             </ul>
         </nav>
     </header>
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <div class="cards-container">
+    <section class="produtos">
         <div class="card">
             <div class="card-image">
                 <img src="../img/truckIndependent01.jpg" alt="Truck independent">
@@ -158,23 +158,14 @@
             </div>
             <div class="close-btn">×</div>
         </div>
-    </div>
-    <div class="overlay"></div>
-
+    </section>
     <section class="sobre">
         <div class="sobre-conteudo">
             <div class="sobre-texto">
                 <h2>Saiba mais sobre o nosso projeto</h2>
-                <p>A ideia deste projeto surgiu a partir de um Projeto Integrador, realizado durante o curso de
-                    Desenvolvimento de Sistemas no Senac RS. Nosso grupo — formado por Cauã Aquiles, Gabriel de Graaf e
-                    Maurício Steffen — no início estavamos totalmente perdidos e sem ideias para o PI. No entanto,
-                    alguns membros já haviam tido experiências com o mundo do skate, e foi daí que nasceu o
-                    <strong>Skate For All.</strong>
-                </p>
-                <p>Nosso objetivo é transformar vidas através do esporte, arrecadando skates e peças para doar a jovens
-                    que sonham em ter seu primeiro skate, promovendo inclusão, diversão e saúde.</p>
-                <p>Com a sua ajuda, podemos levar esperança e novas oportunidades através do skate. Venha fazer parte
-                    desse movimento!</p>
+                <p>A ideia deste projeto surgiu a partir de um Projeto Integrador, realizado durante o curso de Desenvolvimento de Sistemas no Senac RS. Nosso grupo — formado por Cauã Aquiles, Gabriel de Graaf e Maurício Steffen — no início estavamos totalmente perdidos e sem ideias para o PI. No entanto, alguns membros já haviam tido experiências com o mundo do skate, e foi daí que nasceu o <strong>Skate For All.</strong></p>
+                <p>Nosso objetivo é transformar vidas através do esporte, arrecadando skates e peças para doar a jovens que sonham em ter seu primeiro skate, promovendo inclusão, diversão e saúde.</p>
+                <p>Com a sua ajuda, podemos levar esperança e novas oportunidades através do skate. Venha fazer parte desse movimento!</p>
             </div>
             <div class="sobre-imagem">
                 <img src="../img/jovemSkate.jpg" alt="imagemSobre">
@@ -189,7 +180,6 @@
     </footer>
 
 </body>
-<script src="../src//js/card-expander.js"></script>
 <script src="../src/js/homeScreen.js"></script>
 
 </html>
