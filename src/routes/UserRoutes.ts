@@ -11,6 +11,8 @@ router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.get('/users/', middleware.authenticateToken, UserController.getAll);
 router.put('/update', UserController.update);
+router.get('/userById/', middleware.authenticateToken, UserController.getById);
+
 
 
 export default router;

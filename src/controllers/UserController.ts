@@ -78,19 +78,19 @@ export class UserController {
 
   static async getById(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
+      const id = req.user.id; // pega do token
       const user = await repo.findUserById(id);
       if (!user) {
         res.status(404).json({ message: "Usuário não encontrado." });
         return;
       }
-
       res.json(user);
     } catch (error) {
       res.status(500).json({ message: "Erro ao buscar usuário", details: error });
       return;
     }
   }
+  
 
   static async update(req: Request, res: Response) {
     try {
