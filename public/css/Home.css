@@ -97,9 +97,20 @@ nav a:hover {
     background-color: darkred;
 }
 
+.draw-section {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
 
-
-
+.draw-title {
+    justify-self: center;
+    align-self: center;
+    margin-top: 50px;
+    padding: 30px;
+    font-size: xx-large;
+}
 
 .cards-container {
     display: flex;
