@@ -7,7 +7,6 @@ const repo = new UserRepository();
 
 export class UserController {
 
-
   static async register(req: Request, res: Response) {
     try {
       const { name, email, password, phone, address, state } = req.body;
@@ -26,7 +25,6 @@ export class UserController {
       return;
     }
   }
-
 
   static async login(req: Request, res: Response) {
     try {
@@ -64,8 +62,6 @@ export class UserController {
     }
   }
 
-
-
   static async getAll(req: Request, res: Response) {
     try {
       const users = await repo.findAllUsers();
@@ -93,42 +89,72 @@ export class UserController {
     }
   }
 
-  // static async getMe(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const userId = req.user.id;
-  //     const user = await repo.findUserById(userId);
-      
-  //     if (!user) {
-  //       res.status(404).json({ message: "Usuário não encontrado." });
-  //       return;
-  //     }
-  //     const { password, ...userData } = user;
-  //     res.json(userData);
-  //   } catch (error) {
-  //     res.status(500).json({ 
-  //       message: "Erro ao buscar usuário", 
-  //       error: error instanceof Error ? error.message : String(error)
-  //     });
-  //   }
-  // }
-
-  static async update(req: Request, res: Response) {
+  static async getMe(req: Request, res: Response): Promise<void> {
     try {
-      const id = req.user.id;
-      const { name, email, phone, address, password } = req.body;
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado. Autenticação necessária." });
+        return;
+      }
 
-      const fieldsToUpdate = { name, email, phone, address, password };
-      const updated = await repo.updateUser(id, fieldsToUpdate);
+      const userId = req.user.id;
+      const user = await repo.findUserById(userId);
 
-      if (!updated) {
+      if (!user) {
         res.status(404).json({ message: "Usuário não encontrado." });
         return;
       }
 
-      res.json({ message: "Usuário atualizado com sucesso.", updated });
+      const { password, ...safeUserData } = user;
+      res.json(safeUserData);
+
     } catch (error) {
-      res.status(500).json({ message: "Erro ao atualizar usuário", details: error });
-      return;
+      console.error('Erro no getMe:', error);
+      res.status(500).json({
+        message: "Erro ao buscar dados do usuário",
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  static async update(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado. Usuário não autenticado." });
+        return;
+      }
+
+      const userId = req.user.id;
+      const { name, email, phone, address, password } = req.body;
+
+      if (email) {
+        const existingUser = await repo.findUserByEmail(email);
+        if (existingUser && existingUser.id !== userId) {
+          res.status(409).json({ message: "Email já está em uso." });
+          return;
+        }
+      }
+
+      const updateData = { name, email, phone, address, password };
+      const updatedUser = await repo.updateUser(userId, updateData);
+
+      if (!updatedUser) {
+        res.status(404).json({ message: "Usuário não encontrado." });
+        return;
+      }
+
+      const safeUserData = updatedUser;
+
+      res.json({
+        message: "Usuário atualizado com sucesso!",
+        user: safeUserData,
+      });
+
+    } catch (error) {
+      console.error('Erro ao atualizar usuário:', error);
+      res.status(500).json({
+        message: "Erro ao atualizar usuário",
+        error: error instanceof Error ? error.message : String(error)
+      });
     }
   }
 
@@ -149,5 +175,4 @@ export class UserController {
       return;
     }
   }
-
 }

@@ -1,49 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perfil do Usuário</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/UserProfile.css" />
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <a href="homeScreen.html">
-        <img src="../img/logoSkateForAll-removebg-preview.png" alt="logo" />
-      </a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="homeScreen.html">Início</a></li>
-        <li id="logoutBtn" title="Sair da conta" style="cursor: pointer;">Sair do Perfil</li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="profile-container">
-    <h2 class="profile-title">INFORMAÇÕES DO USUÁRIO</h2>
-    
-    <div id="profile-info">
-      <p><strong>Nome:</strong> <span id="user-name"></span></p>
-      <p><strong>Email:</strong> <span id="user-email"></span></p>
-      <p><strong>Telefone:</strong> <span id="user-phone"></span></p>
-      <p><strong>Endereço:</strong> <span id="user-address"></span></p>
-      <p><strong>Estado:</strong> <span id="user-state"></span></p>
-    </div>
-  </div>
-
-  <script src="../js/userProfile.js"></script>
-</body>
-</html> -->
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -76,24 +30,19 @@
 
     <form id="profile-form">
       <label>Nome:
-        <!-- <input type="text" name="nome" value="João da Silva" disabled /> -->
-        <input id="name" type="text" name="nome" value="" disabled />
+        <input id="name-input" type="text" name="nome" disabled />
       </label>
 
       <label>Email:
-        <input type="email" name="email" value="joao@email.com" disabled />
+        <input id="email-input" type="email" name="email" disabled />
       </label>
 
       <label>Telefone:
-        <input type="text" name="telefone" value="(11) 91234-5678" disabled />
+        <input id="phone-input" type="text" name="telefone" disabled />
       </label>
 
       <label>Endereço:
-        <input type="text" name="endereco" value="Rua das Ruas, 123" disabled />
-      </label>
-
-      <label>Senha:
-        <input type="text" name="password" value="1234" disabled />
+        <input id="address-input" type="text" name="endereco" disabled />
       </label>
 
       <div class="botoes">

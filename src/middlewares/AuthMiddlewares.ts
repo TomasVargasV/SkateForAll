@@ -18,10 +18,10 @@ export class AuthMiddleware {
             res.status(401).json({ message: "Token não fornecido" });
             return;
         }
-        
+
         try {
             const user = verifyToken(token);
-            req.user = user; // Você pode usar isso em rotas depois
+            req.user = user;
             next();
         } catch (error) {
             res.status(403).json({ message: "Token inválido ou expirado" });
