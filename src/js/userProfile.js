@@ -7,24 +7,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const token = localStorage.getItem("token");
 
-  // Logout
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("token");
-      window.location.href = "/html/homeScreen.html";
-    });
-  }
+  // LOGOUT
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.href = "/html/homeScreen.html";
+  });
 
-  // Ativar edição
-  editarBtn.addEventListener("click", function () {
-    inputs.forEach((input) => {
-      input.disabled = false;
-    });
+  // HABILITAR CAMPOS
+  editarBtn.addEventListener("click", () => {
+    inputs.forEach((input) => input.disabled = false);
     salvarBtn.disabled = false;
     editarBtn.disabled = true;
   });
 
-  // Buscar dados do usuário autenticado
+  // CARREGAR DADOS DO USUÁRIO
   async function carregarUsuario() {
     try {
       const response = await fetch("http://localhost:3000/api/userById/", {
@@ -34,9 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      if (!response.ok) {
-        throw new Error("Erro ao buscar usuário");
-      }
+      if (!response.ok) throw new Error("Erro ao buscar usuário");
 
       const user = await response.json();
 
@@ -46,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector('input[name="endereco"]').value = user.address;
       document.querySelector('input[name="password"]').value = user.password;
     } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro ao carregar os dados do perfil.");
+      console.error("Erro ao carregar usuário:", error);
+      alert("Erro ao carregar perfil.");
     }
   }
 
-  // Salvar alterações
+  // SUBMETER ALTERAÇÕES
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -60,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       email: document.querySelector('input[name="email"]').value,
       phone: document.querySelector('input[name="telefone"]').value,
       address: document.querySelector('input[name="endereco"]').value,
-      password: document.querySelector('input[name="password"]').value
+      password: document.querySelector('input[name=password]')
     };
 
     try {
@@ -73,24 +67,27 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify(updatedUser)
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Erro ao atualizar perfil");
+        console.error("Erro do servidor:", result);
+        alert("Erro ao atualizar usuário.");
+        return;
       }
 
-      const result = await response.json();
-      alert("Perfil atualizado com sucesso!");
+      alert("Usuário atualizado com sucesso!");
 
-      // Desativa campos novamente
+      // Trava os campos novamente
       inputs.forEach((input) => input.disabled = true);
       salvarBtn.disabled = true;
       editarBtn.disabled = false;
 
     } catch (error) {
-      console.error("Erro ao atualizar:", error);
-      alert("Erro ao salvar alterações.");
+      console.error("Erro ao enviar alterações:", error);
+      alert("Erro na requisição.");
     }
   });
 
-  // Chamar carregamento
+  // CHAMADA INICIAL
   carregarUsuario();
 });

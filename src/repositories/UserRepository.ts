@@ -24,7 +24,7 @@ export class UserRepository {
   async updateUser(id: number, fieldsToUpdate: Partial<User>) {
     const user = await this.findUserById(id);
     if (!user) return null;
-
+  
     Object.assign(user, fieldsToUpdate);
     return await this.userRepository.save(user);
   }

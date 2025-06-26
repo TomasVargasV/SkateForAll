@@ -95,6 +95,8 @@ export class UserController {
   static async update(req: Request, res: Response) {
     try {
       const id = req.user.id;
+      console.log("ID do user vindo do token:", id);
+      console.log("Dados recebidos:", req.body);
       const { name, email,phone, address, password } = req.body;
 
       const fieldsToUpdate = { name, email, phone, address, password};
