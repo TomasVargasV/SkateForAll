@@ -33,7 +33,7 @@ export class Draw {
     resumo: string,
     videoUrl: string,
     imagemEmpresa: string,
-    
+
   ) {
     this.empresa = empresa;
     this.item = item;

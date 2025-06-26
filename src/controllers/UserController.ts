@@ -93,24 +93,24 @@ export class UserController {
     }
   }
 
-  static async getMe(req: Request, res: Response): Promise<void> {
-    try {
-      const userId = req.user.id;
-      const user = await repo.findUserById(userId);
+  // static async getMe(req: Request, res: Response): Promise<void> {
+  //   try {
+  //     const userId = req.user.id;
+  //     const user = await repo.findUserById(userId);
       
-      if (!user) {
-        res.status(404).json({ message: "Usuário não encontrado." });
-        return;
-      }
-      const { password, ...userData } = user;
-      res.json(userData);
-    } catch (error) {
-      res.status(500).json({ 
-        message: "Erro ao buscar usuário", 
-        error: error instanceof Error ? error.message : String(error)
-      });
-    }
-  }
+  //     if (!user) {
+  //       res.status(404).json({ message: "Usuário não encontrado." });
+  //       return;
+  //     }
+  //     const { password, ...userData } = user;
+  //     res.json(userData);
+  //   } catch (error) {
+  //     res.status(500).json({ 
+  //       message: "Erro ao buscar usuário", 
+  //       error: error instanceof Error ? error.message : String(error)
+  //     });
+  //   }
+  // }
 
   static async update(req: Request, res: Response) {
     try {
