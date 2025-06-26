@@ -14,7 +14,7 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, password }),
     });
 
-    const text = await res.text(); 
+    const text = await res.text();
     console.log("Texto bruto da resposta:", text);
 
     let data;

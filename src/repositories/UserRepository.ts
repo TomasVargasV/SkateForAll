@@ -25,6 +25,13 @@ export class UserRepository {
     const user = await this.findUserById(id);
     if (!user) return null;
 
+    if (fieldsToUpdate.email && fieldsToUpdate.email !== user.email) {
+      const existingUser = await this.findUserByEmail(fieldsToUpdate.email);
+      if (existingUser && existingUser.id !== id) {
+        throw new Error("Email já está em uso por outro usuário");
+      }
+    }
+
     Object.assign(user, fieldsToUpdate);
     return await this.userRepository.save(user);
   }
