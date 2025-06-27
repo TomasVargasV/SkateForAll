@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Skate For All</title>
   <link rel="stylesheet" href="../css/Login.css" />
+  <link rel="stylesheet" href="../css/Header.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="../html/homeScreen.html">
-            <img src="../img/logoSkateForAll-removebg-preview.png" alt="logo">
-           </a>
-        </div>
-        
-    </header>
+  <header>
+    <a href="homeScreen.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      
+    </nav>
+  </header>
+  
   <div class="login-wrapper">
     <div class="login-image">
       <img src="../img/bannerLogin.jpg" alt="Skatista fazendo manobra">
@@ -36,7 +39,7 @@
         <button type="submit" class="btn-login">Entrar</button>
         <div class="register-link">
             <p>Não tem uma conta?</p>
-            <a href="../html/registerScream.html" class="btn-register">Cadastrar-se</a>
+            <a href="../html/registerCompany.html" class="btn-register">Cadastrar-se</a>
         </div>
         <a href="#" class="esqueci-senha">Esqueceu sua senha?</a>
       </form>

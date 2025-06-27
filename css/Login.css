@@ -3,15 +3,6 @@ body{
 }
 
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 20px;
-    background-color: #111;
-    
-}
-
 .logo:hover img {
     transform: scale(1.05);
     filter: brightness(1.2);
