@@ -3,40 +3,65 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sorteio - Skate For All</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio</title>
   <link rel="stylesheet" href="../css/Draw.css">
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <a href="../html/homeScreen.html">
-        <img src="../img/logoSkateForAll-removebg-preview.png" alt="logo">
-      </a>
-    </div>
-    <nav class="user-nav">
-      <a href="/minhas-ins" class="header-link">Minhas inscrições</a>
-      <a href="/meus-d" class="header-link">Meus dados</a>
+  <div class="container">
+    <header>
+      <h1>Sorteio</h1>
+      <p class="subtitle">Assista ao vídeo completo e nos informe seu usuario do instagram para liberar sua inscrição no
+        sorteio</p>
+    </header>
 
-    </nav>
-  </header>
-
-  <main class="main-dark">
-    <section class="empresa-info">
-      <div class="empresa-card">
-        <div class="empresa-logo">
-          <img src="https://img.icons8.com/ios-filled/50/FFFFFF/skateboard.png" alt="Skate Icon">
+    <div class="content">
+      <div class="section">
+        <div class="section-title">
+          <h2>Assista ao Vídeo</h2>
         </div>
-        <h2>Marca</h2>
-        <p><strong>Missão</strong></p>
-        <p>SkateShop RS apoia talentos do skate e promove inclusão através de doações acessíveis.</p>
-      </div>
-    </section>
 
-    <section class="sorteio-info">
-      <h1><span class="destaque">Doação:</span> 5 Skates completos</h1>
-      <p>Assista ao vídeo para liberar sua participação</p>
-      <div class="video-placeholder">
-        <div class="play-icon">&#9658;</div>
+        <div id="player"></div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">0% assistido</div>
+
+        <div class="instructions">
+          <p><strong>Para participar do sorteio:</strong></p>
+          <ul>
+            <li>Assista ao vídeo completo até o final</li>
+            <li>Preencha seu @instagram abaixo</li>
+            <li>O botão de inscrição será liberado automaticamente</li>
+            <li>Clique em "Inscrever-se" para confirmar</li>
+          </ul>
+        </div>
       </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Informe seu Instagram</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="instaUser">Seu @instagram:</label>
+          <div class="input-with-icon">
+            <input type="text" id="instaUser" placeholder="ex: seuusuario">
+          </div>
+          <div class="validation-message" id="insta-msg"></div>
+        </div>
+
+        <button id="btn" disabled>
+          Inscrever-se no Sorteio
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="../js/draw.js"></script>
+
+</html>
