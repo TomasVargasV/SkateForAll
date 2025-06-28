@@ -9,57 +9,58 @@
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>Sorteio</h1>
-      <p class="subtitle">Assista ao vídeo completo e nos informe seu usuario do instagram para liberar sua inscrição no
-        sorteio</p>
-    </header>
+  <header></header>
+  <main>
+    <section class="draw_description_section">
+      <div class="draw_description_div">
+        <p class="draw_description_text">
+          Paragrafo com as informações do sorteioParagrafo com as informações do sorteioParagrafo com as informações do
+          sorteioParagrafo com as informações do sorteioParagrafo com as informações do sorteioParagrafo com as
+          informações do sorteioParagrafo com as informações do sorteio
+        </p>
+      </div>
+    </section>
+    <section class="draw_info_container">
+      <div class="draw_info">
+        <div class="draw_actions">
 
-    <div class="content">
-      <div class="section">
-        <div class="section-title">
-          <h2>Assista ao Vídeo</h2>
+          <section class="draw_actions_video">
+            <div class="video_wrapper">
+              <div id="player"></div>
+            </div>
+            <div class="progress_container">
+              <div class="progress_bar_wrapper">
+                <div class="progress_bar" id="progress-bar"></div>
+              </div>
+              <div class="progress_text" id="progress-text">
+                0% assistido
+              </div>
+            </div>
+          </section>
+
+          <section class="draw_actions_instagram">
+            <div class="form_group">
+              <p class="form_title">Informe seu Instagram</p>
+              <input class="form_input" type="text" id="instaUser" placeholder="ex: seuusuario">
+              <div class="validation_message" id="insta-msg"></div>
+            </div>
+            <button class="form_button" id="btn" disabled>
+              Inscrever-se no Sorteio
+            </button>
+          </section>
+
         </div>
-
-        <div id="player"></div>
-
-        <div class="progress-container">
-          <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        <div class="progress-text" id="progress-text">0% assistido</div>
-
-        <div class="instructions">
-          <p><strong>Para participar do sorteio:</strong></p>
-          <ul>
-            <li>Assista ao vídeo completo até o final</li>
-            <li>Preencha seu @instagram abaixo</li>
-            <li>O botão de inscrição será liberado automaticamente</li>
-            <li>Clique em "Inscrever-se" para confirmar</li>
-          </ul>
+        <div class="draw_instructions">
+          <p class="draw_description_text">
+            Paragrafo com as informações do sorteioParagrafo com as informações do sorteioParagrafo com as informações
+            do
+            sorteioParagrafo com as informações do sorteioParagrafo com as informações do sorteioParagrafo com as
+            informações do sorteioParagrafo com as informações do sorteio
+          </p>
         </div>
       </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>Informe seu Instagram</h2>
-        </div>
-
-        <div class="form-group">
-          <label for="instaUser">Seu @instagram:</label>
-          <div class="input-with-icon">
-            <input type="text" id="instaUser" placeholder="ex: seuusuario">
-          </div>
-          <div class="validation-message" id="insta-msg"></div>
-        </div>
-
-        <button id="btn" disabled>
-          Inscrever-se no Sorteio
-        </button>
-      </div>
-    </div>
-  </div>
-
+    </section>
+  </main>
 </body>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="../js/draw.js"></script>
