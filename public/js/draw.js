@@ -177,7 +177,7 @@ function updateButtonState() {
     if (!instaInput || !btn || !msgInsta) return;
 
     const instaValue = instaInput.value.trim();
-    const instaRegex = /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]{1,30}$/i;
+    const instaRegex = /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]{1,30}$/;
     const isInstaValid = instaRegex.test(instaValue.replace('@', ''));
 
     if (!instaInputTouched) {

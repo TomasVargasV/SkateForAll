@@ -1,3 +1,5 @@
+//const { getSystemErrorMap } = require("util");
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("form-cadastro");
   
@@ -40,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch (error) {
         console.error("Erro na requisição:", error);
-        alert("Erro na conexao.");
+        alert("Erro na conexao." + error.message);
       }
     });
   });

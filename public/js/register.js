@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch (error) {
         console.error("Erro na requisição:", error);
-        alert("Erro na conxao.");
+        alert("Erro na conxao." + error.message);
       }
     });
   });
