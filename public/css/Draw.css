@@ -1,4 +1,4 @@
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,158 +6,156 @@
 }
 
 body {
+  /* position: relative; */
   background-color: #333;
   min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  max-width: 800px;
-  overflow: hidden;
 }
 
 header {
-  background-color: white;
-  color: red;
-  padding: 30px 20px;
-  text-align: center;
-  border-bottom: 1px solid #333;
+  background-color: brown;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  padding: 20px;
+  max-width: 70%;
 }
 
-.subtitle {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
-.content {
-  padding: 30px;
+@media (min-width: 768px) {
+  .main-content.with-video {
+    grid-template-areas:
+      "video video"
+      "participate prizes"
+      "instructions instructions";
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main-content.without-video {
+    grid-template-areas:
+      "participate prizes"
+      "instructions instructions";
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.section {
-  margin-bottom: 30px;
+/* Card styling */
+.card {
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid brown;
 }
 
 .section-title {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  color: red;
-  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: white;
 }
 
-.section-title i {
-  font-size: 1.8rem;
+.video-section {
+  grid-area: video;
+}
+
+.video-required {
+  display: flex;
+  color: red;
+  font-size: small;
+  margin-left: 20px;
+  align-self: center;
+  justify-self: center;
 }
 
 #player {
-  width: 100%;
-  height: 450px;
   background-color: #000;
   border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  margin-bottom: 20px;
+  height: auto;
 }
 
-.progress-container {
+.progress_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progress_bar_wrapper {
   background-color: #f0f0f0;
   border-radius: 10px;
-  height: 20px;
+  height: 10px;
   overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.progress-bar {
+.progress_bar {
   height: 100%;
   background: linear-gradient(90deg, #ff416c, #ff4b2b);
   width: 0%;
   transition: width 0.5s ease;
 }
 
-.progress-text {
+.progress_text {
   text-align: center;
   font-weight: bold;
-  color: red;
-  margin-bottom: 20px;
-  font-size: 1.1rem;
 }
 
-.instructions {
-  background-color: #f9f9f9;
-  border-left: 4px solid red;
-  padding: 15px;
-  border-radius: 0 8px 8px 0;
-  margin: 20px 0;
+.participation-section {
+  grid-area: participate;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.instructions ul {
-  padding-left: 20px;
-  margin-top: 10px;
+.instagram-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.instructions li {
-  margin-bottom: 8px;
+.instagram-input label {
+  color: white;
 }
 
-.form-group {
-  margin-bottom: 25px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #444;
-}
-
-.input-with-icon {
-  position: relative;
-}
-
-.input-with-icon i {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-  font-size: 1.2rem;
-}
-
-input {
-  width: 100%;
-  padding: 15px 15px 15px 50px;
+.instagram-input input {
+  padding: 12px;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
-  font-size: 1.1rem;
+}
+
+.instagram-input input:focus {
+  border-color: brown;
+  outline: none;
+}
+
+.instagram-input input::placeholder {
+  color: #adb5bd;
+}
+
+.form_input {
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
   transition: all 0.3s;
 }
 
-input:focus {
+.form_input:focus {
   border-color: red;
   outline: none;
 }
 
-.validation-message {
-  margin-top: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 0.95rem;
+.validation_message {
   display: none;
 }
 
@@ -166,6 +164,8 @@ input:focus {
   color: #00a87e;
   border: 1px solid #00a87e;
   display: block;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .invalid {
@@ -173,11 +173,13 @@ input:focus {
   color: #ff3b30;
   border: 1px solid #ff3b30;
   display: block;
+  padding: 5px;
+  border-radius: 8px;
 }
 
-button {
+.form_button {
   width: 100%;
-  padding: 18px;
+  padding: 10px;
   background: linear-gradient(90deg, #ff416c, #ff4b2b);
   color: white;
   border: none;
@@ -190,126 +192,115 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
-button:disabled {
+.form_button:disabled {
   background: #cccccc;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-button:not(:disabled):hover {
+.form_button:not(:disabled):hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 20px rgba(255, 65, 108, 0.6);
 }
 
-@media (max-width: 768px) {
-  #player {
-    height: 300px;
+.terms {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.prizes-section {
+  grid-area: prizes;
+}
+
+.prizes-list {
+  padding-left: 25px;
+  color: white;
+}
+
+.prizes-list li {
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.instructions-section {
+  grid-area: instructions;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+}
+
+.step-number {
+  background-color: white;
+  color: brown;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.step-content h4 {
+  margin-top: 4px;
+  color: brown;
+}
+
+.step-content p {
+  color: white;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .section-title {
+    font-size: 1.2rem;
   }
 
-  h1 {
-    font-size: 2rem;
+  .steps {
+    grid-template-columns: 1fr;
   }
 
-  .subtitle {
-    font-size: 1rem;
+  .toggle-container {
+    flex-direction: column;
+    align-items: center;
   }
-} */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-body{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-}
-
-header{
-  height: 100px;
-  background-color: lightblue;
-  border-bottom: 1px solid #ff3333;
-  background-color:#333;
-
-}
-
-main{
-  display: flex;
-  height: 100%;
-}
-
-.draw_description {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 500px;
-  background-color: #333;
-  position: relative; 
-}
-.draw_description::after {
-  content: "";
-  position: absolute;
-  top: 50px; 
-  bottom: 50px; 
-  right: 0;
-  width: 1px;
-  background-color: #ff3333;
-}
-
-.draw_info_container{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.draw_info{
-  display: flex;
-  height: 100%;
-}
-
-.draw_actions {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #333;
-  position: relative; 
-}
-.draw_actions::after {
-  content: "";
-  position: absolute;
-  top: 100px;     
-  bottom: 100px;  
-  right: 0;
-  width: 1px;
-  background-color: #ff3333;
-}
-
-.draw_instructions{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color:#333;
-}
-
-.draw_info_footer {
-  display: flex;
-  height: 100px;
-  background-color: #333;
-  position: relative; 
-}
-.draw_info_footer::before {
-  content: "";
-  position: absolute;
-  left: 100px;    
-  right: 100px;  
-  top: 0;
-  height: 1px;
-  background-color: #ff3333;
+  .main-content {
+    grid-template-areas:
+      "video"
+      "participate"
+      "prizes"
+      "instructions";
+  }
 }
