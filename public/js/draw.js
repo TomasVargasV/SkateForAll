@@ -180,31 +180,59 @@ function updateButtonState() {
     const instaRegex = /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]{1,30}$/;
     const isInstaValid = instaRegex.test(instaValue.replace('@', ''));
 
-    if (!instaInputTouched) {
-        msgInsta.textContent = '';
-        msgInsta.className = 'validation-message';
-    }
+    // Determina se estamos no modo com vídeo
+    const hasVideo = document.body.classList.contains('with-video');
 
-    if (!videoCompleted) {
-        btn.disabled = true;
-        btn.innerHTML = 'Assista o vídeo completo para desbloquear';
-        btn.style.backgroundColor = '#cccccc';
-    } else if (!instaInputTouched) {
-        btn.disabled = true;
-        btn.innerHTML = 'Inscrever-se no Sorteio';
-        btn.style.backgroundColor = '#cccccc';
-    } else if (!isInstaValid) {
-        btn.disabled = true;
-        btn.innerHTML = 'Inscrever-se no Sorteio';
-        btn.style.backgroundColor = '#cccccc';
-        msgInsta.textContent = '❌ Use apenas letras, números, . e _ (máx 30 caracteres)';
-        msgInsta.className = 'validation-message invalid';
-    } else {
-        btn.disabled = false;
-        btn.innerHTML = 'Inscrever-se no Sorteio';
-        btn.style.backgroundColor = '#ff416c';
-        msgInsta.textContent = '✅ Instagram válido!';
-        msgInsta.className = 'validation-message valid';
+    // Lógica para modo COM VÍDEO
+    if (hasVideo) {
+        if (!videoCompleted) {
+            btn.disabled = true;
+            btn.innerHTML = 'Assista o vídeo completo para desbloquear';
+            btn.style.backgroundColor = '#cccccc';
+            msgInsta.textContent = '';
+            return;
+        }
+        
+        // Vídeo completo, validar Instagram
+        if (!instaInputTouched) {
+            btn.disabled = true;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#cccccc';
+            msgInsta.textContent = '';
+        } else if (!isInstaValid) {
+            btn.disabled = true;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#cccccc';
+            msgInsta.textContent = '❌ Use apenas letras, números, . e _ (máx 30 caracteres)';
+            msgInsta.className = 'validation-message invalid';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#ff416c';
+            msgInsta.textContent = '✅ Instagram válido!';
+            msgInsta.className = 'validation-message valid';
+        }
+    } 
+    // Lógica para modo SEM VÍDEO
+    else {
+        if (!instaInputTouched) {
+            btn.disabled = true;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#cccccc';
+            msgInsta.textContent = '';
+        } else if (!isInstaValid) {
+            btn.disabled = true;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#cccccc';
+            msgInsta.textContent = '❌ Use apenas letras, números, . e _ (máx 30 caracteres)';
+            msgInsta.className = 'validation-message invalid';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = 'Inscrever-se no Sorteio';
+            btn.style.backgroundColor = '#ff416c';
+            msgInsta.textContent = '✅ Instagram válido!';
+            msgInsta.className = 'validation-message valid';
+        }
     }
 }
 
