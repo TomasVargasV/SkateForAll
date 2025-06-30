@@ -7,7 +7,7 @@ import path from "path";
 
 const app = express();
 
-const publicPath = path.join(__dirname, "..", "public"); 
+const publicPath = path.join(__dirname, "..", "public");
 
 app.use(express.static(publicPath));
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(publicPath, "html", "homeScreen.html"));
+  res.sendFile(path.join(publicPath, "html", "home.html"));
 });
 
 app.use("/api", UserRoutes);

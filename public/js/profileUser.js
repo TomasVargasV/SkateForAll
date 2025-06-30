@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
-    window.location.href = "/public/html/homeScreen.html";
+    window.location.href = "/public/html/home.html";
   });
 
   editarBtn.addEventListener("click", () => {
@@ -54,44 +54,42 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   form.addEventListener("submit", async function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const updatedUser = {
-    name: nameInput.value,
-    email: emailInput.value,
-    phone: phoneInput.value,
-    address: addressInput.value,
-  };
+    const updatedUser = {
+      name: nameInput.value,
+      email: emailInput.value,
+      phone: phoneInput.value,
+      address: addressInput.value,
+    };
 
-  try {
-    const response = await fetch("http://localhost:3000/api/user/me", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(updatedUser)
-    });
+    try {
+      const response = await fetch("http://localhost:3000/api/user/me", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedUser)
+      });
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      throw new Error(errorResponse.message || "Erro ao atualizar usuário");
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || "Erro ao atualizar usuário");
+      }
+
+      await carregarUsuario();
+      alert("Usuário atualizado com sucesso!");
+
+      inputs.forEach(input => input.disabled = true);
+      salvarBtn.disabled = true;
+      editarBtn.disabled = false;
+
+    } catch (error) {
+      console.error("Erro ao enviar alterações:", error);
+      alert(error.message || "Erro na requisição.");
     }
-
-    // Recarrega os dados ATUALIZADOS antes de desabilitar os campos
-    await carregarUsuario(); // Adicione esta linha
-    alert("Usuário atualizado com sucesso!");
-
-    // Só desabilita os campos APÓS recarregar os dados
-    inputs.forEach(input => input.disabled = true);
-    salvarBtn.disabled = true;
-    editarBtn.disabled = false;
-
-  } catch (error) {
-    console.error("Erro ao enviar alterações:", error);
-    alert(error.message || "Erro na requisição.");
-  }
-});
+  });
 
   if (token) {
     carregarUsuario();

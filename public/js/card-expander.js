@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const detailBtn = clone.querySelector('.detail-btn');
             detailBtn.addEventListener('click', function() {
                 // Aqui você pode definir a URL para onde o botão deve levar
-                window.location.href = '../html/drawScreen.html'; 
+                window.location.href = '../html/draw.html'; 
             });
 
             const closeButton = clone.querySelector('.close-btn');

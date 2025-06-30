@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
 
     const name = document.getElementById("name").value;
-    const CNPJ = document.getElementById("CNPJ").value;
-    const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
-    const BusinessAddress = document.getElementById("BusinessAddress").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const confirmPassword = document.getElementById("repetir-senha").value;
+    const address = document.getElementById("address").value;
+    const state = document.getElementById("itemStatus").value;
     const erroMsg = document.getElementById("senha-erro");
 
     if (password !== confirmPassword) {
@@ -22,24 +22,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/registerc", {
+      const response = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name, CNPJ, email, password, phone, BusinessAddress })
+        body: JSON.stringify({ name, phone, email, password, address, state })
       });
 
       if (response.ok) {
-        alert("Empresa cadastrada com sucesso!");
-        window.location.href = "../html/loginCompany.html";
+        alert("Usuário cadastrado com sucesso!");
+        window.location.href = "../html/loginUser.html";
       } else {
         const data = await response.json();
         alert("Erro: " + data.message);
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      alert("Erro na conexao." + error.message);
+      alert("Erro na conxao." + error.message);
     }
   });
 });

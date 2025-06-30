@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro Empresa - Skate For All</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="../css/Register.css" />
 </head>
+
 <body>
   <header>
-    <a href="../html/homeScreen.html" class="logo-link">
+    <a href="../html/home.html" class="logo-link">
       <img src="../img/logoSkateForAll-removebg-preview.png" alt="Logo Skate For All" class="logo-img" />
     </a>
   </header>
@@ -19,37 +21,30 @@
       <h2>Cadastre sua empresa</h2>
       <p>Seja uma parceira do bem. Doe, divulgue e transforme vidas.</p>
 
-      <div class="input-duo">
-        <div class="input-group">
-          <label for="empresa">Nome da empresa</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div class="input-group">
-          <label for="cnpj">CNPJ</label>
-          <input type="text" id="CNPJ" name="CNPJ" required />
-        </div>
+      <div class="input-group">
+        <label for="empresa">Nome da empresa</label>
+        <input type="text" id="name" name="name" required />
       </div>
-
+      <div class="input-group">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" id="CNPJ" name="CNPJ" required />
+      </div>
       <div class="input-group">
         <label for="email">Email corporativo</label>
         <input type="email" id="email" name="email" required />
       </div>
-
       <div class="input-group">
         <label for="telefone">Telefone de contato</label>
         <input type="tel" id="phone" name="phone" required />
       </div>
-
       <div class="input-group">
         <label for="endereco">Endereço comercial</label>
-        <input type="text" id="BusinessAdress" name="BusinessAdress" required />
+        <input type="text" id="BusinessAddress" name="BusinessAddress" required />
       </div>
-
       <div class="input-group">
         <label for="senha">Crie uma senha</label>
         <input type="password" id="password" name="password" required />
       </div>
-
       <div class="input-group">
         <label for="confirmarSenha">Confirme a senha</label>
         <input type="password" id="confirmPassword" name="confirmPassword" required />
@@ -61,4 +56,5 @@
   </main>
 </body>
 <script src="../js/registerCompany.js"></script>
+
 </html>

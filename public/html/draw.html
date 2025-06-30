@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio</title>
+  <link rel="stylesheet" href="../css/Draw.css">
+
+</head>
+
+<body class="with-video">
+  <header>
+
+    <!-- Video toggle buttons (simulating database control) -->
+    <div class="toggle-container">
+      <button class="toggle-btn active" id="withVideoBtn">com video</button>
+      <button class="toggle-btn" id="withoutVideoBtn">sem video</button>
+    </div>
+
+  </header>
+
+  <div class="container">
+
+    <div id="mainContent" class="main-content with-video">
+
+      <section id="videoSection" class="video-section card">
+        <h2 class="section-title">
+          <span>Assista o vídeo</span>
+          <span class="video-required">obrigatorio</span>
+        </h2>
+
+        <div class="video_wrapper">
+          <div id="player"></div>
+        </div>
+        <div class="progress_container">
+          <div class="progress_bar_wrapper">
+            <div class="progress_bar" id="progress-bar"></div>
+          </div>
+          <div class="progress_text" id="progress-text">
+            0% assistido
+          </div>
+        </div>
+
+      </section>
+
+      <section class="participation-section card">
+        <h2 class="section-title">
+          <span>Inscreva-se</span>
+        </h2>
+
+        <div class="instagram-input">
+          <label for="instagram-username">Insira seu usuário do instagram:</label>
+
+          <input class="form_input" type="text" id="instaUser" placeholder="ex: seuusuario">
+          <div class="validation_message" id="insta-msg"></div>
+
+          <p class="terms">Para validar sua entrada nós verificaremos se sua conta está dentre os seguidores das marcas
+            mantenedoras do sorteio</p>
+        </div>
+
+        <button class="form_button" id="btn" disabled>
+          Inscrever-se
+        </button>
+      </section>
+
+      <section class="prizes-section card">
+        <h2 class="section-title">
+          <span>Itens do sorteio:</span>
+        </h2>
+        <ul class="prizes-list">
+          <li><strong>Shape brabo:</strong> Shape brabo dessa marca braba</li>
+          <li><strong>Truck brabo:</strong> Truck brabissimo dessa marca braba</li>
+          <li><strong>Lixa braba:</strong> Lixa braba demais</li>
+          <li><strong>Rodinha braba:</strong> Essas roda são muito braba</li>
+        </ul>
+      </section>
+
+      <section class="instructions-section card">
+
+        <h2 class="section-title">
+          <span>Como participar</span>
+        </h2>
+
+        <div id="instructionsWithVideo" class="instructions-set">
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Assista ao video</h4>
+                <p>Assista todo o vídeo para ser elegível ao sorteio.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Siga o nosso instagram</h4>
+                <p>Siga a conta da SkateForAll no instagram.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Nos diga seu usuário do instagram</h4>
+                <p>Usaremos esta informação para conferir se você segue as contas necessárias para participar deste
+                  sorteio.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Compartilhe este sorteio</h4>
+                <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>Clique em participar</h4>
+                <p>Clique o botão de participar e boa sorte!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="instructionsWithoutVideo" class="instructions-set" style="display: none;">
+          <div class="steps">
+
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Siga o nosso instagram</h4>
+                <p>Siga a conta da SkateForAll no instagram.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Nos diga seu usuário do instagram</h4>
+                <p>Usaremos esta informação para conferir se você segue as contas necessárias para participar deste
+                  sorteio.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Compartilhe este sorteio</h4>
+                <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Clique em participar</h4>
+                <p>Clique o botão de participar e boa sorte!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+</body>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="../js/draw.js"></script>
+<script src="../js/has-video.js"></script>
+
+</html>
