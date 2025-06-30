@@ -82,17 +82,6 @@
     margin-bottom: 20px;
   }
   
-  .input-duo {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .input-duo .input-group {
-    flex: 1;
-    min-width: 48%;
-  }
-  
   .input-group label {
     font-size: 0.85rem;
     margin-bottom: 5px;
@@ -147,14 +136,6 @@
   @media (max-width: 600px) {
     .form-cadastro {
       padding: 30px 20px;
-    }
-  
-    .input-duo {
-      flex-direction: column;
-    }
-  
-    .input-duo .input-group {
-      min-width: 100%;
     }
   
     header {

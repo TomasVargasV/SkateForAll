@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const sponsors = [
         '/public/img/spitfire-logo.png',
+        '/public/img/logo_psh.png',
         '/public/img/ace-logo.png',
         '/public/img/vans-logo.png',
         '/public/img/independent-logo.png',
