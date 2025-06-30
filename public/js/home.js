@@ -14,7 +14,6 @@ function logged(){
 
 logged()
 
-// homeScreen.js
 
 document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("logoutBtn");

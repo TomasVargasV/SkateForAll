@@ -108,7 +108,7 @@ nav a:hover {
     height: 150px;
 }
 
-.carousel-slide img {
+.sponsor-logo {
     max-height: 100px;
     width: auto;
     height: auto;
@@ -117,10 +117,26 @@ nav a:hover {
     transition: all 0.3s ease;
 }
 
-.carousel-slide img:hover {
+.sponsor-logo:hover {
     filter: grayscale(0%) brightness(100%);
     transform: scale(1.05);
 }
+
+/* FIZ ISSO PRA DESTACAR NOSSO PATROCINADOR REAL */
+
+.carousel-slide img {
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.carousel-slide img:hover {
+    transform: scale(1.1);
+}
+
+/* ----------------------------------------------- */
 
 @keyframes carouselAnimation {
     0% {
@@ -471,15 +487,15 @@ footer {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .footer-section {
         text-align: center;
     }
-    
+
     .social-links {
         justify-content: center;
     }
-    
+
     .partner-logos {
         justify-content: center;
     }
