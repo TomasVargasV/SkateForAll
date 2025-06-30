@@ -7,14 +7,18 @@
   <title>Cadastro - Skate For All</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="../css/Register.css" />
+  <link rel="stylesheet" href="../css/Header.css">
 </head>
 
 <body>
   <header>
-    <a href="../html/home.html" class="logo-link">
-      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Logo Skate For All" class="logo-img" />
+    <a href="home.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
     </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu"></nav>
   </header>
+  
 
   <main class="container">
     <form id="form-cadastro" class="form-cadastro">
