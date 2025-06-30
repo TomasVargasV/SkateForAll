@@ -13,7 +13,7 @@ export class Company {
     name: string;
 
     @Column({ unique: true })
-    CNPJ: number;
+    CNPJ: string;
 
     @Column({ unique: true })
     email: string;
@@ -31,14 +31,14 @@ export class Company {
     createdAt!: Date;
 
 
-    constructor(name: string,CNPJ:number, email: string, password: string, phone: string, BusinessAddress: string) {
+    constructor(name: string, CNPJ: string, email: string, password: string, phone: string, BusinessAddress: string) {
         this.name = name;
         this.CNPJ = CNPJ;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.BusinessAddress = BusinessAddress;
-        }
+    }
 
     @BeforeInsert()
     @BeforeUpdate()

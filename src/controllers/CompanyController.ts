@@ -10,7 +10,7 @@ export class CompanyController {
 
   static async register(req: Request, res: Response) {
     try {
-      const { name, CNPJ, email, password, phone, BusinessAddress} = req.body;
+      const { name, CNPJ, email, password, phone, BusinessAddress } = req.body;
 
       const existing = await repo.findCompanyByEmail(email);
       if (existing) {
@@ -27,29 +27,28 @@ export class CompanyController {
     }
   }
 
-  
   static async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
       console.log("Tentando login para:", email);
-  
+
       const company = await repo.findCompanyByEmail(email);
       if (!company) {
         console.log("Empresa não encontrado");
         res.status(404).json({ message: "Empresa não encontrado." });
         return;
       }
-  
+
       const isValid = await bcrypt.compare(password, company.password);
       if (!isValid) {
         console.log("Senha inválida");
         res.status(401).json({ message: "Senha inválida." });
         return;
       }
-  
+
       const token = generateToken({ id: company.id, email: company.email });
       console.log("Login bem-sucedido:", token);
-  
+
       res.json({ message: "Login autorizado", token });
     } catch (error: any) {
       console.error("Erro no login:", error);
@@ -61,10 +60,9 @@ export class CompanyController {
           raw: error,
         },
       });
-  }}
-  
+    }
+  }
 
-  
   static async getAll(req: Request, res: Response) {
     try {
       const companys = await repo.findAllCompanys();
@@ -95,9 +93,9 @@ export class CompanyController {
   static async update(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
-      const { name,CNPJ, email, password, phone, BusinessAddress } = req.body;
+      const { name, CNPJ, email, password, phone, BusinessAddress } = req.body;
 
-      const fieldsToUpdate = { name,CNPJ, email, password, phone, BusinessAddress};
+      const fieldsToUpdate = { name, CNPJ, email, password, phone, BusinessAddress };
       const updated = await repo.updateCompany(id, fieldsToUpdate);
 
       if (!updated) {
@@ -129,5 +127,4 @@ export class CompanyController {
       return;
     }
   }
-
 }

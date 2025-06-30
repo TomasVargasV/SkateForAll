@@ -4,7 +4,7 @@ import { Company } from "../models/Company";
 export class CompanyRepository {
   private CompanyRepository = AppDataSource.getRepository(Company);
 
-  async createCompany(name: string,CNPJ:number, email: string, password: string, phone: string, BusinessAddress: string) {
+  async createCompany(name: string, CNPJ: string, email: string, password: string, phone: string, BusinessAddress: string) {
     const company = new Company(name, CNPJ, email, password, phone, BusinessAddress);
     return await this.CompanyRepository.save(company);
   }
