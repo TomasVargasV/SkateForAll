@@ -78,11 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(errorResponse.message || "Erro ao atualizar usuário");
       }
 
-      // Recarrega os dados ATUALIZADOS antes de desabilitar os campos
-      await carregarUsuario(); // Adicione esta linha
+      await carregarUsuario();
       alert("Usuário atualizado com sucesso!");
 
-      // Só desabilita os campos APÓS recarregar os dados
       inputs.forEach(input => input.disabled = true);
       salvarBtn.disabled = true;
       editarBtn.disabled = false;
