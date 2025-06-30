@@ -6,21 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sorteio - Skate For All</title>
   <link rel="stylesheet" href="../css/Draw.css">
+  <link rel="stylesheet" href="../css/Header.css">
 </head>
 
 <body>
+ 
   <header>
-    <div class="logo">
-      <a href="../html/homeScreen.html">
-        <img src="../img/logoSkateForAll-removebg-preview.png" alt="logo">
-      </a>
-    </div>
-    <nav class="user-nav">
-      <a href="/minhas-ins" class="header-link">Minhas inscrições</a>
-      <a href="/meus-d" class="header-link">Meus dados</a>
-
+    <a href="homeScreen.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      <a href="userProfile.html">Perfil</a>
+      <a href="loginScreen.html">Sair</a>
     </nav>
   </header>
+  
 
   <main class="main-dark">
     <section class="empresa-info">
