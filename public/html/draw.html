@@ -11,13 +11,18 @@
 
 <body class="with-video">
   <header>
-
-    <!-- Video toggle buttons (simulating database control) -->
+    <a href="home.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
     <div class="toggle-container">
       <button class="toggle-btn active" id="withVideoBtn">com video</button>
       <button class="toggle-btn" id="withoutVideoBtn">sem video</button>
     </div>
-
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      <a href="profileUser.html">Perfil</a>
+      <a href="selectLogin.html">Sair</a>
+    </nav>
   </header>
 
   <div class="container">
