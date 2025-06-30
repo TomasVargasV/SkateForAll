@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (response.ok) {
         alert("Usuário cadastrado com sucesso!");
-        window.location.href = "../html/loginScreen.html";
+        window.location.href = "../html/loginUser.html";
       } else {
         const data = await response.json();
         alert("Erro: " + data.message);
