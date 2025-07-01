@@ -7,19 +7,18 @@
   <title>Tipo de Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/SelectRegister.css" />
+  <link rel="stylesheet" href="../css/Header.css">
 </head>
 
 <body>
   <header>
-    <div class="logo">
-      <a href="home.html">
-        <img src="../img/logoSkateForAll-removebg-preview.png" alt="logo" />
-      </a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="home.html">Início</a></li>
-      </ul>
+    <a href="home.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      <a href="profileUser.html">Perfil</a>
+      <a href="selectLogin.html">Sair</a>
     </nav>
   </header>
 
