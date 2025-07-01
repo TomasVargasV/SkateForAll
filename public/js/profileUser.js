@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alert(error.message || "Erro ao carregar perfil.");
 
       if (error.message.includes("Token inválido") || error.message.includes("não autenticado")) {
-        window.location.href = "/public/html/login.html";
+        window.location.href = "/public/html/loginUser.html";
       }
     }
   }
@@ -95,6 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarUsuario();
   } else {
     alert("Usuário não autenticado. Redirecionando para login.");
-    window.location.href = "/public/html/login.html";
+    window.location.href = "/public/html/loginUser.html";
   }
 });
