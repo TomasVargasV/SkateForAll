@@ -18,16 +18,18 @@
             <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
         </a>
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <nav id="noLogin">
-            <a href="selectLogin.html">Login</a>
-            <a href="selectRegister.html">Cadastra-se</a>
-        </nav>
-        <nav id="login">
-            <ul>
-                <li><a href="profileUser.html">Perfil</a></li>
-                <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
-            </ul>
-        </nav>
+        <div class="nav-container" id="navContainer">
+            <nav id="noLogin">
+                <a href="selectLogin.html">Login</a>
+                <a href="selectRegister.html">Cadastra-se</a>
+            </nav>
+            <nav id="login">
+                <ul>
+                    <li><a href="profileUser.html">Perfil</a></li>
+                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <section class="sponsors-section">
@@ -304,10 +306,10 @@
     </footer>
 
 </body>
+<script src="../js/auth.js"></script>
+<script src="../js/header.js"></script>
 <script src="../js/home.js"></script>
 <script src="../js/card-expander.js"></script>
-<script src="../js/login-dropdown.js"></script>
 <script src="../js/carroucel.js"></script>
-<script src="../js/card-expander.js"></script>
 
 </html>

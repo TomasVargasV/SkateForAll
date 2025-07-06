@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tipo de Login</title>
+  <link rel="icon" type="image/png" href="../img/logoSkateForAll-removebg-preview.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/SelectRegister.css" />
   <link rel="stylesheet" href="../css/Header.css">
@@ -12,15 +13,23 @@
 
 <body>
   <header>
-    <a href="home.html" class="logo">
-      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
-    </a>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="nav-menu">
-      <a href="profileUser.html">Perfil</a>
-      <a href="selectLogin.html">Sair</a>
-    </nav>
-  </header>
+        <a href="home.html" class="logo">
+            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-container" id="navContainer">
+            <nav id="noLogin">
+                <a href="selectLogin.html">Login</a>
+                <a href="selectRegister.html">Cadastra-se</a>
+            </nav>
+            <nav id="login">
+                <ul>
+                    <li><a href="profileUser.html">Perfil</a></li>
+                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
   <main>
     <h1>Como deseja logar?</h1>
@@ -37,5 +46,7 @@
     </div>
   </main>
 </body>
+<script src="../js/auth.js"></script>
+<script src="../js/header.js"></script>
 
 </html>
