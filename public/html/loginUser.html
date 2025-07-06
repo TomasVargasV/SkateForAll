@@ -12,24 +12,25 @@
 </head>
 
 <body>
+
   <header>
-    <a href="home.html" class="logo">
-      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
-    </a>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <div class="nav-container" id="navContainer">
-      <nav id="noLogin">
-        <a href="selectLogin.html">Voltar</a>
-        <a href="selectRegister.html">Cadastra-se</a>
-      </nav>
-      <nav id="login">
-        <ul>
-          <li><a href="profileUser.html">Perfil</a></li>
-          <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <a href="home.html" class="logo">
+            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-container" id="navContainer">
+            <nav id="noLogin">
+                <a href="selectLogin.html">Voltar</a>
+                <a href="selectRegister.html">Cadastra-se</a>
+            </nav>
+            <nav id="loggedInNav" style="display:none;">
+                <ul>
+                    <li><a id="profileLink" href="#">Perfil</a></li>
+                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
   <div class="login-wrapper">
     <div class="login-image">

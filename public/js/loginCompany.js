@@ -29,6 +29,8 @@ form.addEventListener("submit", async (e) => {
     }
 
     localStorage.setItem("token", data.token);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userType", "company");
     window.location.href = "/public/html/home.html";
   } catch (err) {
     erroEl.textContent = err.message;
