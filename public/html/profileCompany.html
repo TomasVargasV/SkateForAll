@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil da Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/profileCompany.css" />
+    <link rel="stylesheet" href="../css/Header.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="home.html" class="logo">
+            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="nav-menu">
+            <a href="draw.html">Sorteios</a>
+            <a id="logoutBtn" href="selectLogin.html">Sair</a>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <h2>Perfil da Empresa</h2>
+
+        <form id="profile-form">
+            <label>Nome:
+                <input id="name-input" type="text" name="nome" disabled />
+            </label>
+
+            <label>CNPJ:
+                <input id="cnpj-input" type="text" name="cnpj" disabled />
+            </label>
+
+            <label>Email:
+                <input id="email-input" type="email" name="email" disabled />
+            </label>
+
+            <label>Telefone:
+                <input id="phone-input" type="text" name="telefone" disabled />
+            </label>
+
+            <label>Endereço:
+                <input id="address-input" type="text" name="endereco" disabled />
+            </label>
+
+            <div class="botoes">
+                <button type="button" id="editar">Editar Perfil</button>
+                <button type="submit" id="salvar" disabled>Salvar Alterações</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="../js/profileCompany.js"></script>
+</body>
+
+</html>
