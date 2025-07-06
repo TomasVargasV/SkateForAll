@@ -110,6 +110,76 @@ export class CompanyController {
     }
   }
 
+  static async getMe(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado. Autenticação necessária." });
+        return;
+      }
+
+      const companyId = req.user.id;
+      const company = await repo.findCompanyById(companyId);
+
+      if (!company) {
+        res.status(404).json({ message: "Empresa não encontrada." });
+        return;
+      }
+
+      // Remova a senha antes de enviar
+      const { password, ...safeCompanyData } = company;
+      res.json(safeCompanyData);
+
+    } catch (error) {
+      console.error('Erro no getMe:', error);
+      res.status(500).json({
+        message: "Erro ao buscar dados da empresa",
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  static async updateMe(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado. Empresa não autenticada." });
+        return;
+      }
+
+      const companyId = req.user.id;
+      const { name, CNPJ, email, phone, BusinessAddress, password } = req.body;
+
+      // Verifique se o email já está em uso
+      if (email) {
+        const existingCompany = await repo.findCompanyByEmail(email);
+        if (existingCompany && existingCompany.id !== companyId) {
+          res.status(409).json({ message: "Email já está em uso." });
+          return;
+        }
+      }
+
+      const updateData = { name, CNPJ, email, phone, BusinessAddress, password };
+      const updatedCompany = await repo.updateCompany(companyId, updateData);
+
+      if (!updatedCompany) {
+        res.status(404).json({ message: "Empresa não encontrada." });
+        return;
+      }
+
+      const { password: _, ...safeCompanyData } = updatedCompany;
+      res.json({
+        message: "Empresa atualizada com sucesso!",
+        company: safeCompanyData,
+      });
+
+    } catch (error) {
+      console.error('Erro ao atualizar empresa:', error);
+      res.status(500).json({
+        message: "Erro ao atualizar empresa",
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
   static async delete(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);

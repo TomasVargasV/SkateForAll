@@ -41,10 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const empresa = await response.json();
 
             nameInput.value = empresa.name || '';
-            cnpjInput.value = empresa.cnpj || '';
+            cnpjInput.value = empresa.CNPJ || '';
             emailInput.value = empresa.email || '';
             phoneInput.value = empresa.phone || '';
-            addressInput.value = empresa.address || '';
+            addressInput.value = empresa.BusinessAddress || '';
         } catch (error) {
             console.error("Erro ao carregar empresa:", error);
             alert(error.message || "Erro ao carregar perfil.");
@@ -60,10 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const updatedCompany = {
             name: nameInput.value,
-            cnpj: cnpjInput.value,
+            CNPJ: cnpjInput.value,
             email: emailInput.value,
             phone: phoneInput.value,
-            address: addressInput.value,
+            BusinessAddress: addressInput.value,
         };
 
         try {
