@@ -1,45 +1,40 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import { Company } from "./Company";
+import { User } from "./User";
 
-@Entity("sorteios")
+@Entity()
 export class Draw {
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @ManyToOne(() => Company, company => company.draws)
+  company!: Company;
+
+  @Column({ nullable: true })
+  image?: string;
+
+  @Column({ nullable: true })
+  videoUrl?: string;
 
   @Column()
-  empresa: string;
+  title!: string;
 
   @Column()
-  item: string;
+  subtitle!: string;
+
+  @Column('text')
+  includedItems!: string;
 
   @Column()
-  quantidade: number;
+  winnerCount!: number;
 
-  @Column()
-  resumo: string;
+  @ManyToMany(() => User, user => user.draws)
+  @JoinTable()
+  enrolledUsers!: User[];
 
-  @Column()
-  videoUrl: string;
+  @Column({ default: true })
+  isActive!: boolean;
 
-  @Column()
-  imagemEmpresa: string;
-
-  @CreateDateColumn()
-  created_at!: Date;
-
-  constructor(
-    empresa: string,
-    item: string,
-    quantidade: number,
-    resumo: string,
-    videoUrl: string,
-    imagemEmpresa: string,
-
-  ) {
-    this.empresa = empresa;
-    this.item = item;
-    this.quantidade = quantidade;
-    this.resumo = resumo;
-    this.videoUrl = videoUrl;
-    this.imagemEmpresa = imagemEmpresa;
-  }
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  createdAt!: Date;
 }

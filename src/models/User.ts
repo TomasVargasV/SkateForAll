@@ -1,8 +1,10 @@
 import {
     Entity, PrimaryGeneratedColumn, Column, OneToMany,
-    BeforeInsert, BeforeUpdate
+    BeforeInsert, BeforeUpdate,
+    ManyToMany
 } from "typeorm";
 import bcrypt from "bcryptjs";
+import { Draw } from "./Draw";
 
 @Entity()
 export class User {
@@ -27,8 +29,11 @@ export class User {
     @Column({ length: 100 })
     address: string;
 
-    @Column({length: 50})
+    @Column({ length: 50 })
     state: string;
+
+    @ManyToMany(() => Draw, draw => draw.enrolledUsers)
+    draws!: Draw[];
 
 
     constructor(name: string, email: string, password: string, phone: string, address: string, state: string) {
@@ -38,7 +43,7 @@ export class User {
         this.phone = phone;
         this.address = address;
         this.state = state;
-        }
+    }
 
     @BeforeInsert()
     @BeforeUpdate()
