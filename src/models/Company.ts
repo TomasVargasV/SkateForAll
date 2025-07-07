@@ -3,6 +3,7 @@ import {
     BeforeInsert, BeforeUpdate
 } from "typeorm";
 import bcrypt from "bcryptjs";
+import { Draw } from "./Draw";
 
 @Entity()
 export class Company {
@@ -29,6 +30,9 @@ export class Company {
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
+
+    @OneToMany(() => Draw, draw => draw.company)
+    draws!: Draw[];
 
 
     constructor(name: string, CNPJ: string, email: string, password: string, phone: string, BusinessAddress: string) {

@@ -1,16 +1,19 @@
-import { Router, response } from "express";
+import { Router } from "express";
 import { DrawController } from "../controllers/DrawController";
-import { Request, Response } from "express";
-import { request } from "http";
+import { AuthMiddleware } from "../middlewares/AuthMiddlewares";
 
+const middleware = new AuthMiddleware();
 
-const drawRoutes = Router();
+const router = Router();
 
-const controller = new DrawController();
+router.post("/draws", middleware.authenticateToken, DrawController.create);
+router.get("/company/draws", middleware.authenticateToken, DrawController.getCompanyDraws);
+router.put("/draws/:id", middleware.authenticateToken, DrawController.update);
+router.delete("/draws/:id", middleware.authenticateToken, DrawController.delete);
 
+router.get("/draws", DrawController.getAll);
+router.get("/draws/:id", DrawController.getById);
 
-drawRoutes.post("/create", controller.create.bind);
-drawRoutes.get("/list", controller.list.bind);
-drawRoutes.delete("/:id", controller.delete.bind)
+router.post("/draws/:id/enroll", middleware.authenticateToken, DrawController.enroll);
 
-export default drawRoutes;
+export default router;
