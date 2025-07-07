@@ -1,40 +1,65 @@
-// const navNoL = document.getElementById("noLogin")
-// const navL = document.getElementById("login")
+async function fetchDraws() {
+    try {
+        const response = await fetch('http://localhost:3000/api/draws');
+        if (!response.ok) {
+            throw new Error('Erro ao carregar sorteios');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Erro:', error);
+        return [];
+    }
+}
 
-// function logged() {
-//     const isLogged = localStorage.getItem('token')
-//     if (isLogged != null) {
-//         navNoL.style.display = 'none'
-//         navL.style.display = 'block'
-//     } else {
-//         navNoL.style.display = 'block'
-//         navL.style.display = 'none'
-//     }
-// }
+function createDrawCard(draw) {
+    const items = draw.includedItems.split(';').map(item => item.trim());
 
-// logged()
+    return `
+    <div class="card">
+      <div class="card-image">
+        <img src="${draw.image}" alt="${draw.title}">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">${draw.title}</h3>
+        <div class="card-description">
+          <h3 class="card-subtitle">${draw.subtitle}</h3>
+          <h4>Sorteio inclui:</h4>
+          <ul>
+            ${items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+          ${draw.winnerCount == 1 ?
+            'Será sorteado 1 kit' : `<p class="card-obs">Serão sorteados ${draw.winnerCount} kits</p>`}
+        </div>
+        <button class="card-btn">Mais detalhes</button>
+        <button class="detail-btn" data-draw-id="${draw.id}">Inscrever-se</button>
+      </div>
+      <div class="close-btn">×</div>
+    </div>
+  `;
+}
 
+async function renderDraws() {
+    const container = document.querySelector('.cards-container');
+    const draws = await fetchDraws();
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const logoutBtn = document.getElementById("logoutBtn");
+    if (draws.length === 0) {
+        container.innerHTML = '<p class="no-draws">Nenhum sorteio disponível no momento</p>';
+        return;
+    }
 
-//     if (logoutBtn) {
-//         logoutBtn.addEventListener("click", () => {
-//             localStorage.removeItem("token"); // remove o token
-//             location.reload(); // recarrega a página
-//         });
-//     }
+    container.innerHTML = draws.map(createDrawCard).join('');
+}
 
-//     // Exibir o menu certo baseado na presença do token
-//     const token = localStorage.getItem("token");
-//     const navNoLogin = document.getElementById("noLogin");
-//     const navLogin = document.getElementById("login");
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await renderDraws();
+        if (typeof initCardExpanders === 'function') {
+            initCardExpanders();
+        } else {
+            console.warn('initCardExpanders not found');
+        }
 
-//     if (token) {
-//         navNoLogin.style.display = "none";
-//         navLogin.style.display = "flex";
-//     } else {
-//         navNoLogin.style.display = "flex";
-//         navLogin.style.display = "none";
-//     }
-// });
+    } catch (error) {
+        console.error('Initialization error:', error);
+    }
+});

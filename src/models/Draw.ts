@@ -12,7 +12,7 @@ export class Draw {
 
   @Column({ nullable: true })
   image?: string;
-
+  
   @Column({ nullable: true })
   videoUrl?: string;
 

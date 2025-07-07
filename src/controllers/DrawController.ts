@@ -26,7 +26,16 @@ export class DrawController {
   static async getAll(req: Request, res: Response) {
     try {
       const draws = await repo.findAllDraws();
-      res.json(draws);
+      const simplifiedDraws = draws.map(draw => ({
+        id: draw.id,
+        title: draw.title,
+        subtitle: draw.subtitle,
+        image: draw.image,
+        includedItems: draw.includedItems,
+        winnerCount: draw.winnerCount
+      }));
+
+      res.json(simplifiedDraws);
     } catch (error) {
       res.status(500).json({ error: "Erro ao buscar sorteios" });
     }

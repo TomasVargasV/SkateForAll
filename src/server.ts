@@ -1,6 +1,7 @@
 import express from "express";
 import UserRoutes from "./routes/UserRoutes";
 import CompanyRoutes from "./routes/CompanyRoutes";
+import DrawRoutes from "./routes/DrawRoutes"; 
 import cors from "cors";
 import { AppDataSource } from "./dataSource";
 import path from "path";
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", UserRoutes);
 app.use("/api", CompanyRoutes);
+app.use("/api", DrawRoutes); 
 
 AppDataSource.initialize().then(() => {
   app.listen(3000, () => console.log("Server is running on port 3000"));
