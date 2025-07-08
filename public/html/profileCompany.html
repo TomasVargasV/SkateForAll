@@ -60,6 +60,15 @@
                 <button type="submit" id="salvar" disabled>Salvar Alterações</button>
             </div>
         </form>
+
+        <form id="cadastro-sorteio" enctype="multipart/form-data">
+            <input type="text" id="title" placeholder="Título do Sorteio" required>
+            <input type="text" id="subtitle" placeholder="Subtítulo" required>
+            <textarea id="includedItems" placeholder="Itens inclusos" required></textarea>
+            <input type="number" id="winnerCount" placeholder="Número de ganhadores" required>
+            <input type="file" id="image" accept="image/*">
+            <button type="submit">Criar Sorteio</button>
+        </form>
     </main>
 
 </body>
