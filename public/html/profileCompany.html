@@ -31,44 +31,97 @@
         </div>
     </header>
 
-    <main class="profile-container">
-        <h2>Perfil da Empresa</h2>
+    <main>
+        <div class="draw-container">
+            <form id="cadastro-sorteio" enctype="multipart/form-data">
+                <h3>Criar Novo Sorteio</h3>
 
-        <form id="profile-form">
-            <label>Nome:
-                <input id="name-input" type="text" name="nome" disabled />
-            </label>
+                <div class="form-group">
+                    <label for="title">Título do Sorteio</label>
+                    <input id="title" type="text" placeholder="Ex: Kit Completo de Skate Profissional" required>
+                </div>
 
-            <label>CNPJ:
-                <input id="cnpj-input" type="text" name="CNPJ" disabled />
-            </label>
+                <div class="form-group">
+                    <label for="subtitle">Subtítulo</label>
+                    <input id="subtitle" type="text" placeholder="Ex: Participe e concorra a um kit completo!" required>
+                </div>
 
-            <label>Email:
-                <input id="email-input" type="email" name="email" disabled />
-            </label>
+                <div class="form-group">
+                    <label for="includedItems">Itens Inclusos</label>
+                    <textarea id="includedItems"
+                        placeholder="Liste os itens que fazem parte do prêmio. Ex:&#10;- Trucks de alumínio&#10;- 4 rodas de alta performance&#10;- Rolamentos ABEC 7"
+                        required></textarea>
+                </div>
 
-            <label>Telefone:
-                <input id="phone-input" type="text" name="telefone" disabled />
-            </label>
+                <div class="form-group">
+                    <label for="winnerCount">Número de Ganhadores</label>
+                    <input id="winnerCount" type="number" min="1" placeholder="Ex: 3" required>
+                </div>
 
-            <label>Endereço:
-                <input id="address-input" type="text" name="BusinessAddress" disabled />
-            </label>
+                <div class="form-group">
+                    <label>Imagem do Sorteio</label>
+                    <div class="file-input-container">
+                        <div class="file-input-label" id="fileInputLabel">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 13V19H5V13H3V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13H19ZM13 5V15H11V5H8L12 1L16 5H13Z"
+                                    fill="#aaa" />
+                            </svg>
+                            <p>Arraste e solte uma imagem ou clique para selecionar</p>
+                        </div>
+                        <input id="image" type="file" accept="image/*">
+                    </div>
+                </div>
 
-            <div class="botoes">
-                <button type="button" id="editar">Editar Perfil</button>
-                <button type="submit" id="salvar" disabled>Salvar Alterações</button>
+                <div class="form-group">
+                    <label for="videoUrl">Link para Vídeo do YouTube (Opcional)</label>
+                    <input id="videoUrl" type="text" placeholder="Ex: https://www.youtube.com/watch?v=...">
+                </div>
+
+                <label class="checkbox-container">
+                    <input type="hidden" name="isActive" value="false">
+                    <input type="checkbox" name="isActive" id="isActiveCheckbox" value="true">
+                    <span class="custom-checkbox"></span>
+                    <span class="checkbox-label">Ativar sorteio imediatamente após criação</span>
+                </label>
+
+                <button type="submit">Criar Sorteio</button>
+            </form>
+        </div>
+        <div class="profile-container">
+            <h2>Perfil da Empresa</h2>
+            <form id="profile-form">
+                <label>Nome:
+                    <input id="name-input" type="text" name="nome" disabled />
+                </label>
+
+                <label>CNPJ:
+                    <input id="cnpj-input" type="text" name="CNPJ" disabled />
+                </label>
+
+                <label>Email:
+                    <input id="email-input" type="email" name="email" disabled />
+                </label>
+
+                <label>Telefone:
+                    <input id="phone-input" type="text" name="telefone" disabled />
+                </label>
+
+                <label>Endereço:
+                    <input id="address-input" type="text" name="BusinessAddress" disabled />
+                </label>
+
+                <div class="botoes">
+                    <button type="button" id="editar">Editar Perfil</button>
+                    <button type="submit" id="salvar" disabled>Salvar Alterações</button>
+                </div>
+            </form>
+            <div class="company-draws-section">
+                <h2>Meus Sorteios</h2>
+                <div id="drawsContainer" class="draws-container"></div>
             </div>
-        </form>
-
-        <form id="cadastro-sorteio" enctype="multipart/form-data">
-            <input type="text" id="title" placeholder="Título do Sorteio" required>
-            <input type="text" id="subtitle" placeholder="Subtítulo" required>
-            <textarea id="includedItems" placeholder="Itens inclusos" required></textarea>
-            <input type="number" id="winnerCount" placeholder="Número de ganhadores" required>
-            <input type="file" id="image" accept="image/*">
-            <button type="submit">Criar Sorteio</button>
-        </form>
+        </div>
     </main>
 
 </body>

@@ -13,37 +13,52 @@ async function fetchDraws() {
 
 function createDrawCard(draw) {
   const items = draw.includedItems.split(';').map(item => item.trim());
-  return `
-    <div class="card">
-      <div class="card-image">
-        <img src="${draw.image}" alt="${draw.image}">
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">${draw.title}</h3>
-        <div class="card-description">
-          <h3 class="card-subtitle">${draw.subtitle}</h3>
-          <h4>Sorteio inclui:</h4>
-          <ul>
-            ${items.map(item => `<li>${item}</li>`).join('')}
-          </ul>
-          ${draw.winnerCount == 1
-      ? 'Será sorteado 1 kit'
-      : `<p class="card-obs">Serão sorteados ${draw.winnerCount} kits</p>`
-    }
+  // console.log(
+  //   'id', draw.id,
+  //   'url', draw.videoUrl,
+  //   'title', draw.title,
+  //   'sub', draw.subtitle,
+  //   'items', draw.includedItems,
+  //   'winnters', draw.winnerCount,
+  //   'isactive', draw.isActive,
+  //   'createdat', draw.createdAt,
+  //   'companyid', draw.company,
+  //   'image', draw.image
+  // )
+  if (draw.isActive) {
+    return `
+      <div class="card">
+        <div class="card-image">
+          <img src="${draw.image}" alt="${draw.title}">
         </div>
-        <button class="card-btn">Mais detalhes</button>
-        <button class="detail-btn" data-draw-id="${draw.id}">Inscrever-se</button>
+        <div class="card-content">
+          <h3 class="card-title">${draw.title}</h3>
+          <div class="card-description">
+            <h3 class="card-subtitle">${draw.subtitle}</h3>
+            <h4>Sorteio inclui:</h4>
+            <ul>
+              ${items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            ${draw.winnerCount == 1
+        ? 'Será sorteado 1 kit'
+        : `<p class="card-obs">Serão sorteados ${draw.winnerCount} kits</p>`
+      }
+          </div>
+          <button class="card-btn">Mais detalhes</button>
+          <button class="detail-btn" data-draw-id="${draw.id}">Inscrever-se</button>
+        </div>
+        <div class="close-btn">×</div>
       </div>
-      <div class="close-btn">×</div>
-    </div>
-  `;
+    `
+  }
 }
 
 async function renderDraws() {
   const container = document.querySelector('.cards-container');
   const draws = await fetchDraws();
+  const activeDraws = draws.filter(draw => draw.isActive);
 
-  if (draws.length === 0) {
+  if (activeDraws.length == 0) {
     container.innerHTML = '<p class="no-draws">Nenhum sorteio disponível no momento</p>';
     return;
   }

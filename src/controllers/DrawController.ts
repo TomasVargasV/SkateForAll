@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { DrawRepository } from "../repositories/DrawRepository";
+import { Company } from "../models/Company";
+import { CompanyRepository } from "../repositories/CompanyRepository";
+import { Draw } from "../models/Draw";
 
 const repo = new DrawRepository();
 
@@ -11,10 +14,29 @@ export class DrawController {
         return;
       }
 
-      const { title, subtitle, includedItems, winnerCount } = req.body;
+      const companyId = req.user.id;
+      const companyRepo = new CompanyRepository();
+      const company = await companyRepo.findCompanyById(companyId);
+
+      if (!company) {
+        res.status(404).json({ message: "Empresa não encontrada." });
+        return;
+      }
+
+      const { title, subtitle, includedItems, winnerCount, videoUrl } = req.body;
+      const isActive = req.body.isActive === "true";
       const image = req.file ? `/uploads/${req.file.filename}` : undefined;
 
-      const drawData = { title, subtitle, includedItems, winnerCount, image };
+      const drawData: Partial<Draw> = {
+        title,
+        subtitle,
+        includedItems,
+        winnerCount,
+        image,
+        videoUrl,
+        isActive,
+        company
+      };
 
       const draw = await repo.createDraw(drawData);
       res.status(201).json(draw);
@@ -32,11 +54,19 @@ export class DrawController {
         subtitle: draw.subtitle,
         image: draw.image,
         includedItems: draw.includedItems,
-        winnerCount: draw.winnerCount
+        winnerCount: draw.winnerCount,
+        videoUrl: draw.videoUrl,
+        isActive: draw.isActive,
+        createdAt: draw.createdAt,
+        company: draw.company ? {
+          id: draw.company.id,
+          name: draw.company.name,
+        } : null
       }));
 
       res.json(simplifiedDraws);
     } catch (error) {
+      console.error("Erro detalhado:", error);
       res.status(500).json({ error: "Erro ao buscar sorteios" });
     }
   }

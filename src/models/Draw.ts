@@ -7,12 +7,12 @@ export class Draw {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Company, company => company.draws)
+  @ManyToOne(() => Company, company => company.draws, { eager: true })
   company!: Company;
 
   @Column({ nullable: true })
   image?: string;
-  
+
   @Column({ nullable: true })
   videoUrl?: string;
 
@@ -32,7 +32,7 @@ export class Draw {
   @JoinTable()
   enrolledUsers!: User[];
 
-  @Column({ default: true })
+  @Column({ default: false })
   isActive!: boolean;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

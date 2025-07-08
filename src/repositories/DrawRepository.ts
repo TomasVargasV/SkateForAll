@@ -6,13 +6,16 @@ export class DrawRepository {
     private drawRepository = AppDataSource.getRepository(Draw);
 
     async createDraw(drawData: Partial<Draw>) {
+        if (!drawData.company) {
+            throw new Error("Empresa não associada ao sorteio");
+        }
         const draw = this.drawRepository.create(drawData);
         return await this.drawRepository.save(draw);
     }
 
     async findAllDraws() {
         return await this.drawRepository.find({
-            relations: ["company", "enrolledUsers"]
+            relations: ["company"]
         });
     }
 
@@ -53,7 +56,7 @@ export class DrawRepository {
     async getCompanyDraws(companyId: number) {
         return await this.drawRepository.find({
             where: { company: { id: companyId } },
-            relations: ["enrolledUsers"]
+            relations: ["enrolledUsers", "company"]
         });
     }
 }
