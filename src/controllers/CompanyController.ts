@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { CompanyRepository } from "../repositories/CompanyRepository";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../auth";
+import { DrawRepository } from "../repositories/DrawRepository";
 
 const repo = new CompanyRepository();
 
 export class CompanyController {
-
 
   static async register(req: Request, res: Response) {
     try {
@@ -125,9 +125,14 @@ export class CompanyController {
         return;
       }
 
-      // Remova a senha antes de enviar
+      const drawRepo = new DrawRepository();
+      const draws = await drawRepo.getCompanyDraws(companyId);
       const { password, ...safeCompanyData } = company;
-      res.json(safeCompanyData);
+      
+      res.json({
+        ...safeCompanyData,
+        draws
+      });
 
     } catch (error) {
       console.error('Erro no getMe:', error);
