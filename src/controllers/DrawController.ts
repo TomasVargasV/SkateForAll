@@ -11,10 +11,10 @@ export class DrawController {
         return;
       }
 
-      const drawData = {
-        ...req.body,
-        company: { id: req.user.id }
-      };
+      const { title, subtitle, includedItems, winnerCount } = req.body;
+      const image = req.file ? `/uploads/${req.file.filename}` : undefined;
+
+      const drawData = { title, subtitle, includedItems, winnerCount, image };
 
       const draw = await repo.createDraw(drawData);
       res.status(201).json(draw);

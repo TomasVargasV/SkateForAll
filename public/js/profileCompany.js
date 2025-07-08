@@ -101,3 +101,30 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "/public/html/login.html";
     }
 });
+
+document.getElementById('cadastro-sorteio').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fd = new FormData();
+    fd.append('title', document.getElementById('title').value);
+    fd.append('subtitle', document.getElementById('subtitle').value);
+    fd.append('includedItems', document.getElementById('includedItems').value);
+    fd.append('winnerCount', document.getElementById('winnerCount').value);
+
+    const file = document.getElementById('image').files[0];
+    if (file) fd.append('image', file);
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/api/draws', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: fd
+        });
+        const json = await res.json();
+        if (res.ok) alert('Sorteio criado!');
+        else console.error(json);
+    } catch (err) {
+        console.error('Erro na requisição:', err);
+    }
+});
