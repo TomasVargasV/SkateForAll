@@ -136,3 +136,5 @@ dist
 .pnp.*
 # Ignorar arquivos de configuração e dependências
 package-lock.json
+
+/uploads/
