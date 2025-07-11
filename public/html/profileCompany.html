@@ -32,6 +32,39 @@
     </header>
 
     <main>
+        <div class="profile-container">
+            <h2>Perfil da Empresa</h2>
+            <form id="profile-form">
+                <label>Nome:
+                    <input id="name-input" type="text" name="nome" disabled />
+                </label>
+
+                <label>CNPJ:
+                    <input id="cnpj-input" type="text" name="CNPJ" disabled />
+                </label>
+
+                <label>Email:
+                    <input id="email-input" type="email" name="email" disabled />
+                </label>
+
+                <label>Telefone:
+                    <input id="phone-input" type="text" name="telefone" disabled />
+                </label>
+
+                <label>Endereço:
+                    <input id="address-input" type="text" name="BusinessAddress" disabled />
+                </label>
+
+                <div class="botoes">
+                    <button type="button" id="editar">Editar Perfil</button>
+                    <button type="submit" id="salvar" disabled>Salvar Alterações</button>
+                </div>
+            </form>
+            <div class="company-draws-section">
+                <h2>Meus Sorteios</h2>
+                <div id="drawsContainer" class="draws-container"></div>
+            </div>
+        </div>
         <div class="draw-container">
             <form id="cadastro-sorteio" enctype="multipart/form-data">
                 <h3>Criar Novo Sorteio</h3>
@@ -70,7 +103,7 @@
                             </svg>
                             <p>Arraste e solte uma imagem ou clique para selecionar</p>
                         </div>
-                        <input id="image" type="file" accept="image/*">
+                        <input id="image" type="file" accept="image/*" required>
                     </div>
                 </div>
 
@@ -88,39 +121,6 @@
 
                 <button type="submit">Criar Sorteio</button>
             </form>
-        </div>
-        <div class="profile-container">
-            <h2>Perfil da Empresa</h2>
-            <form id="profile-form">
-                <label>Nome:
-                    <input id="name-input" type="text" name="nome" disabled />
-                </label>
-
-                <label>CNPJ:
-                    <input id="cnpj-input" type="text" name="CNPJ" disabled />
-                </label>
-
-                <label>Email:
-                    <input id="email-input" type="email" name="email" disabled />
-                </label>
-
-                <label>Telefone:
-                    <input id="phone-input" type="text" name="telefone" disabled />
-                </label>
-
-                <label>Endereço:
-                    <input id="address-input" type="text" name="BusinessAddress" disabled />
-                </label>
-
-                <div class="botoes">
-                    <button type="button" id="editar">Editar Perfil</button>
-                    <button type="submit" id="salvar" disabled>Salvar Alterações</button>
-                </div>
-            </form>
-            <div class="company-draws-section">
-                <h2>Meus Sorteios</h2>
-                <div id="drawsContainer" class="draws-container"></div>
-            </div>
         </div>
     </main>
 

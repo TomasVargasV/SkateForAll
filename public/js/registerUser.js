@@ -6,11 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
+    const instagram = document.getElementById("instagram").value;
+    const address = document.getElementById("address").value;
+    const state = document.getElementById("itemStatus").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("repetir-senha").value;
-    const address = document.getElementById("address").value;
-    const state = document.getElementById("itemStatus").value;
     const erroMsg = document.getElementById("senha-erro");
 
     if (password !== confirmPassword) {
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name, phone, email, password, address, state })
+        body: JSON.stringify({ name, email, password, phone, instagram, address, state })
       });
 
       if (response.ok) {

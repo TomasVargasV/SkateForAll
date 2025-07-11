@@ -268,7 +268,6 @@ checkbox.addEventListener('change', function () {
 
 // Simular dados do perfil
 document.getElementById('editar').addEventListener('click', function () {
-    alert('Funcionalidade de edição ativada!');
     document.querySelectorAll('#profile-form input:not([type="hidden"])').forEach(input => {
         input.disabled = false;
     });
