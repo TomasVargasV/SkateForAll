@@ -9,24 +9,24 @@ export class Draw {
 
   @ManyToOne(() => Company, company => company.draws, { eager: true, nullable: false} )
   company!: Company;
+  
+  @Column({nullable: false})
+  title!: string;
+  
+  @Column({nullable: false})
+  subtitle!: string;
+  
+  @Column('text', {nullable: false})
+  includedItems!: string;
+
+  @Column({nullable: false})
+  winnerCount!: number;
 
   @Column({nullable: false})
   image!: string;
 
   @Column({ nullable: true })
   videoUrl?: string;
-
-  @Column({nullable: false})
-  title!: string;
-
-  @Column({nullable: false})
-  subtitle!: string;
-
-  @Column('text', {nullable: false})
-  includedItems!: string;
-
-  @Column({nullable: false})
-  winnerCount!: number;
 
   @ManyToMany(() => User, user => user.draws)
   @JoinTable()
