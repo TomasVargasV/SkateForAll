@@ -10,14 +10,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 100px;
-    padding: 50px;
-}
-
 header {
     background-color: #111;
     display: flex;
@@ -55,33 +47,35 @@ nav ul li:hover {
     display: none;
 }
 
+main {
+    display: flex;
+    align-items: flex-start;
+    gap: 100px;
+    padding: 50px;
+}
+
 .profile-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 40px auto;
     padding: 30px;
     background-color: #1c1c1c;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-    align-self: flex-start;
-}
-
-.profile-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: red;
 }
 
 .draw-container {
     width: 100%;
-    margin: 40px auto;
     padding: 30px;
     background-color: #1c1c1c;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-    align-self: flex-start;
+}
+
+.profile-container h2 {
+    text-align: center;
+    font-size: 28px;
+    color: red;
 }
 
 form label {
@@ -134,30 +128,6 @@ form input:disabled {
     cursor: not-allowed;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 20px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .profile-container {
-        margin: 20px;
-        padding: 20px;
-    }
-
-    .botoes button {
-        flex: 1 1 100%;
-    }
-}
-
 #cadastro-sorteio {
     width: 100%;
 }
@@ -201,19 +171,6 @@ form input:disabled {
 #cadastro-sorteio textarea {
     min-height: 110px;
     resize: vertical;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.checkbox-group label {
-    margin-bottom: 0;
-    font-weight: normal;
-    color: #ccc;
 }
 
 .file-input-container {
@@ -275,19 +232,6 @@ form input:disabled {
     background-color: #cc0000;
 }
 
-.preview-container {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.preview-container img {
-    max-width: 100%;
-    max-height: 200px;
-    border-radius: 5px;
-    display: none;
-}
-
-/* Estilização do checkbox personalizado */
 .custom-checkbox {
     position: relative;
     display: inline-block;
@@ -320,18 +264,6 @@ form input:disabled {
     opacity: 0;
     width: 0;
     height: 0;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    #cadastro-sorteio {
-        margin-top: 30px;
-        padding-top: 20px;
-    }
-
-    #cadastro-sorteio h3 {
-        font-size: 20px;
-    }
 }
 
 .company-draws-section {
@@ -410,9 +342,6 @@ form input:disabled {
     color: #ccc;
 }
 
-
-
-/* Estilos do Modal */
 .modal {
     display: none;
     position: fixed;
@@ -453,15 +382,9 @@ form input:disabled {
     color: #333;
 }
 
-/* Animações */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideDown {
@@ -469,21 +392,18 @@ form input:disabled {
         transform: translateY(-50px);
         opacity: 0;
     }
-
     to {
         transform: translateY(0);
         opacity: 1;
     }
 }
 
-/* Adicione isto para melhorar a interatividade dos cards */
 .draw-card {
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .draw-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -535,3 +455,111 @@ form input:disabled {
     background-color: #2980b9;
 }
 
+/* Responsividade (sem alterar layout original) */
+@media (max-width: 1200px) {
+    main {
+        gap: 50px;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    main {
+        gap: 40px;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        padding: 15px;
+        height: auto;
+    }
+
+    .logo img {
+        height: 80px;
+        width: 80px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    main {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .profile-container,
+    .draw-container {
+        padding: 20px;
+        margin: 0;
+    }
+
+    .botoes button {
+        flex: 1 1 100%;
+    }
+
+    .draws-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        padding: 10px;
+    }
+
+    main {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .profile-container,
+    .draw-container {
+        padding: 15px;
+    }
+
+    .profile-container h2 {
+        font-size: 24px;
+    }
+
+    .draws-container {
+        grid-template-columns: 1fr;
+    }
+
+    #cadastro-sorteio h3 {
+        font-size: 20px;
+    }
+
+    .file-input-container {
+        padding: 15px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 10px;
+    }
+
+    .botoes {
+        gap: 10px;
+    }
+
+    #cadastro-sorteio .form-group {
+        margin-bottom: 15px;
+    }
+
+    .modal-image {
+        height: 150px;
+    }
+}
