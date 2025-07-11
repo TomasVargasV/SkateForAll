@@ -7,25 +7,25 @@ export class Draw {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Company, company => company.draws, { eager: true })
+  @ManyToOne(() => Company, company => company.draws, { eager: true, nullable: false} )
   company!: Company;
 
-  @Column({ nullable: true })
-  image?: string;
+  @Column({nullable: false})
+  image!: string;
 
   @Column({ nullable: true })
   videoUrl?: string;
 
-  @Column()
+  @Column({nullable: false})
   title!: string;
 
-  @Column()
+  @Column({nullable: false})
   subtitle!: string;
 
-  @Column('text')
+  @Column('text', {nullable: false})
   includedItems!: string;
 
-  @Column()
+  @Column({nullable: false})
   winnerCount!: number;
 
   @ManyToMany(() => User, user => user.draws)

@@ -3,12 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("profile-form");
   const editarBtn = document.getElementById("editar");
   const salvarBtn = document.getElementById("salvar");
-  const inputs = form.querySelectorAll("input");
+  const camposEditaveis = form.querySelectorAll("input, select");
 
   const nameInput = document.getElementById("name-input");
   const emailInput = document.getElementById("email-input");
   const phoneInput = document.getElementById("phone-input");
+  const instagramInput = document.getElementById("instagram-input");
   const addressInput = document.getElementById("address-input");
+  const stateInput = document.getElementById("state-input");
 
   const token = localStorage.getItem("token");
 
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   editarBtn.addEventListener("click", () => {
-    inputs.forEach((input) => input.disabled = false);
+    camposEditaveis.forEach((input) => input.disabled = false);
     salvarBtn.disabled = false;
     editarBtn.disabled = true;
   });
@@ -42,7 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
       nameInput.value = user.name || '';
       emailInput.value = user.email || '';
       phoneInput.value = user.phone || '';
+      instagramInput.value = user.instagram || '';
       addressInput.value = user.address || '';
+      stateInput.value = user.state || '';
     } catch (error) {
       console.error("Erro ao carregar usuário:", error);
       alert(error.message || "Erro ao carregar perfil.");
@@ -60,7 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
       name: nameInput.value,
       email: emailInput.value,
       phone: phoneInput.value,
+      instagram: instagramInput.value,
       address: addressInput.value,
+      state: stateInput.value
     };
 
     try {
@@ -81,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       await carregarUsuario();
       alert("Usuário atualizado com sucesso!");
 
-      inputs.forEach(input => input.disabled = true);
+      camposEditaveis.forEach(input => input.disabled = true);
       salvarBtn.disabled = true;
       editarBtn.disabled = false;
 

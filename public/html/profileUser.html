@@ -14,22 +14,22 @@
 <body>
 
   <header>
-        <a href="home.html" class="logo">
-            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
-        </a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <div class="nav-container" id="navContainer">
-            <nav id="noLogin">
-                <a href="selectLogin.html">Login</a>
-                <a href="selectRegister.html">Cadastra-se</a>
-            </nav>
-            <nav id="loggedInNav" style="display:none;">
-                <ul>
-                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <a href="home.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-container" id="navContainer">
+      <nav id="noLogin">
+        <a href="selectLogin.html">Login</a>
+        <a href="selectRegister.html">Cadastra-se</a>
+      </nav>
+      <nav id="loggedInNav" style="display:none;">
+        <ul>
+          <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main class="profile-container">
     <h2>Perfil do Usuário</h2>
@@ -47,9 +47,44 @@
         <input id="phone-input" type="text" name="telefone" disabled />
       </label>
 
+      <label>Instagram:
+        <input id="instagram-input" type="text" name="instagram" disabled />
+      </label>
+
       <label>Endereço:
         <input id="address-input" type="text" name="endereco" disabled />
       </label>
+
+      <label class="state-label">Estado:</label>
+      <select id="state-input" name="estado" disabled>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
 
       <div class="botoes">
         <button type="button" id="editar">Editar Perfil</button>

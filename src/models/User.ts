@@ -11,36 +11,39 @@ export class User {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ length: 100 })
+    @Column({ nullable: false })
     name: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column()
+    @Column({ nullable: false})
     password: string;
-
+    
+    @Column({  nullable: false })
+    phone: string;
+    
+    @Column({ unique: true, nullable: false })
+    instagram: string;
+    
+    @Column({ nullable: false })
+    address: string;
+    
+    @Column({ nullable: false })
+    state: string;
+    
+    @ManyToMany(() => Draw, draw => draw.enrolledUsers)
+    draws!: Draw[];
+    
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
-    @Column({ length: 100 })
-    phone: string;
-
-    @Column({ length: 100 })
-    address: string;
-
-    @Column({ length: 50 })
-    state: string;
-
-    @ManyToMany(() => Draw, draw => draw.enrolledUsers)
-    draws!: Draw[];
-
-
-    constructor(name: string, email: string, password: string, phone: string, address: string, state: string) {
+    constructor(name: string, email: string, password: string, phone: string, instagram: string, address: string, state: string) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.instagram = instagram;
         this.address = address;
         this.state = state;
     }

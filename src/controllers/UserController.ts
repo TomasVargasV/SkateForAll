@@ -9,7 +9,7 @@ export class UserController {
 
   static async register(req: Request, res: Response) {
     try {
-      const { name, email, password, phone, address, state } = req.body;
+      const { name, email, password, phone, instagram, address, state } = req.body;
 
       const existing = await repo.findUserByEmail(email);
       if (existing) {
@@ -17,7 +17,7 @@ export class UserController {
         return;
       }
 
-      const user = await repo.createUser(name, email, password, phone, address, state);
+      const user = await repo.createUser(name, email, password, phone, instagram, address, state);
       res.status(201).json(user);
       return;
     } catch (error) {
@@ -124,8 +124,7 @@ export class UserController {
       }
 
       const userId = req.user.id;
-      const { name, email, phone, address, password } = req.body;
-
+      const { name, email, password, phone, instagram, address, state } = req.body;
       if (email) {
         const existingUser = await repo.findUserByEmail(email);
         if (existingUser && existingUser.id !== userId) {
@@ -134,7 +133,7 @@ export class UserController {
         }
       }
 
-      const updateData = { name, email, phone, address, password };
+      const updateData = { name, email, password, phone, instagram, address, state };
       const updatedUser = await repo.updateUser(userId, updateData);
 
       if (!updatedUser) {
