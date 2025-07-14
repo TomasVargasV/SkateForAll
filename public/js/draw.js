@@ -9,19 +9,36 @@ let instaInputTouched = false;
 let lastPosition = 0;
 let cheatAttempts = 0;
 
-function initYouTubePlayer() {
+function extractYouTubeId(url) {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function initYouTubePlayer(videoUrl) {
+    const videoId = extractYouTubeId(videoUrl);
+    if (!videoId) return;
+
     if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') {
-        createPlayer();
+        createPlayer(videoId);
     } else {
-        window.onYouTubeIframeAPIReady = createPlayer;
+        window.onYouTubeIframeAPIReady = () => createPlayer(videoId);
+
+        if (!document.getElementById('youtube-api')) {
+            const tag = document.createElement('script');
+            tag.id = 'youtube-api';
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
+        }
     }
 }
 
-function createPlayer() {
+function createPlayer(videoId) {
     player = new YT.Player('player', {
         height: '100%',
         width: '100%',
-        videoId: 'cuiilGuoL7Y',
+        videoId: videoId,
         playerVars: {
             enablejsapi: 1,
             rel: 0,
@@ -170,95 +187,133 @@ function updateProgressUI() {
 }
 
 function updateButtonState() {
-    const instaInput = document.getElementById('instaUser');
     const btn = document.getElementById('btn');
-    const msgInsta = document.getElementById('insta-msg');
+    const participationMessage = document.getElementById('participationMessage');
 
-    if (!instaInput || !btn || !msgInsta) return;
+    if (!btn) return;
 
-    const instaValue = instaInput.value.trim();
-    const instaRegex = /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]{1,30}$/;
-    const isInstaValid = instaRegex.test(instaValue.replace('@', ''));
-
-    // Determina se estamos no modo com vídeo
     const hasVideo = document.body.classList.contains('with-video');
 
-    // Lógica para modo COM VÍDEO
     if (hasVideo) {
         if (!videoCompleted) {
             btn.disabled = true;
-            btn.innerHTML = 'Assista o vídeo completo para desbloquear';
-            btn.style.backgroundColor = '#cccccc';
-            msgInsta.textContent = '';
-            return;
-        }
-        
-        // Vídeo completo, validar Instagram
-        if (!instaInputTouched) {
-            btn.disabled = true;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#cccccc';
-            msgInsta.textContent = '';
-        } else if (!isInstaValid) {
-            btn.disabled = true;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#cccccc';
-            msgInsta.textContent = '❌ Use apenas letras, números, . e _ (máx 30 caracteres)';
-            msgInsta.className = 'validation-message invalid';
+            btn.innerHTML = 'Assista o vídeo completo';
+            if (participationMessage) {
+                participationMessage.innerHTML = 'Assista o vídeo completo para habilitar a inscrição';
+            }
         } else {
             btn.disabled = false;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#ff416c';
-            msgInsta.textContent = '✅ Instagram válido!';
-            msgInsta.className = 'validation-message valid';
+            btn.innerHTML = 'Participar do Sorteio';
+            if (participationMessage) {
+                participationMessage.innerHTML = 'Vídeo completo! Clique para participar';
+            }
         }
-    } 
-    // Lógica para modo SEM VÍDEO
-    else {
-        if (!instaInputTouched) {
-            btn.disabled = true;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#cccccc';
-            msgInsta.textContent = '';
-        } else if (!isInstaValid) {
-            btn.disabled = true;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#cccccc';
-            msgInsta.textContent = '❌ Use apenas letras, números, . e _ (máx 30 caracteres)';
-            msgInsta.className = 'validation-message invalid';
-        } else {
-            btn.disabled = false;
-            btn.innerHTML = 'Inscrever-se no Sorteio';
-            btn.style.backgroundColor = '#ff416c';
-            msgInsta.textContent = '✅ Instagram válido!';
-            msgInsta.className = 'validation-message valid';
+    } else {
+        btn.disabled = false;
+        btn.innerHTML = 'Participar do Sorteio';
+        if (participationMessage) {
+            participationMessage.innerHTML = 'Clique no botão para participar do sorteio';
         }
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    initYouTubePlayer();
+function getDrawIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+}
 
-    const instaInput = document.getElementById('instaUser');
+function setupEventListeners() {
     const btn = document.getElementById('btn');
 
-    instaInput.addEventListener('input', function () {
-        instaInputTouched = true;
+    if (btn) {
+        btn.addEventListener('click', function () {
+            this.disabled = true;
+            this.innerHTML = 'Enviando...';
+
+            setTimeout(() => {
+                alert(`✅ Inscrição realizada com sucesso!\n\nBoa sorte no sorteio!`);
+                this.innerHTML = 'Inscrição Confirmada!';
+            }, 1500);
+        });
+
+    } else {
+        console.warn('Elemento btn não encontrado');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const drawId = getDrawIdFromURL();
+
+    if (!drawId) {
+        alert('ID do sorteio não encontrado na URL');
+        return;
+    }
+
+    try {
+        // Buscar detalhes do sorteio
+        const response = await fetch(`http://localhost:3000/api/draws/${drawId}`);
+        if (!response.ok) throw new Error('Erro ao carregar sorteio');
+
+        const draw = await response.json();
+
+        document.getElementById('drawTitle').textContent = draw.title;
+        document.getElementById('drawSubtitle').textContent = draw.subtitle;
+
+        if (draw.image) {
+            document.getElementById('drawImage').src = draw.image;
+            document.getElementById('drawImage').style.display = 'block';
+        }
+
+        const prizesList = document.getElementById('prizesList');
+
+        if (prizesList) {
+            const items = draw.includedItems.split(';');
+            prizesList.innerHTML = '';
+            items.forEach(item => {
+                if (item.trim()) {
+                    const li = document.createElement('li');
+                    li.textContent = item.trim();
+                    prizesList.appendChild(li);
+                }
+            });
+        }
+
+        const videoSection = document.getElementById('videoSection');
+        const instructionsWithVideo = document.getElementById('instructionsWithVideo');
+        const instructionsWithoutVideo = document.getElementById('instructionsWithoutVideo');
+
+        const mainContent = document.getElementById('mainContent');
+        // Controle da exibição baseado na presença de vídeo
+        if (draw.hasVideo && draw.videoUrl) {
+
+            mainContent.classList.add('with-video');
+            mainContent.classList.remove('without-video');
+            // Modo com vídeo
+            document.body.classList.add('with-video');
+            document.getElementById('videoSection').style.display = 'block';
+            document.getElementById('instructionsWithVideo').style.display = 'block';
+            document.getElementById('instructionsWithoutVideo').style.display = 'none';
+
+            // Inicializar player do YouTube
+            initYouTubePlayer(draw.videoUrl);
+        } else {
+
+            mainContent.classList.remove('with-video');
+            mainContent.classList.add('without-video');
+            // Modo sem vídeo
+            document.body.classList.remove('with-video');
+            document.getElementById('videoSection').style.display = 'none';
+            document.getElementById('instructionsWithVideo').style.display = 'none';
+            document.getElementById('instructionsWithoutVideo').style.display = 'block';
+            videoCompleted = true; // Marcar como completo para habilitar o botão
+        }
+
+        // Restante do código (validação de instagram, etc.)
+        setupEventListeners();
         updateButtonState();
-    });
 
-    btn.addEventListener('click', function () {
-        const username = document.getElementById('instaUser').value.trim().replace('@', '');
-
-        this.disabled = true;
-        this.innerHTML = 'Enviando...';
-        this.style.backgroundColor = '#cccccc';
-
-        setTimeout(() => {
-            alert(`✅ Inscrição realizada com sucesso!\n\nInstagram: @${username}\n\nBoa sorte no sorteio!`);
-            this.innerHTML = 'Inscrição Confirmada!';
-        }, 1500);
-    });
-
-    setInterval(updateButtonState, 1000);
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao carregar detalhes do sorteio');
+    }
 });

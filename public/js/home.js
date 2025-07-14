@@ -13,18 +13,6 @@ async function fetchDraws() {
 
 function createDrawCard(draw) {
   const items = draw.includedItems.split(';').map(item => item.trim());
-  // console.log(
-  //   'id', draw.id,
-  //   'url', draw.videoUrl,
-  //   'title', draw.title,
-  //   'sub', draw.subtitle,
-  //   'items', draw.includedItems,
-  //   'winnters', draw.winnerCount,
-  //   'isactive', draw.isActive,
-  //   'createdat', draw.createdAt,
-  //   'companyid', draw.company,
-  //   'image', draw.image
-  // )
   if (draw.isActive) {
     return `
       <div class="card">
@@ -44,8 +32,8 @@ function createDrawCard(draw) {
         : `<p class="card-obs">Serão sorteados ${draw.winnerCount} kits</p>`
       }
           </div>
-          <button class="card-btn">Mais detalhes</button>
-          <button class="detail-btn" data-draw-id="${draw.id}">Inscrever-se</button>
+          <button class="card-btn" data-draw-id="${draw.id}">Mais detalhes</button>
+      <button class="detail-btn" data-draw-id="${draw.id}">Inscrever-se</button>
         </div>
         <div class="close-btn">×</div>
       </div>
@@ -78,4 +66,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('Initialization error:', error);
   }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await renderDraws();
+
+  // Adicionar evento de clique para os botões "Mais detalhes"
+  document.querySelectorAll('.card-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const drawId = this.getAttribute('data-draw-id');
+      window.location.href = `draw.html?id=${drawId}`;
+    });
+  });
+
+  // Adicionar evento de clique para "Inscrever-se" (se necessário)
+  document.querySelectorAll('.detail-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const drawId = this.getAttribute('data-draw-id');
+      // Lógica para inscrição direta se necessário
+    });
+  });
 });

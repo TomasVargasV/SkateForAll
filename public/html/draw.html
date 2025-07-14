@@ -32,16 +32,17 @@
     </div>
   </header>
 
-  <div class="toggle-container">
-    <button class="toggle-btn active" id="withVideoBtn">com video</button>
-    <button class="toggle-btn" id="withoutVideoBtn">sem video</button>
-  </div>
-
   <div class="container">
+
+    <div class="draw-header">
+      <h1 id="drawTitle"></h1>
+      <h2 id="drawSubtitle"></h2>
+      <img id="drawImage" src="" alt="Imagem do sorteio">
+    </div>
 
     <div id="mainContent" class="main-content with-video">
 
-      <section id="videoSection" class="video-section card">
+      <section id="videoSection" class="video-section card" style="display: none">
         <h2 class="section-title">
           <span>Assista o vídeo</span>
           <span class="video-required">obrigatorio</span>
@@ -66,30 +67,18 @@
           <span>Inscreva-se</span>
         </h2>
 
-        <div class="instagram-input">
-          <label for="instagram-username">Insira seu usuário do instagram:</label>
-
-          <input class="form_input" type="text" id="instaUser" placeholder="ex: seuusuario">
-          <div class="validation_message" id="insta-msg"></div>
-
-          <p class="terms">Para validar sua entrada nós verificaremos se sua conta está dentre os seguidores das marcas
-            mantenedoras do sorteio</p>
-        </div>
 
         <button class="form_button" id="btn" disabled>
           Inscrever-se
         </button>
+        <div id="participationMessage" class="participation-message"></div>
       </section>
 
       <section class="prizes-section card">
         <h2 class="section-title">
           <span>Itens do sorteio:</span>
         </h2>
-        <ul class="prizes-list">
-          <li><strong>Shape brabo:</strong> Shape brabo dessa marca braba</li>
-          <li><strong>Truck brabo:</strong> Truck brabissimo dessa marca braba</li>
-          <li><strong>Lixa braba:</strong> Lixa braba demais</li>
-          <li><strong>Rodinha braba:</strong> Essas roda são muito braba</li>
+        <ul id="prizesList" class="prizes-list">
         </ul>
       </section>
 
@@ -108,7 +97,6 @@
                 <p>Assista todo o vídeo para ser elegível ao sorteio.</p>
               </div>
             </div>
-
             <div class="step">
               <div class="step-number">2</div>
               <div class="step-content">
@@ -116,26 +104,15 @@
                 <p>Siga a conta da SkateForAll no instagram.</p>
               </div>
             </div>
-
             <div class="step">
               <div class="step-number">3</div>
-              <div class="step-content">
-                <h4>Nos diga seu usuário do instagram</h4>
-                <p>Usaremos esta informação para conferir se você segue as contas necessárias para participar deste
-                  sorteio.</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step-number">4</div>
               <div class="step-content">
                 <h4>Compartilhe este sorteio</h4>
                 <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
               </div>
             </div>
-
             <div class="step">
-              <div class="step-number">5</div>
+              <div class="step-number">4</div>
               <div class="step-content">
                 <h4>Clique em participar</h4>
                 <p>Clique o botão de participar e boa sorte!</p>
@@ -146,7 +123,6 @@
 
         <div id="instructionsWithoutVideo" class="instructions-set" style="display: none;">
           <div class="steps">
-
             <div class="step">
               <div class="step-number">1</div>
               <div class="step-content">
@@ -154,26 +130,15 @@
                 <p>Siga a conta da SkateForAll no instagram.</p>
               </div>
             </div>
-
             <div class="step">
               <div class="step-number">2</div>
-              <div class="step-content">
-                <h4>Nos diga seu usuário do instagram</h4>
-                <p>Usaremos esta informação para conferir se você segue as contas necessárias para participar deste
-                  sorteio.</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step-number">3</div>
               <div class="step-content">
                 <h4>Compartilhe este sorteio</h4>
                 <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
               </div>
             </div>
-
             <div class="step">
-              <div class="step-number">4</div>
+              <div class="step-number">3</div>
               <div class="step-content">
                 <h4>Clique em participar</h4>
                 <p>Clique o botão de participar e boa sorte!</p>
@@ -191,6 +156,5 @@
 <script src="../js/header.js"></script>
 <script src="../js/draw.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
-<script src="../js/has-video.js"></script>
 
 </html>
