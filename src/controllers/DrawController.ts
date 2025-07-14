@@ -74,6 +74,10 @@ export class DrawController {
   static async getById(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        res.status(400).json({ message: "ID inválido" });
+        return;
+      }
       const draw = await repo.findDrawById(id);
 
       if (!draw) {
@@ -81,7 +85,24 @@ export class DrawController {
         return;
       }
 
-      res.json(draw);
+      const response = {
+        id: draw.id,
+        title: draw.title,
+        subtitle: draw.subtitle,
+        includedItems: draw.includedItems,
+        winnerCount: draw.winnerCount,
+        image: draw.image,
+        videoUrl: draw.videoUrl,
+        hasVideo: !!draw.videoUrl,
+        isActive: draw.isActive,
+        createdAt: draw.createdAt,
+        company: draw.company ? {
+          id: draw.company.id,
+          name: draw.company.name,
+        } : null
+      };
+
+      res.json(response);
     } catch (error) {
       res.status(500).json({ error: "Erro ao buscar sorteio" });
     }
