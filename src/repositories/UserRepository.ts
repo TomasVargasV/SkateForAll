@@ -5,7 +5,7 @@ export class UserRepository {
   private userRepository = AppDataSource.getRepository(User);
 
   async createUser(name: string, email: string, password: string, phone: string, instagram: string, address: string, state: string) {
-    const user = new User(name, email, password, phone, instagram, address, state);
+    const user = new User('user', name, email, password, phone, instagram, address, state);
     return await this.userRepository.save(user);
   }
 
@@ -13,9 +13,10 @@ export class UserRepository {
     return await this.userRepository.find();
   }
 
-  async findUserById(id: number) {
-    return await this.userRepository.findOne({ where: { id } });
-  }
+  async findUserById(id: number, loadDraws: boolean = false) {
+  const options = loadDraws ? { relations: ["draws"] } : {};
+  return await this.userRepository.findOne({ where: { id }, ...options });
+}
 
   async findUserByEmail(email: string) {
     return await this.userRepository.findOne({ where: { email } });

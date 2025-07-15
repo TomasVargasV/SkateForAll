@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #333;
+  background-color: #111;
   min-height: 100vh;
 }
 
@@ -170,7 +170,7 @@ body {
 .form_button {
   width: 100%;
   padding: 10px;
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  background: red;
   color: white;
   border: none;
   border-radius: 10px;
@@ -295,33 +295,40 @@ body {
   }
 }
 
-.draw-header {
+.draw-banner {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  justify-content: center;
   margin-bottom: 30px;
   color: white;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #1c1c1c;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
   border-radius: 15px;
 }
 
-.draw-header h1 {
+.draw-banner h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  color: #ffcc00;
+  color: red;
 }
 
-.draw-header h2 {
+.draw-banner h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid brown;
 }
 
-.draw-header img {
+.draw-banner img {
   max-width: 100%;
   border-radius: 15px;
   max-height: 400px;
   object-fit: cover;
-  margin-top: 20px;
   display: none;
+  margin-bottom: 20px;
+  align-self: center;
 }
 
 @media (max-width: 768px) {
@@ -329,11 +336,11 @@ body {
     max-width: 95%;
   }
 
-  .draw-header h1 {
+  .draw-banner h1 {
     font-size: 2rem;
   }
 
-  .draw-header h2 {
+  .draw-banner h2 {
     font-size: 1.4rem;
   }
 }

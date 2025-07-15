@@ -17,28 +17,36 @@ export class User {
     @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column({ nullable: false})
+    @Column({ nullable: false })
     password: string;
-    
-    @Column({  nullable: false })
+
+    @Column({ nullable: false })
     phone: string;
-    
+
     @Column({ unique: true, nullable: false })
     instagram: string;
-    
+
     @Column({ nullable: false })
     address: string;
-    
+
     @Column({ nullable: false })
     state: string;
-    
+
     @ManyToMany(() => Draw, draw => draw.enrolledUsers)
     draws!: Draw[];
-    
+
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
-    constructor(name: string, email: string, password: string, phone: string, instagram: string, address: string, state: string) {
+    @Column({
+        type: "enum",
+        enum: ["user", "admin"],
+        default: "user"
+    })
+    role: string;
+
+    constructor(role: string = 'user', name: string, email: string, password: string, phone: string, instagram: string, address: string, state: string) {
+        this.role = role;
         this.name = name;
         this.email = email;
         this.password = password;

@@ -8,6 +8,7 @@ const middleware = new AuthMiddleware();
 const router = Router();
 
 router.post("/draws", middleware.authenticateToken, upload.single('image'), DrawController.create);
+router.get("/draws/:id/check-enrollment", middleware.authenticateToken, DrawController.checkEnrollment);
 router.get("/company/draws", middleware.authenticateToken, DrawController.getCompanyDraws);
 router.put("/draws/:id", middleware.authenticateToken, DrawController.update);
 router.delete("/draws/:id", middleware.authenticateToken, DrawController.delete);

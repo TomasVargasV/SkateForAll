@@ -18,7 +18,13 @@ export class UserController {
       }
 
       const user = await repo.createUser(name, email, password, phone, instagram, address, state);
-      res.status(201).json(user);
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        type: 'user'
+      });
+
+      res.status(201).json({ user: user, token });
       return;
     } catch (error) {
       res.status(500).json({ error: "Erro ao registrar usuário", details: error });
@@ -45,10 +51,14 @@ export class UserController {
         return;
       }
 
-      const token = generateToken({ id: user.id, email: user.email });
-      console.log("Login bem-sucedido:", token);
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        type: 'user'
+      });
 
-      res.json({ message: "Login autorizado", token });
+      res.json({ token, user: { ...user, role: user.role } });
+      console.log("Login bem-sucedido:", token);;
     } catch (error: any) {
       console.error("Erro no login:", error);
       res.status(500).json({
@@ -172,6 +182,34 @@ export class UserController {
     } catch (error) {
       res.status(500).json({ message: "Erro ao deletar usuário", details: error });
       return;
+    }
+  }
+
+  static async getUserDraws(req: Request, res: Response) {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado." });
+        return;
+      }
+
+      const userId = req.user.id;
+      const user = await repo.findUserById(userId, true);
+
+      if (!user) {
+        res.status(404).json({ message: "Usuário não encontrado." });
+        return;
+      }
+
+      const draws = user.draws || [];
+      res.json(draws);
+      return
+    } catch (error) {
+      console.error('Erro ao buscar sorteios do usuário:', error);
+      res.status(500).json({
+        message: "Erro ao buscar sorteios",
+        error: error instanceof Error ? error.message : String(error)
+      });
+      return
     }
   }
 }

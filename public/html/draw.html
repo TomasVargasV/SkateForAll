@@ -14,139 +14,143 @@
 <body class="with-video">
 
   <header>
-    <a href="home.html" class="logo">
-      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
-    </a>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <div class="nav-container" id="navContainer">
-      <nav id="noLogin">
-        <a href="selectLogin.html">Login</a>
-        <a href="selectRegister.html">Cadastra-se</a>
-      </nav>
-      <nav id="loggedInNav" style="display:none;">
-        <ul>
-          <li><a id="profileLink" href="#">Perfil</a></li>
-          <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <a href="home.html" class="logo">
+            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-container" id="navContainer">
+            <nav id="noLogin">
+                <a href="selectLogin.html">Login</a>
+                <a href="selectRegister.html">Cadastra-se</a>
+            </nav>
+            <nav id="loggedInNav" style="display:none;">
+                <ul>
+                    <li><a id="profileLink" href="#">Perfil</a></li>
+                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
   <div class="container">
-
-    <div class="draw-header">
+    <div class="draw-banner">
       <h1 id="drawTitle"></h1>
       <h2 id="drawSubtitle"></h2>
       <img id="drawImage" src="" alt="Imagem do sorteio">
-    </div>
 
-    <div id="mainContent" class="main-content with-video">
+      <div id="mainContent" class="main-content with-video">
 
-      <section id="videoSection" class="video-section card" style="display: none">
-        <h2 class="section-title">
-          <span>Assista o vídeo</span>
-          <span class="video-required">obrigatorio</span>
-        </h2>
+        <section id="videoSection" class="video-section card" style="display: none">
+          <h2 class="section-title">
+            <span>Assista o vídeo</span>
+            <span class="video-required">obrigatorio</span>
+          </h2>
 
-        <div class="video_wrapper">
-          <div id="player"></div>
-        </div>
-        <div class="progress_container">
-          <div class="progress_bar_wrapper">
-            <div class="progress_bar" id="progress-bar"></div>
+          <div class="video_wrapper">
+            <div id="player"></div>
           </div>
-          <div class="progress_text" id="progress-text">
-            0% assistido
-          </div>
-        </div>
-
-      </section>
-
-      <section class="participation-section card">
-        <h2 class="section-title">
-          <span>Inscreva-se</span>
-        </h2>
-
-
-        <button class="form_button" id="btn" disabled>
-          Inscrever-se
-        </button>
-        <div id="participationMessage" class="participation-message"></div>
-      </section>
-
-      <section class="prizes-section card">
-        <h2 class="section-title">
-          <span>Itens do sorteio:</span>
-        </h2>
-        <ul id="prizesList" class="prizes-list">
-        </ul>
-      </section>
-
-      <section class="instructions-section card">
-
-        <h2 class="section-title">
-          <span>Como participar</span>
-        </h2>
-
-        <div id="instructionsWithVideo" class="instructions-set">
-          <div class="steps">
-            <div class="step">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h4>Assista ao video</h4>
-                <p>Assista todo o vídeo para ser elegível ao sorteio.</p>
-              </div>
+          <div class="progress_container">
+            <div class="progress_bar_wrapper">
+              <div class="progress_bar" id="progress-bar"></div>
             </div>
-            <div class="step">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h4>Siga o nosso instagram</h4>
-                <p>Siga a conta da SkateForAll no instagram.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h4>Compartilhe este sorteio</h4>
-                <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-number">4</div>
-              <div class="step-content">
-                <h4>Clique em participar</h4>
-                <p>Clique o botão de participar e boa sorte!</p>
-              </div>
+            <div class="progress_text" id="progress-text">
+              0% assistido
             </div>
           </div>
-        </div>
 
-        <div id="instructionsWithoutVideo" class="instructions-set" style="display: none;">
-          <div class="steps">
-            <div class="step">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h4>Siga o nosso instagram</h4>
-                <p>Siga a conta da SkateForAll no instagram.</p>
+        </section>
+
+        <section class="participation-section card">
+          <h2 class="section-title">
+            <span>Inscreva-se</span>
+          </h2>
+
+
+          <button class="form_button" id="btn" disabled>
+            Inscrever-se
+          </button>
+          <div id="participationMessage" class="participation-message"></div>
+          <div id="alreadyEnrolled" style="display: none; margin-top: 15px;">
+            ✅ Você já está inscrito neste sorteio!
+          </div>
+        </section>
+
+        <section class="prizes-section card">
+          <h2 class="section-title">
+            <span>Itens do sorteio:</span>
+          </h2>
+          <ul id="prizesList" class="prizes-list">
+          </ul>
+        </section>
+
+        <section class="instructions-section card">
+
+          <h2 class="section-title">
+            <span>Como participar</span>
+          </h2>
+
+          <div id="instructionsWithVideo" class="instructions-set">
+            <div class="steps">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Assista ao video</h4>
+                  <p>Assista todo o vídeo para ser elegível ao sorteio.</p>
+                </div>
               </div>
-            </div>
-            <div class="step">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h4>Compartilhe este sorteio</h4>
-                <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.</p>
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Siga o nosso instagram</h4>
+                  <p>Siga a conta da SkateForAll no instagram.</p>
+                </div>
               </div>
-            </div>
-            <div class="step">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h4>Clique em participar</h4>
-                <p>Clique o botão de participar e boa sorte!</p>
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Compartilhe este sorteio</h4>
+                  <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Clique em participar</h4>
+                  <p>Clique o botão de participar e boa sorte!</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+
+          <div id="instructionsWithoutVideo" class="instructions-set" style="display: none;">
+            <div class="steps">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Siga o nosso instagram</h4>
+                  <p>Siga a conta da SkateForAll no instagram.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Compartilhe este sorteio</h4>
+                  <p>Compartilhe este sorteio no seu instagram e nos marque para ganhar uma entrada extra no sorteio.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Clique em participar</h4>
+                  <p>Clique o botão de participar e boa sorte!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 
