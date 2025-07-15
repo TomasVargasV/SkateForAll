@@ -35,6 +35,9 @@ export class User {
     @ManyToMany(() => Draw, draw => draw.enrolledUsers)
     draws!: Draw[];
 
+    @ManyToMany(() => Draw, draw => draw.winners)
+    drawsWon!: Draw[];
+
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 

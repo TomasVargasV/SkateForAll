@@ -48,24 +48,45 @@ export class DrawRepository {
             where: { id: drawId },
             relations: ["enrolledUsers"]
         });
-        
+
         if (!draw) throw new Error("Sorteio não encontrado");
-        
+
         // Verificar se usuário já está inscrito
         const alreadyEnrolled = draw.enrolledUsers?.some(user => user.id === userId);
         if (alreadyEnrolled) {
             throw new Error("Usuário já está inscrito neste sorteio");
         }
-        
+
         // Carregar usuário
         const user = await this.userRepository.findOne({ where: { id: userId } });
         if (!user) throw new Error("Usuário não encontrado");
-        
+
         // Adicionar relação
         if (!draw.enrolledUsers) draw.enrolledUsers = [];
         draw.enrolledUsers.push(user);
         await this.drawRepository.save(draw);
-        
+
+        return true;
+    }
+
+    async unenrollUser(drawId: number, userId: number): Promise<boolean> {
+        const draw = await this.drawRepository.findOne({
+            where: { id: drawId },
+            relations: ["enrolledUsers"]
+        });
+
+        if (!draw) throw new Error("Sorteio não encontrado");
+
+        // Verificar se usuário está inscrito
+        const userIndex = draw.enrolledUsers?.findIndex(user => user.id === userId);
+        if (userIndex === -1 || userIndex === undefined) {
+            throw new Error("Usuário não está inscrito neste sorteio");
+        }
+
+        // Remover relação
+        draw.enrolledUsers = draw.enrolledUsers?.filter(user => user.id !== userId);
+        await this.drawRepository.save(draw);
+
         return true;
     }
 
@@ -74,7 +95,7 @@ export class DrawRepository {
             where: { id: drawId },
             relations: ["enrolledUsers"]
         });
-        
+
         if (!draw) return false;
         return draw.enrolledUsers?.some(user => user.id === userId) || false;
     }
@@ -84,5 +105,28 @@ export class DrawRepository {
             where: { company: { id: companyId } },
             relations: ["enrolledUsers", "company"]
         });
+    }
+
+    async drawWinners(drawId: number): Promise<User[]> {
+        const draw = await this.drawRepository.findOne({
+            where: { id: drawId },
+            relations: ["enrolledUsers", "winners"]
+        });
+        if (!draw) throw new Error("Sorteio não encontrado");
+        if (!draw.isActive) throw new Error("Sorteio inativo");
+        const totalInscritos = draw.enrolledUsers.length;
+        if (totalInscritos < draw.winnerCount) {
+            throw new Error("Número de inscritos menor que número de ganhadores");
+        }
+        const shuffled = draw.enrolledUsers
+            .map(u => ({ sort: Math.random(), user: u }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(o => o.user);
+        const winners = shuffled.slice(0, draw.winnerCount);
+
+        draw.winners = winners;
+        draw.isActive = false;
+        await this.drawRepository.save(draw);
+        return winners;
     }
 }

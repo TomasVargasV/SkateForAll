@@ -383,8 +383,13 @@ form input:disabled {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideDown {
@@ -392,6 +397,7 @@ form input:disabled {
         transform: translateY(-50px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -562,4 +568,35 @@ form input:disabled {
     .modal-image {
         height: 150px;
     }
+}
+
+.btn-draw {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-draw:hover {
+    background-color: #45a049;
+}
+
+.btn-draw:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.winners-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.winners-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
 }
