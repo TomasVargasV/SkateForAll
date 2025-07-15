@@ -31,6 +31,9 @@ export class DrawRepository {
     async updateDraw(id: number, fieldsToUpdate: Partial<Draw>) {
         const draw = await this.findDrawById(id);
         if (!draw) return null;
+        if (draw.isFinished && fieldsToUpdate.isActive) {
+            throw new Error("Não é possível ativar um sorteio encerrado");
+        }
 
         Object.assign(draw, fieldsToUpdate);
         return await this.drawRepository.save(draw);
@@ -126,6 +129,8 @@ export class DrawRepository {
 
         draw.winners = winners;
         draw.isActive = false;
+        draw.isFinished = true;
+
         await this.drawRepository.save(draw);
         return winners;
     }

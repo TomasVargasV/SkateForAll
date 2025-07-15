@@ -35,6 +35,9 @@ export class Draw {
   @Column({ default: false })
   isActive!: boolean;
 
+  @Column({ default: false })
+  isFinished!: boolean;
+
   @ManyToMany(() => User, user => user.drawsWon)
   @JoinTable({ name: "draw_winners" })
   winners!: User[];

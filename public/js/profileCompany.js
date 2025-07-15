@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const json = await res.json();
                 console.log("Sorteio criado:", json);
                 document.querySelector('#drawsContainer').innerHTML = '';
-                await carregarSorteiosDaEmpresa(); // Espera recarregar os sorteios
+                await carregarSorteiosDaEmpresa();
                 formSorteio.reset();
                 fileInputLabel.innerHTML = `
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,10 +240,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}">` : ''}
                 <h3>${sorteio.title}</h3>
                 <span class="enrolled-count">Inscritos: ${sorteio.enrolledUsers?.length || 0}</span>
-                <span class="status ${sorteio.isActive ? 'active' : 'inactive'}">${sorteio.isActive ? 'Ativo' : 'Inativo'}</span>
+                <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span>
             </div>
         `).join('');
         adicionarEventosCards();
+    }
+
+    function getStatusClass(sorteio) {
+        if (sorteio.isFinished) return 'finished';
+        return sorteio.isActive ? 'active' : 'inactive';
+    }
+
+    function getStatusText(sorteio) {
+        if (sorteio.isFinished) return 'Encerrado';
+        return sorteio.isActive ? 'Ativo' : 'Inativo';
     }
 
     function adicionarEventosCards() {
@@ -259,6 +269,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function abrirModal(sorteio) {
         const modal = document.getElementById('sorteioModal');
         const modalContent = document.getElementById('modalContent');
+
+        // Construir conteúdo do modal
+        let buttonsHTML = '';
+        if (!sorteio.isFinished) {
+            buttonsHTML += `
+                <button id="btnToggleStatus" class="btn-toggle-status">
+                    ${sorteio.isActive ? 'Desativar Sorteio' : 'Ativar Sorteio'}
+                </button>
+            `;
+
+            // Adicionar botão de sorteio apenas se o sorteio estiver ativo
+            if (sorteio.isActive) {
+                buttonsHTML += `<button id="btnDrawWinners" class="btn-draw">Sortear Vencedores</button>`;
+            }
+        }
+
         modalContent.innerHTML = `
             <div class="modal-header">
                 ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}" class="modal-image">` : ''}
@@ -267,13 +293,17 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="modal-body">
                 <p><strong>Descrição:</strong> ${sorteio.description || 'Sem descrição'}</p>
                 <p><strong>Inscritos:</strong> ${sorteio.enrolledUsers?.length || 0}</p>
-                <p><strong>Status atual:</strong> <span class="status ${sorteio.isActive ? 'active' : 'inactive'}" id="modalStatus">${sorteio.isActive ? 'Ativo' : 'Inativo'}</span></p>
+                <p><strong>Status:</strong> <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span></p>
+                ${sorteio.winners?.length > 0 ? `
+                    <p><strong>Vencedores:</strong></p>
+                    <ul class="winners-list">
+                        ${sorteio.winners.map(winner => `<li>${winner.name}</li>`).join('')}
+                    </ul>
+                ` : ''}
                 <p><strong>Data de Criação:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
             </div>
             <div class="modal-footer">
-                <button id="btnToggleStatus" class="btn-toggle-status">
-                    ${sorteio.isActive ? 'Desativar Sorteio' : 'Ativar Sorteio'}
-                </button>
+                ${buttonsHTML}
                 <button class="btn-close-modal">Fechar</button>
             </div>
         `;
@@ -283,6 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector('.btn-close-modal').addEventListener('click', fecharModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal() });
 
+        // Configurar evento para botão de toggle
         const toggleButton = document.getElementById('btnToggleStatus');
         if (toggleButton) {
             toggleButton.addEventListener('click', async () => {
@@ -292,16 +323,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 toggleButton.innerHTML = 'Carregando...';
 
                 try {
-                    await atualizarStatusSorteio(sorteio.id, novoStatus);
+                    const response = await fetch(`http://localhost:3000/api/draws/${sorteio.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ isActive: novoStatus })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Falha ao atualizar o status do sorteio');
+                    }
+
+                    const updatedDraw = await response.json();
+
+                    // Atualizar estado local
                     sorteio.isActive = novoStatus;
-                    document.getElementById('modalStatus').textContent = novoStatus ? 'Ativo' : 'Inativo';
-                    document.getElementById('modalStatus').className = 'status ' + (novoStatus ? 'active' : 'inactive');
-                    toggleButton.innerHTML = `
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 12L12 16L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        ${novoStatus ? 'Desativar Sorteio' : 'Ativar Sorteio'}
-                    `;
+
+                    // Atualizar lista de sorteios
+                    const index = listaSorteios.findIndex(s => s.id === sorteio.id);
+                    if (index !== -1) {
+                        listaSorteios[index] = { ...listaSorteios[index], isActive: novoStatus };
+                    }
+
+                    // Atualizar status no modal
+                    const statusElement = modalContent.querySelector('.status');
+                    if (statusElement) {
+                        statusElement.textContent = getStatusText(sorteio);
+                        statusElement.className = 'status ' + getStatusClass(sorteio);
+                    }
+
+                    // Atualizar botão
+                    toggleButton.innerHTML = novoStatus ? 'Desativar Sorteio' : 'Ativar Sorteio';
+
+                    // Atualizar card na lista
                     atualizarCard(sorteio);
                 } catch (error) {
                     console.error('Erro na atualização:', error);
@@ -313,10 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        if (sorteio.isActive) {
-            modalContent.innerHTML += `<button id="btnDrawWinners" class="btn-draw">Sortear Vencedores</button>`;
-        }
-
+        // Configurar evento para botão de sorteio
         const drawButton = document.getElementById('btnDrawWinners');
         if (drawButton) {
             drawButton.addEventListener('click', async () => {
@@ -324,7 +377,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 drawButton.innerHTML = 'Sorteando...';
 
                 try {
-                    const token = localStorage.getItem('token');
                     const response = await fetch(`http://localhost:3000/api/draws/${sorteio.id}/draw-winners`, {
                         method: 'POST',
                         headers: {
@@ -340,9 +392,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     const result = await response.json();
                     alert(`Sorteio realizado! Vencedores:\n${result.winners.map(w => `- ${w.name}`).join('\n')}`);
 
+                    // Atualizar estado local
+                    sorteio.isActive = false;
+                    sorteio.isFinished = true;
+                    sorteio.winners = result.winners;
+
+                    // Atualizar lista de sorteios
+                    const index = listaSorteios.findIndex(s => s.id === sorteio.id);
+                    if (index !== -1) {
+                        listaSorteios[index] = {
+                            ...listaSorteios[index],
+                            isActive: false,
+                            isFinished: true,
+                            winners: result.winners
+                        };
+                    }
+
+                    // Fechar modal e recarregar lista
                     fecharModal();
                     await carregarSorteiosDaEmpresa();
-
                 } catch (error) {
                     console.error('Erro no sorteio:', error);
                     alert('Erro ao realizar sorteio: ' + error.message);
@@ -358,8 +426,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (card) {
             const statusSpan = card.querySelector('.status');
             if (statusSpan) {
-                statusSpan.textContent = sorteioAtualizado.isActive ? 'Ativo' : 'Inativo';
-                statusSpan.className = 'status ' + (sorteioAtualizado.isActive ? 'active' : 'inactive');
+                statusSpan.textContent = getStatusText(sorteioAtualizado);
+                statusSpan.className = 'status ' + getStatusClass(sorteioAtualizado);
             }
         }
     }
@@ -368,26 +436,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById('sorteioModal');
         if (modal) {
             modal.style.display = 'none';
-        }
-    }
-
-    async function atualizarStatusSorteio(id, novoStatus) {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:3000/api/draws/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ isActive: novoStatus })
-            });
-
-            if (!response.ok) throw new Error('Falha ao atualizar o status do sorteio');
-            return await response.json();
-        } catch (error) {
-            console.error('Erro:', error);
-            throw error;
         }
     }
 
