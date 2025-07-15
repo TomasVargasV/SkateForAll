@@ -72,21 +72,67 @@ export class DrawController {
     }
   }
 
+  // static async getById(req: Request, res: Response) {
+  //   try {
+  //     const id = parseInt(req.params.id);
+  //     if (isNaN(id)) {
+  //       res.status(400).json({ message: "ID inválido" });
+  //       return;
+  //     }
+  //     const draw = await repo.findDrawById(id);
+
+  //     if (!draw) {
+  //       res.status(404).json({ message: "Sorteio não encontrado" });
+  //       return;
+  //     }
+
+  //     const response = {
+  //       id: draw.id,
+  //       title: draw.title,
+  //       subtitle: draw.subtitle,
+  //       includedItems: draw.includedItems,
+  //       winnerCount: draw.winnerCount,
+  //       image: draw.image,
+  //       videoUrl: draw.videoUrl,
+  //       hasVideo: !!draw.videoUrl,
+  //       isActive: draw.isActive,
+  //       createdAt: draw.createdAt,
+  //       company: draw.company ? {
+  //         id: draw.company.id,
+  //         name: draw.company.name,
+  //       } : null
+  //     };
+
+  //     res.json(response);
+  //   } catch (error) {
+  //     res.status(500).json({ error: "Erro ao buscar sorteio" });
+  //   }
+  // }
+
   static async getById(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
         res.status(400).json({ message: "ID inválido" });
-        return;
+        return
       }
-      const draw = await repo.findDrawById(id);
 
+      // já carrega enrolledUsers porque seu repo faz relations
+      const draw = await repo.findDrawById(id);
       if (!draw) {
         res.status(404).json({ message: "Sorteio não encontrado" });
-        return;
+        return
       }
 
-      const response = {
+      // montar resposta incluindo dados básicos dos usuários
+      const participants = draw.enrolledUsers?.map(u => ({
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        instagram: u.instagram
+      })) || [];
+
+      res.json({
         id: draw.id,
         title: draw.title,
         subtitle: draw.subtitle,
@@ -100,14 +146,17 @@ export class DrawController {
         company: draw.company ? {
           id: draw.company.id,
           name: draw.company.name,
-        } : null
-      };
-
-      res.json(response);
+        } : null,
+        participants
+      });
+      return
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: "Erro ao buscar sorteio" });
+      return
     }
   }
+
 
   static async update(req: Request, res: Response) {
     try {
@@ -154,20 +203,24 @@ export class DrawController {
   static async enroll(req: Request, res: Response) {
     try {
       if (!req.user) {
-        return res.status(401).json({ message: "Não autorizado." });
+        res.status(401).json({ message: "Não autorizado." });
+        return
       }
 
       // Verificar se é usuário (não empresa)
       if (req.user.type !== 'user') {
-        return res.status(403).json({ error: "Apenas usuários podem participar de sorteios" });
+        res.status(403).json({ error: "Apenas usuários podem participar de sorteios" });
+        return
       }
 
       const drawId = parseInt(req.params.id);
       const result = await repo.enrollUser(drawId, req.user.id);
 
       res.json({ message: "Inscrição realizada com sucesso" });
+      return
     } catch (error: any) {
       res.status(400).json({ error: error.message });
+      return
     }
   }
 
@@ -188,14 +241,17 @@ export class DrawController {
   static async checkEnrollment(req: Request, res: Response) {
     try {
       if (!req.user) {
-        return res.status(401).json({ message: "Não autorizado." });
+        res.status(401).json({ message: "Não autorizado." });
+        return
       }
 
       const drawId = parseInt(req.params.id);
       const isEnrolled = await repo.checkUserEnrollment(drawId, req.user.id);
       res.json({ isEnrolled });
+      return
     } catch (error) {
       res.status(500).json({ error: "Erro ao verificar inscrição" });
+      return
     }
   }
 }

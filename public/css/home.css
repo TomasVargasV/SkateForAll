@@ -39,18 +39,6 @@ nav a {
     transition: 0.3s;
 }
 
-.logoutBtn {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.logoutBtn:hover {
-    color: red;
-}
-
 nav a:hover {
     color: red;
 }

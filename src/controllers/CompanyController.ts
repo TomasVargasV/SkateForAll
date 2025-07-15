@@ -58,10 +58,10 @@ export class CompanyController {
         type: 'company'
       });
 
-      res.json({ token });
       console.log("Login bem-sucedido:", token);
 
       res.json({ message: "Login autorizado", token });
+      return
     } catch (error: any) {
       console.error("Erro no login:", error);
       res.status(500).json({
@@ -72,6 +72,7 @@ export class CompanyController {
           raw: error,
         },
       });
+      return
     }
   }
 

@@ -29,7 +29,6 @@ export class AuthMiddleware {
         try {
             const decoded = verifyToken(token);
             
-            // Verificar o tipo do token decodificado
             if (typeof decoded === "string" || !('id' in decoded)) {
                 throw new Error("Formato de token inválido");
             }

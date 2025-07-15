@@ -25,6 +25,7 @@
       </nav>
       <nav id="loggedInNav" style="display:none;">
         <ul>
+          <li><a id="profileLink" href="#">Perfil</a></li>
           <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
         </ul>
       </nav>
@@ -33,7 +34,6 @@
 
   <main class="profile-container">
     <h2>Perfil do Usuário</h2>
-
     <form id="profile-form">
       <label>Nome:
         <input id="name-input" type="text" name="nome" disabled />
@@ -91,6 +91,11 @@
         <button type="submit" id="salvar" disabled>Salvar Alterações</button>
       </div>
     </form>
+    <section class="my-draws">
+      <h3>Sorteios que estou participando</h3>
+      <div id="draws-list">
+      </div>
+    </section>
   </main>
 
 </body>

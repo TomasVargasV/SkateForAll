@@ -13,9 +13,10 @@ export class UserRepository {
     return await this.userRepository.find();
   }
 
-  async findUserById(id: number) {
-    return await this.userRepository.findOne({ where: { id } });
-  }
+  async findUserById(id: number, loadDraws: boolean = false) {
+  const options = loadDraws ? { relations: ["draws"] } : {};
+  return await this.userRepository.findOne({ where: { id }, ...options });
+}
 
   async findUserByEmail(email: string) {
     return await this.userRepository.findOne({ where: { email } });

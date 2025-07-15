@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       instagramInput.value = user.instagram || '';
       addressInput.value = user.address || '';
       stateInput.value = user.state || '';
+      await carregarSorteios(token)
     } catch (error) {
       console.error("Erro ao carregar usuário:", error);
       alert(error.message || "Erro ao carregar perfil.");
@@ -104,3 +105,45 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "/public/html/loginUser.html";
   }
 });
+
+async function carregarSorteios(userToken) {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/my-draws", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${userToken}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao carregar sorteios");
+    }
+
+    const draws = await response.json();
+    const drawsList = document.getElementById("draws-list");
+
+    if (draws.length === 0) {
+      drawsList.innerHTML = '<div class="no-draws">Você ainda não está participando de nenhum sorteio</div>';
+      return;
+    }
+
+    drawsList.innerHTML = draws.map(draw => `
+      <div class="draw-card">
+        <img src="${draw.image}" alt="${draw.title}" class="draw-image">
+        <div class="draw-info">
+          <h4>${draw.title}</h4>
+          <p>${draw.subtitle}</p>
+          <p>Empresa: ${draw.company.name}</p>
+          <p>Data de inscrição: ${new Date(draw.createdAt).toLocaleDateString()}</p>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error("Erro ao carregar sorteios:", error);
+    document.getElementById("draws-list").innerHTML = `
+      <div class="no-draws">
+        Erro ao carregar sorteios: ${error.message}
+      </div>
+    `;
+  }
+}

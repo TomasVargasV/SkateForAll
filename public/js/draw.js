@@ -86,7 +86,7 @@ function onStateChange(event) {
 
 function updatePlaybackProgress() {
     if (playbackStartTime) {
-        const elapsedTime = (Date.now() - playbackStartTime) / 1000;
+        const elapsedTime = (Date.now() - playbackStartTime) / 500;
         const newTotal = totalPlayedTime + elapsedTime;
 
         watched = Math.min(videoDuration, newTotal);
@@ -222,7 +222,7 @@ async function checkEnrollment(drawId) {
     }
 
     try {
-        const response = await fetch(`/api/draws/${drawId}/check-enrollment`, {
+        const response = await fetch(`http://localhost:3000/api/draws/${drawId}/check-enrollment`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -253,7 +253,7 @@ async function enrollInDraw(drawId) {
     }
 
     try {
-        const response = await fetch(`/api/draws/${drawId}/enroll`, {
+        const response = await fetch(`http://localhost:3000/api/draws/${drawId}/enroll`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

@@ -184,4 +184,32 @@ export class UserController {
       return;
     }
   }
+
+  static async getUserDraws(req: Request, res: Response) {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado." });
+        return;
+      }
+
+      const userId = req.user.id;
+      const user = await repo.findUserById(userId, true);
+
+      if (!user) {
+        res.status(404).json({ message: "Usuário não encontrado." });
+        return;
+      }
+
+      const draws = user.draws || [];
+      res.json(draws);
+      return
+    } catch (error) {
+      console.error('Erro ao buscar sorteios do usuário:', error);
+      res.status(500).json({
+        message: "Erro ao buscar sorteios",
+        error: error instanceof Error ? error.message : String(error)
+      });
+      return
+    }
+  }
 }
