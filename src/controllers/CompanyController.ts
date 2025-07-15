@@ -19,7 +19,13 @@ export class CompanyController {
       }
 
       const company = await repo.createCompany(name, CNPJ, email, password, phone, BusinessAddress);
-      res.status(201).json(company);
+      const token = generateToken({
+        id: company.id,
+        email: company.email,
+        type: 'company'
+      });
+
+      res.status(201).json({ company: company, token });
       return;
     } catch (error) {
       res.status(500).json({ error: "Erro ao registrar empresa", details: error });
@@ -46,7 +52,13 @@ export class CompanyController {
         return;
       }
 
-      const token = generateToken({ id: company.id, email: company.email });
+      const token = generateToken({
+        id: company.id,
+        email: company.email,
+        type: 'company'
+      });
+
+      res.json({ token });
       console.log("Login bem-sucedido:", token);
 
       res.json({ message: "Login autorizado", token });
@@ -128,7 +140,7 @@ export class CompanyController {
       const drawRepo = new DrawRepository();
       const draws = await drawRepo.getCompanyDraws(companyId);
       const { password, ...safeCompanyData } = company;
-      
+
       res.json({
         ...safeCompanyData,
         draws

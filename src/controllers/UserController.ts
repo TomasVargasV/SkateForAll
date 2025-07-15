@@ -18,7 +18,13 @@ export class UserController {
       }
 
       const user = await repo.createUser(name, email, password, phone, instagram, address, state);
-      res.status(201).json(user);
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        type: 'user'
+      });
+
+      res.status(201).json({ user: user, token });
       return;
     } catch (error) {
       res.status(500).json({ error: "Erro ao registrar usuário", details: error });
@@ -45,10 +51,14 @@ export class UserController {
         return;
       }
 
-      const token = generateToken({ id: user.id, email: user.email });
-      console.log("Login bem-sucedido:", token);
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        type: 'user'
+      });
 
-      res.json({ message: "Login autorizado", token });
+      res.json({ token, user: { ...user, role: user.role } });
+      console.log("Login bem-sucedido:", token);;
     } catch (error: any) {
       console.error("Erro no login:", error);
       res.status(500).json({

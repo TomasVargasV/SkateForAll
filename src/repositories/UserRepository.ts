@@ -5,7 +5,7 @@ export class UserRepository {
   private userRepository = AppDataSource.getRepository(User);
 
   async createUser(name: string, email: string, password: string, phone: string, instagram: string, address: string, state: string) {
-    const user = new User(name, email, password, phone, instagram, address, state);
+    const user = new User('user', name, email, password, phone, instagram, address, state);
     return await this.userRepository.save(user);
   }
 

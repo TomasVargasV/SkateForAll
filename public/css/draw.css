@@ -295,7 +295,7 @@ body {
   }
 }
 
-.draw-header {
+.draw-banner {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -308,20 +308,20 @@ body {
   border-radius: 15px;
 }
 
-.draw-header h1 {
+.draw-banner h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
   color: red;
 }
 
-.draw-header h2 {
+.draw-banner h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid brown;
 }
 
-.draw-header img {
+.draw-banner img {
   max-width: 100%;
   border-radius: 15px;
   max-height: 400px;
@@ -336,11 +336,11 @@ body {
     max-width: 95%;
   }
 
-  .draw-header h1 {
+  .draw-banner h1 {
     font-size: 2rem;
   }
 
-  .draw-header h2 {
+  .draw-banner h2 {
     font-size: 1.4rem;
   }
 }

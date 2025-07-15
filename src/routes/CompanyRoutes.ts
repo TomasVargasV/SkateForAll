@@ -7,12 +7,6 @@ const middleware = new AuthMiddleware()
 
 const router = Router();
 
-// router.post('/registerc', CompanyController.register);
-// router.post('/loginc', CompanyController.login);
-// router.get('/companys/', middleware.authenticateToken, CompanyController.getAll);
-// router.get('/company/me', middleware.authenticateToken, CompanyController.getMe);
-// router.put('/company/me', middleware.authenticateToken, CompanyController.updateMe);
-
 router.post("/registerc", CompanyController.register);
 router.post("/loginc", CompanyController.login);
 router.get("/company/me", middleware.authenticateToken, CompanyController.getMe);

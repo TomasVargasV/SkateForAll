@@ -3,6 +3,7 @@ import { DrawRepository } from "../repositories/DrawRepository";
 import { Company } from "../models/Company";
 import { CompanyRepository } from "../repositories/CompanyRepository";
 import { Draw } from "../models/Draw";
+import { getRepository } from "typeorm";
 
 const repo = new DrawRepository();
 
@@ -153,21 +154,20 @@ export class DrawController {
   static async enroll(req: Request, res: Response) {
     try {
       if (!req.user) {
-        res.status(401).json({ message: "Não autorizado." });
-        return;
+        return res.status(401).json({ message: "Não autorizado." });
+      }
+
+      // Verificar se é usuário (não empresa)
+      if (req.user.type !== 'user') {
+        return res.status(403).json({ error: "Apenas usuários podem participar de sorteios" });
       }
 
       const drawId = parseInt(req.params.id);
       const result = await repo.enrollUser(drawId, req.user.id);
 
-      if (!result) {
-        res.status(404).json({ message: "Sorteio não encontrado" });
-        return;
-      }
-
       res.json({ message: "Inscrição realizada com sucesso" });
-    } catch (error) {
-      res.status(500).json({ error: "Erro na inscrição" });
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   }
 
@@ -182,6 +182,20 @@ export class DrawController {
       res.json(draws);
     } catch (error) {
       res.status(500).json({ error: "Erro ao buscar sorteios" });
+    }
+  }
+
+  static async checkEnrollment(req: Request, res: Response) {
+    try {
+      if (!req.user) {
+        return res.status(401).json({ message: "Não autorizado." });
+      }
+
+      const drawId = parseInt(req.params.id);
+      const isEnrolled = await repo.checkUserEnrollment(drawId, req.user.id);
+      res.json({ isEnrolled });
+    } catch (error) {
+      res.status(500).json({ error: "Erro ao verificar inscrição" });
     }
   }
 }
