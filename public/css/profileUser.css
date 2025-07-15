@@ -144,20 +144,37 @@ select:disabled {
   }
 }
 
-
 .my-draws {
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid #333;
 }
 
+.my-draws h3{
+  margin-bottom: 40px;
+}
+
+#draws-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .draw-card {
+  overflow: hidden;
+  box-shadow: 0 2px 15px brown;
+  transition: transform 0.3s ease;
+  cursor: pointer;
   background-color: #222;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
   display: flex;
   align-items: center;
+}
+
+.draw-card:hover {
+  transform: translateY(-5px);
 }
 
 .draw-image {
@@ -186,4 +203,124 @@ select:disabled {
   text-align: center;
   padding: 20px;
   color: #888;
+}
+
+/* Estilos do Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  color: white;
+}
+
+.modal-close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+.modal-header {
+  margin-bottom: 15px;
+}
+
+.modal-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.modal-title {
+  margin-top: 10px;
+  color: red;
+}
+
+.modal-body p {
+  margin: 10px 0;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.btn-unenroll {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-unenroll:hover {
+  background-color: #cc0000;
+}
+
+.btn-close-modal {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.btn-close-modal:hover {
+  background-color: #444;
+}
+
+/* Estilos do Modal (manter os existentes e adicionar) */
+
+.btn-details {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.btn-details:hover {
+  background-color: #444;
+}
+
+/* Adicione isso para o container de botões no modal */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
 }

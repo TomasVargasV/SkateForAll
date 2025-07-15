@@ -7,22 +7,22 @@ export class Draw {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Company, company => company.draws, { eager: true, nullable: false} )
+  @ManyToOne(() => Company, company => company.draws, { eager: true, nullable: false })
   company!: Company;
-  
-  @Column({nullable: false})
+
+  @Column({ nullable: false })
   title!: string;
-  
-  @Column({nullable: false})
+
+  @Column({ nullable: false })
   subtitle!: string;
-  
-  @Column('text', {nullable: false})
+
+  @Column('text', { nullable: false })
   includedItems!: string;
 
-  @Column({nullable: false})
+  @Column({ nullable: false })
   winnerCount!: number;
 
-  @Column({nullable: false})
+  @Column({ nullable: false })
   image!: string;
 
   @Column({ nullable: true })
@@ -34,6 +34,10 @@ export class Draw {
 
   @Column({ default: false })
   isActive!: boolean;
+
+  @ManyToMany(() => User, user => user.drawsWon)
+  @JoinTable({ name: "draw_winners" })
+  winners!: User[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt!: Date;

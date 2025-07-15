@@ -268,13 +268,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p><strong>Descrição:</strong> ${sorteio.description || 'Sem descrição'}</p>
                 <p><strong>Inscritos:</strong> ${sorteio.enrolledUsers?.length || 0}</p>
                 <p><strong>Status atual:</strong> <span class="status ${sorteio.isActive ? 'active' : 'inactive'}" id="modalStatus">${sorteio.isActive ? 'Ativo' : 'Inativo'}</span></p>
-                <p><strong>Data de Criação:</strong> ${sorteio.creationDate || 'Não informada'}</p>
+                <p><strong>Data de Criação:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
             </div>
             <div class="modal-footer">
                 <button id="btnToggleStatus" class="btn-toggle-status">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 12L12 16L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
                     ${sorteio.isActive ? 'Desativar Sorteio' : 'Ativar Sorteio'}
                 </button>
                 <button class="btn-close-modal">Fechar</button>
@@ -312,6 +309,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     toggleButton.innerHTML = originalText;
                 } finally {
                     toggleButton.disabled = false;
+                }
+            });
+        }
+
+        if (sorteio.isActive) {
+            modalContent.innerHTML += `<button id="btnDrawWinners" class="btn-draw">Sortear Vencedores</button>`;
+        }
+
+        const drawButton = document.getElementById('btnDrawWinners');
+        if (drawButton) {
+            drawButton.addEventListener('click', async () => {
+                drawButton.disabled = true;
+                drawButton.innerHTML = 'Sorteando...';
+
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch(`http://localhost:3000/api/draws/${sorteio.id}/draw-winners`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Erro ao sortear');
+                    }
+
+                    const result = await response.json();
+                    alert(`Sorteio realizado! Vencedores:\n${result.winners.map(w => `- ${w.name}`).join('\n')}`);
+
+                    fecharModal();
+                    await carregarSorteiosDaEmpresa();
+
+                } catch (error) {
+                    console.error('Erro no sorteio:', error);
+                    alert('Erro ao realizar sorteio: ' + error.message);
+                    drawButton.disabled = false;
+                    drawButton.innerHTML = 'Sortear Vencedores';
                 }
             });
         }

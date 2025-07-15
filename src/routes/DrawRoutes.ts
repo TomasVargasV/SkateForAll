@@ -17,5 +17,7 @@ router.get("/draws", DrawController.getAll);
 router.get("/draws/:id", DrawController.getById);
 
 router.post("/draws/:id/enroll", middleware.authenticateToken, DrawController.enroll);
+router.delete("/draws/:id/unenroll", middleware.authenticateToken, DrawController.unenroll);
+router.post("/draws/:id/draw-winners", middleware.authenticateToken, DrawController.drawWinners);
 
 export default router;

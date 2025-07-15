@@ -72,43 +72,6 @@ export class DrawController {
     }
   }
 
-  // static async getById(req: Request, res: Response) {
-  //   try {
-  //     const id = parseInt(req.params.id);
-  //     if (isNaN(id)) {
-  //       res.status(400).json({ message: "ID inválido" });
-  //       return;
-  //     }
-  //     const draw = await repo.findDrawById(id);
-
-  //     if (!draw) {
-  //       res.status(404).json({ message: "Sorteio não encontrado" });
-  //       return;
-  //     }
-
-  //     const response = {
-  //       id: draw.id,
-  //       title: draw.title,
-  //       subtitle: draw.subtitle,
-  //       includedItems: draw.includedItems,
-  //       winnerCount: draw.winnerCount,
-  //       image: draw.image,
-  //       videoUrl: draw.videoUrl,
-  //       hasVideo: !!draw.videoUrl,
-  //       isActive: draw.isActive,
-  //       createdAt: draw.createdAt,
-  //       company: draw.company ? {
-  //         id: draw.company.id,
-  //         name: draw.company.name,
-  //       } : null
-  //     };
-
-  //     res.json(response);
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Erro ao buscar sorteio" });
-  //   }
-  // }
-
   static async getById(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
@@ -156,7 +119,6 @@ export class DrawController {
       return
     }
   }
-
 
   static async update(req: Request, res: Response) {
     try {
@@ -224,6 +186,37 @@ export class DrawController {
     }
   }
 
+  static async unenroll(req: Request, res: Response) {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado." });
+        return;
+      }
+
+      if (req.user.type !== 'user') {
+        res.status(403).json({ error: "Apenas usuários podem se desinscrever de sorteios" });
+        return;
+      }
+
+      const drawId = parseInt(req.params.id);
+      const userId = req.user.id;
+
+      const repo = new DrawRepository();
+      const success = await repo.unenrollUser(drawId, userId);
+
+      if (success) {
+        res.json({ message: "Desinscrição realizada com sucesso" });
+        return
+      } else {
+        res.status(400).json({ error: "Não foi possível realizar a desinscrição" });
+        return
+      }
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+      return
+    }
+  }
+
   static async getCompanyDraws(req: Request, res: Response) {
     try {
       if (!req.user) {
@@ -251,6 +244,29 @@ export class DrawController {
       return
     } catch (error) {
       res.status(500).json({ error: "Erro ao verificar inscrição" });
+      return
+    }
+  }
+
+  static async drawWinners(req: Request, res: Response) {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado." });
+        return 
+      }
+      const drawId = parseInt(req.params.id);
+      const winners = await repo.drawWinners(drawId);
+      const data = winners.map(u => ({
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        instagram: u.instagram
+      }));
+      res.json({ winners: data });
+      return
+    } catch (err: any) {
+      const status = err.message.includes("não encontrado") ? 404 : err.message.includes("encerrado") ? 400 : 500;
+      res.status(status).json({ error: err.message });
       return
     }
   }

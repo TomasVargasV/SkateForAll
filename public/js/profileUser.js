@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const stateInput = document.getElementById("state-input");
 
   const token = localStorage.getItem("token");
+  let listaSorteios = [];
 
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
@@ -47,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
       instagramInput.value = user.instagram || '';
       addressInput.value = user.address || '';
       stateInput.value = user.state || '';
-      await carregarSorteios(token)
+
+      await carregarSorteios(token);
     } catch (error) {
       console.error("Erro ao carregar usuário:", error);
       alert(error.message || "Erro ao carregar perfil.");
@@ -98,6 +100,129 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  async function carregarSorteios(userToken) {
+    try {
+      const response = await fetch("http://localhost:3000/api/user/my-draws", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${userToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao carregar sorteios");
+      }
+
+      const draws = await response.json();
+      listaSorteios = draws;
+      const drawsList = document.getElementById("draws-list");
+
+      if (draws.length === 0) {
+        drawsList.innerHTML = '<div class="no-draws">Você ainda não está participando de nenhum sorteio</div>';
+        return;
+      }
+
+      drawsList.innerHTML = draws.map(draw => `
+        <div class="draw-card" data-id="${draw.id}">
+          <img src="${draw.image}" alt="${draw.title}" class="draw-image">
+          <div class="draw-info">
+            <h4>${draw.title}</h4>
+            <p>Empresa: ${draw.company.name}</p>
+            <p>Data de inscrição: ${new Date(draw.createdAt).toLocaleDateString()}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Adicionar evento de clique aos cards
+      document.querySelectorAll('.draw-card').forEach(card => {
+        card.addEventListener('click', function () {
+          const drawId = this.getAttribute('data-id');
+          const sorteio = listaSorteios.find(d => d.id == drawId);
+          if (sorteio) abrirModal(sorteio);
+        });
+      });
+    } catch (error) {
+      console.error("Erro ao carregar sorteios:", error);
+      document.getElementById("draws-list").innerHTML = `
+        <div class="no-draws">
+          Erro ao carregar sorteios: ${error.message}
+        </div>
+      `;
+    }
+  }
+
+  function abrirModal(sorteio) {
+    const modal = document.getElementById('sorteioModal');
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = `
+      <div class="modal-header">
+        ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}" class="modal-image">` : ''}
+        <h2 class="modal-title">${sorteio.title}</h2>
+      </div>
+      <div class="modal-body">
+        <p><strong>Empresa:</strong> ${sorteio.company.name}</p>
+        <p><strong>Data de inscrição:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
+      </div>
+      <div class="modal-footer">
+        <div class="button-group">
+          <button id="btnUnenroll" class="btn-unenroll">Desinscrever-se</button>
+          <button id="btnDetails" data-draw-id="${sorteio.id} class="btn-details">Ver Detalhes</button>
+        </div>
+        <button class="btn-close-modal">Fechar</button>
+      </div>
+    `;
+
+    modal.style.display = 'block';
+
+    // Fechar modal
+    document.querySelector('.modal-close').addEventListener('click', fecharModal);
+    document.querySelector('.btn-close-modal').addEventListener('click', fecharModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal() });
+
+    // Evento de desinscrição
+    document.getElementById('btnUnenroll').addEventListener('click', async () => {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await fetch(`http://localhost:3000/api/draws/${sorteio.id}/unenroll`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.error || "Erro ao desinscrever");
+        }
+
+        // Atualizar a lista de sorteios
+        await carregarSorteios(token);
+        fecharModal();
+        alert("Desinscrito com sucesso!");
+      } catch (error) {
+        console.error('Erro ao desinscrever:', error);
+        alert('Erro ao desinscrever: ' + error.message);
+      }
+    });
+
+    document.querySelectorAll('#btnDetails').forEach(button => {
+      button.addEventListener('click', function () {
+        const drawId = this.getAttribute('data-draw-id')
+        fecharModal();
+        window.location.href = `draw.html?id=${drawId}`;
+      });
+    });
+
+  }
+
+  function fecharModal() {
+    const modal = document.getElementById('sorteioModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // Inicialização
   if (token) {
     carregarUsuario();
   } else {
@@ -105,45 +230,3 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "/public/html/loginUser.html";
   }
 });
-
-async function carregarSorteios(userToken) {
-  try {
-    const response = await fetch("http://localhost:3000/api/user/my-draws", {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${userToken}`
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro ao carregar sorteios");
-    }
-
-    const draws = await response.json();
-    const drawsList = document.getElementById("draws-list");
-
-    if (draws.length === 0) {
-      drawsList.innerHTML = '<div class="no-draws">Você ainda não está participando de nenhum sorteio</div>';
-      return;
-    }
-
-    drawsList.innerHTML = draws.map(draw => `
-      <div class="draw-card">
-        <img src="${draw.image}" alt="${draw.title}" class="draw-image">
-        <div class="draw-info">
-          <h4>${draw.title}</h4>
-          <p>${draw.subtitle}</p>
-          <p>Empresa: ${draw.company.name}</p>
-          <p>Data de inscrição: ${new Date(draw.createdAt).toLocaleDateString()}</p>
-        </div>
-      </div>
-    `).join('');
-  } catch (error) {
-    console.error("Erro ao carregar sorteios:", error);
-    document.getElementById("draws-list").innerHTML = `
-      <div class="no-draws">
-        Erro ao carregar sorteios: ${error.message}
-      </div>
-    `;
-  }
-}
