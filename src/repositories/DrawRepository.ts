@@ -54,17 +54,14 @@ export class DrawRepository {
 
         if (!draw) throw new Error("Sorteio não encontrado");
 
-        // Verificar se usuário já está inscrito
         const alreadyEnrolled = draw.enrolledUsers?.some(user => user.id === userId);
         if (alreadyEnrolled) {
             throw new Error("Usuário já está inscrito neste sorteio");
         }
 
-        // Carregar usuário
         const user = await this.userRepository.findOne({ where: { id: userId } });
         if (!user) throw new Error("Usuário não encontrado");
 
-        // Adicionar relação
         if (!draw.enrolledUsers) draw.enrolledUsers = [];
         draw.enrolledUsers.push(user);
         await this.drawRepository.save(draw);
@@ -80,13 +77,11 @@ export class DrawRepository {
 
         if (!draw) throw new Error("Sorteio não encontrado");
 
-        // Verificar se usuário está inscrito
         const userIndex = draw.enrolledUsers?.findIndex(user => user.id === userId);
         if (userIndex === -1 || userIndex === undefined) {
             throw new Error("Usuário não está inscrito neste sorteio");
         }
 
-        // Remover relação
         draw.enrolledUsers = draw.enrolledUsers?.filter(user => user.id !== userId);
         await this.drawRepository.save(draw);
 

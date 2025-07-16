@@ -99,7 +99,6 @@ main h1 {
   background-color: #e60000;
 }
 
-/* RESPONSIVO */
 @media (max-width: 768px) {
   .options {
     flex-direction: column;

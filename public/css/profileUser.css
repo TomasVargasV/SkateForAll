@@ -47,7 +47,6 @@ nav ul li:hover {
   display: none;
 }
 
-/* Container do perfil */
 .profile-container {
   max-width: 600px;
   margin: 40px auto;
@@ -120,7 +119,6 @@ select:disabled {
   cursor: not-allowed;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -207,7 +205,6 @@ select:disabled {
   color: #888;
 }
 
-/* Estilos do Modal */
 .modal {
   display: none;
   position: fixed;
@@ -319,7 +316,6 @@ select:disabled {
   transition: transform 0.3s ease;
 }
 
-/* Adicione isso para o container de botões no modal */
 .modal-footer {
   display: flex;
   justify-content: space-between;

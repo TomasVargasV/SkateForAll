@@ -80,14 +80,12 @@ export class DrawController {
         return
       }
 
-      // já carrega enrolledUsers porque seu repo faz relations
       const draw = await repo.findDrawById(id);
       if (!draw) {
         res.status(404).json({ message: "Sorteio não encontrado" });
         return
       }
 
-      // montar resposta incluindo dados básicos dos usuários
       const participants = draw.enrolledUsers?.map(u => ({
         id: u.id,
         name: u.name,
@@ -178,7 +176,6 @@ export class DrawController {
         return
       }
 
-      // Verificar se é usuário (não empresa)
       if (req.user.type !== 'user') {
         res.status(403).json({ error: "Apenas usuários podem participar de sorteios" });
         return

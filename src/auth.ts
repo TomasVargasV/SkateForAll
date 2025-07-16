@@ -1,4 +1,3 @@
-// auth.ts
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
 
@@ -12,7 +11,6 @@ if (!JWT_SECRET) {
 
 const secret: Secret = JWT_SECRET;
 
-// Interface para o payload do token
 interface TokenPayload extends JwtPayload {
     id: number;
     email: string;

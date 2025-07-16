@@ -323,7 +323,6 @@ form input:disabled {
 .draw-card-info {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .draw-card .enrolled-count {
@@ -481,7 +480,6 @@ form input:disabled {
     background-color: #444;
 }
 
-/* Responsividade (sem alterar layout original) */
 @media (max-width: 1200px) {
     main {
         gap: 50px;
@@ -640,7 +638,6 @@ form input:disabled {
 
 .delete-btn {
     order: 999;
-    /* Garante que fique por último */
     background-color: #333;
     color: white;
     border: none;
@@ -658,5 +655,4 @@ form input:disabled {
 
 .btn-close-modal {
     order: 1000;
-    /* Sempre o último */
 }

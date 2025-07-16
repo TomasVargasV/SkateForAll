@@ -168,7 +168,6 @@ export class CompanyController {
       const companyId = req.user.id;
       const { name, CNPJ, email, phone, BusinessAddress, password } = req.body;
 
-      // Verifique se o email já está em uso
       if (email) {
         const existingCompany = await repo.findCompanyByEmail(email);
         if (existingCompany && existingCompany.id !== companyId) {
@@ -208,12 +207,10 @@ export class CompanyController {
       const company = await repo.findCompanyById(id);
       if (!company) return res.status(404).json({ message: "Empresa não encontrada" });
   
-      // 1. Exclui todos os draws da empresa
       await AppDataSource
         .getRepository(Draw)
         .delete({ company: { id } });
   
-      // 2. Exclui a empresa
       await repo.deleteCompany(id);
   
       return res.status(200).json({ message: "Conta removida com sucesso" });

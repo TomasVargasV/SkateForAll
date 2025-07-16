@@ -288,7 +288,6 @@ function setupEventListeners() {
                     participationMessage.style.color = 'green';
                     this.innerHTML = 'Inscrito ✓';
 
-                    // Esconde o botão e mostra a mensagem de inscrito
                     document.getElementById('alreadyEnrolled').style.display = 'block';
                     btn.style.display = 'none';
                 }
