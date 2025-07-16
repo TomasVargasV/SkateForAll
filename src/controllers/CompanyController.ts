@@ -3,6 +3,8 @@ import { CompanyRepository } from "../repositories/CompanyRepository";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../auth";
 import { DrawRepository } from "../repositories/DrawRepository";
+import { AppDataSource } from "../dataSource";
+import { Draw } from "../models/Draw";
 
 const repo = new CompanyRepository();
 
@@ -200,19 +202,24 @@ export class CompanyController {
 
   static async delete(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
-      const deleted = await repo.deleteCompany(id);
-
-      if (!deleted) {
-        res.status(404).json({ message: "Empresa não encontrada." });
-        return;
-      }
-
-      res.json({ message: "Empresa deletada com sucesso." });
-      return;
-    } catch (error) {
-      res.status(500).json({ message: "Erro ao deletar empresa", details: error });
-      return;
+      const id = Number(req.params.id);
+      const repo = new CompanyRepository();
+  
+      const company = await repo.findCompanyById(id);
+      if (!company) return res.status(404).json({ message: "Empresa não encontrada" });
+  
+      // 1. Exclui todos os draws da empresa
+      await AppDataSource
+        .getRepository(Draw)
+        .delete({ company: { id } });
+  
+      // 2. Exclui a empresa
+      await repo.deleteCompany(id);
+  
+      return res.status(200).json({ message: "Conta removida com sucesso" });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Erro interno ao deletar conta" });
     }
   }
 }

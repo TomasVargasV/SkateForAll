@@ -616,3 +616,17 @@ form input:disabled {
 .btn-draw {
   order: -1; /* COLOCAR BOTÃO DE SORTEAR EM PRIMEIRO */
 }
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-left: 0;
+  }
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  

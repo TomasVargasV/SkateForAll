@@ -12,16 +12,45 @@ document.addEventListener("DOMContentLoaded", function () {
     const addressInput = document.getElementById("address-input");
     const token = localStorage.getItem("token");
     let listaSorteios = [];
-
-    // Elementos do formulário de sorteio
     const formSorteio = document.getElementById('cadastro-sorteio');
     const imageInput = document.getElementById('image');
     const fileInputLabel = document.getElementById('fileInputLabel');
     const dropArea = document.querySelector('.file-input-container');
     const checkbox = document.getElementById('isActiveCheckbox');
     const customCheckbox = document.querySelector('.custom-checkbox');
+    const deletarBtn = document.getElementById("deletarConta");
 
-    // ============== EVENT LISTENERS PARA O FORMULÁRIO DE SORTEIO ==============
+    if (deletarBtn) {
+        deletarBtn.addEventListener("click", async () => {
+          if (!companyId) {
+            alert("ID da empresa não carregado. Aguarde um instante e tente novamente.");
+            return;
+          }
+      
+          const confirmacao = confirm("Tem certeza que deseja deletar sua conta? Esta ação é irreversível.");
+          if (!confirmacao) return;
+      
+          try {
+            const response = await fetch(`http://localhost:3000/api/company/${companyId}`, {
+              method: "DELETE",
+              headers: { "Authorization": `Bearer ${token}` }
+            });
+      
+            if (!response.ok) {
+              const err = await response.json();
+              throw new Error(err.message || "Erro ao deletar conta");
+            }
+      
+            alert("Conta deletada com sucesso!");
+            localStorage.removeItem("token");
+            window.location.href = "/public/html/home.html";
+          } catch (error) {
+            console.error("Erro ao deletar conta:", error);
+            alert("Erro ao deletar conta: " + error.message);
+          }
+        });
+      }
+
     if (formSorteio) {
         formSorteio.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -124,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ============== EVENT LISTENERS PARA O PERFIL ==============
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             localStorage.removeItem("token");
@@ -178,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ============== FUNÇÕES PRINCIPAIS ==============
     async function carregarEmpresa() {
         try {
             const response = await fetch("http://localhost:3000/api/company/me", {
@@ -192,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const empresa = await response.json();
+            companyId = empresa.id;
             nameInput.value = empresa.name || '';
             cnpjInput.value = empresa.CNPJ || '';
             emailInput.value = empresa.email || '';
