@@ -86,7 +86,7 @@ function onStateChange(event) {
 
 function updatePlaybackProgress() {
     if (playbackStartTime) {
-        const elapsedTime = (Date.now() - playbackStartTime) / 500;
+        const elapsedTime = (Date.now() - playbackStartTime) / 1000;
         const newTotal = totalPlayedTime + elapsedTime;
 
         watched = Math.min(videoDuration, newTotal);
@@ -106,7 +106,7 @@ function updatePlaybackProgress() {
 
         updateProgressUI();
 
-        if (newTotal >= videoDuration && currentPosition >= videoDuration - 1) {
+        if (newTotal >= videoDuration && currentPosition >= videoDuration - 2) {
             completeVideo();
         }
     }
