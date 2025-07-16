@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("profile-form");
   const editarBtn = document.getElementById("editar");
   const salvarBtn = document.getElementById("salvar");
+  const deletarBtn = document.getElementById("deletar-conta");
   const camposEditaveis = form.querySelectorAll("input, select");
 
   const nameInput = document.getElementById("name-input");
@@ -25,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     salvarBtn.disabled = false;
     editarBtn.disabled = true;
   });
+
+  deletarBtn.addEventListener("click", deletarConta);
 
   async function carregarUsuario() {
     try {
@@ -219,6 +222,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById('sorteioModal');
     if (modal) {
       modal.style.display = 'none';
+    }
+  }
+
+  async function deletarConta() {
+    if (!confirm("Tem certeza que deseja deletar sua conta? Esta ação é irreversível e removerá todos os seus dados.")) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:3000/api/user/me", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || "Erro ao deletar conta");
+      }
+
+      // Limpar dados e redirecionar
+      localStorage.removeItem("token");
+      alert("Conta deletada com sucesso!");
+      window.location.href = "/public/html/home.html";
+    } catch (error) {
+      console.error("Erro ao deletar conta:", error);
+      alert("Erro ao deletar conta: " + error.message);
     }
   }
 

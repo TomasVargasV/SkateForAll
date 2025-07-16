@@ -14,9 +14,9 @@ export class UserRepository {
   }
 
   async findUserById(id: number, loadDraws: boolean = false) {
-  const options = loadDraws ? { relations: ["draws"] } : {};
-  return await this.userRepository.findOne({ where: { id }, ...options });
-}
+    const options = loadDraws ? { relations: ["draws"] } : {};
+    return await this.userRepository.findOne({ where: { id }, ...options });
+  }
 
   async findUserByEmail(email: string) {
     return await this.userRepository.findOne({ where: { email } });
@@ -38,8 +38,16 @@ export class UserRepository {
   }
 
   async deleteUser(id: number) {
-    const user = await this.findUserById(id);
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ["draws", "drawsWon"]
+    });
+
     if (!user) return null;
+
+    user.draws = [];
+    user.drawsWon = [];
+    await this.userRepository.save(user);
 
     return await this.userRepository.remove(user);
   }

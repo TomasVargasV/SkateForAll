@@ -149,16 +149,25 @@ export class DrawController {
       }
 
       const id = parseInt(req.params.id);
-      const deleted = await repo.deleteDraw(id);
+      const repo = new DrawRepository();
+      const draw = await repo.findDrawById(id);
 
-      if (!deleted) {
+      if (!draw) {
         res.status(404).json({ message: "Sorteio não encontrado" });
         return;
       }
 
+      if (draw.company.id !== req.user.id) {
+        res.status(403).json({ message: "Você não tem permissão para deletar este sorteio." });
+        return;
+      }
+
+      const deleted = await repo.deleteDraw(id);
       res.json({ message: "Sorteio deletado com sucesso" });
+      return
     } catch (error) {
       res.status(500).json({ error: "Erro ao deletar sorteio" });
+      return
     }
   }
 
@@ -252,7 +261,7 @@ export class DrawController {
     try {
       if (!req.user) {
         res.status(401).json({ message: "Não autorizado." });
-        return 
+        return
       }
       const drawId = parseInt(req.params.id);
       const winners = await repo.drawWinners(drawId);
