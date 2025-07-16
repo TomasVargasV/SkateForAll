@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { CompanyController } from "../controllers/CompanyController";
 import { AuthMiddleware } from "../middlewares/AuthMiddlewares";
-import { compareSync } from "bcryptjs";
 
 const middleware = new AuthMiddleware()
 
@@ -14,6 +13,6 @@ router.put("/company/me", middleware.authenticateToken, CompanyController.update
 router.get("/company", CompanyController.getAll);
 router.get("/company/:id", CompanyController.getById);
 router.put("/company/:id", CompanyController.update);
-router.delete("/company/:id", CompanyController.delete);
+router.delete("/company/:id", middleware.authenticateToken, CompanyController.delete);
 
 export default router;
