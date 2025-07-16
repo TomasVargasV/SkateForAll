@@ -167,10 +167,15 @@ export class UserController {
     }
   }
 
-  static async delete(req: Request, res: Response) {
+  static async deleteMe(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
-      const deleted = await repo.deleteUser(id);
+      if (!req.user) {
+        res.status(401).json({ message: "Não autorizado. Usuário não autenticado." });
+        return;
+      }
+
+      const userId = req.user.id;
+      const deleted = await repo.deleteUser(userId);
 
       if (!deleted) {
         res.status(404).json({ message: "Usuário não encontrado." });
@@ -180,7 +185,11 @@ export class UserController {
       res.json({ message: "Usuário deletado com sucesso." });
       return;
     } catch (error) {
-      res.status(500).json({ message: "Erro ao deletar usuário", details: error });
+      console.error('Erro ao deletar usuário:', error);
+      res.status(500).json({
+        message: "Erro ao deletar usuário",
+        details: error instanceof Error ? error.message : String(error)
+      });
       return;
     }
   }

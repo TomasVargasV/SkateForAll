@@ -22,34 +22,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (deletarBtn) {
         deletarBtn.addEventListener("click", async () => {
-          if (!companyId) {
-            alert("ID da empresa não carregado. Aguarde um instante e tente novamente.");
-            return;
-          }
-      
-          const confirmacao = confirm("Tem certeza que deseja deletar sua conta? Esta ação é irreversível.");
-          if (!confirmacao) return;
-      
-          try {
-            const response = await fetch(`http://localhost:3000/api/company/${companyId}`, {
-              method: "DELETE",
-              headers: { "Authorization": `Bearer ${token}` }
-            });
-      
-            if (!response.ok) {
-              const err = await response.json();
-              throw new Error(err.message || "Erro ao deletar conta");
+            if (!companyId) {
+                alert("ID da empresa não carregado. Aguarde um instante e tente novamente.");
+                return;
             }
-      
-            alert("Conta deletada com sucesso!");
-            localStorage.removeItem("token");
-            window.location.href = "/public/html/home.html";
-          } catch (error) {
-            console.error("Erro ao deletar conta:", error);
-            alert("Erro ao deletar conta: " + error.message);
-          }
+
+            const confirmacao = confirm("Tem certeza que deseja deletar sua conta? Esta ação é irreversível.");
+            if (!confirmacao) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/company/${companyId}`, {
+                    method: "DELETE",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.message || "Erro ao deletar conta");
+                }
+
+                alert("Conta deletada com sucesso!");
+                localStorage.removeItem("token");
+                window.location.href = "/public/html/home.html";
+            } catch (error) {
+                console.error("Erro ao deletar conta:", error);
+                alert("Erro ao deletar conta: " + error.message);
+            }
         });
-      }
+    }
 
     if (formSorteio) {
         formSorteio.addEventListener('submit', async (e) => {
@@ -298,7 +298,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById('sorteioModal');
         const modalContent = document.getElementById('modalContent');
 
-        // Construir conteúdo do modal
         let buttonsHTML = '';
         if (!sorteio.isFinished) {
             buttonsHTML += `
@@ -312,36 +311,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 buttonsHTML += `<button id="btnDrawWinners" class="btn-draw">Sortear Vencedores</button>`;
             }
         }
+        buttonsHTML += `<button id="btnDeleteDraw" class="delete-btn">Deletar Sorteio</button>`;
 
         modalContent.innerHTML = `
-            <div class="modal-header">
-                ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}" class="modal-image">` : ''}
-                <h2 class="modal-title">${sorteio.title}</h2>
-            </div>
-            <div class="modal-body">
-                <p><strong>Descrição:</strong> ${sorteio.description || 'Sem descrição'}</p>
-                <p><strong>Inscritos:</strong> ${sorteio.enrolledUsers?.length || 0}</p>
-                <p><strong>Status:</strong> <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span></p>
-                ${sorteio.winners?.length > 0 ? `
-                    <p><strong>Vencedores:</strong></p>
-                    <ul class="winners-list">
-                        ${sorteio.winners.map(winner => `<li>${winner.name}</li>`).join('')}
-                    </ul>
-                ` : ''}
-                <p><strong>Data de Criação:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
-            </div>
-            <div class="modal-footer">
-                ${buttonsHTML}
-                <button class="btn-close-modal">Fechar</button>
-            </div>
-        `;
+        <div class="modal-header">
+            ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}" class="modal-image">` : ''}
+            <h2 class="modal-title">${sorteio.title}</h2>
+        </div>
+        <div class="modal-body">
+            <p><strong>Inscritos:</strong> ${sorteio.enrolledUsers?.length || 0}</p>
+            <p><strong>Status:</strong> <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span></p>
+            ${sorteio.winners?.length > 0 ? `
+                <p><strong>Vencedores:</strong></p>
+                <ul class="winners-list">
+                    ${sorteio.winners.map(winner => `<li>${winner.name}</li>`).join('')}
+                </ul>
+            ` : ''}
+            <p><strong>Data de Criação:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
+        </div>
+        <div class="modal-footer">
+            ${buttonsHTML}
+            <button class="btn-close-modal">Fechar</button>
+        </div>
+    `;
 
         modal.style.display = 'block';
         document.querySelector('.modal-close').addEventListener('click', fecharModal);
         document.querySelector('.btn-close-modal').addEventListener('click', fecharModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal() });
 
-        // Configurar evento para botão de toggle
         const toggleButton = document.getElementById('btnToggleStatus');
         if (toggleButton) {
             toggleButton.addEventListener('click', async () => {
@@ -397,7 +395,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Configurar evento para botão de sorteio
         const drawButton = document.getElementById('btnDrawWinners');
         if (drawButton) {
             drawButton.addEventListener('click', async () => {
@@ -444,6 +441,39 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert('Erro ao realizar sorteio: ' + error.message);
                     drawButton.disabled = false;
                     drawButton.innerHTML = 'Sortear Vencedores';
+                }
+            });
+        }
+
+        const deleteButton = document.getElementById('btnDeleteDraw');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', async () => {
+                if (!confirm('Tem certeza que deseja deletar este sorteio? Esta ação não pode ser desfeita.')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`http://localhost:3000/api/draws/${sorteio.id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Falha ao deletar o sorteio');
+                    }
+
+                    fecharModal();
+                    const card = document.querySelector(`.draw-card[data-id="${sorteio.id}"]`);
+                    if (card) card.remove();
+
+                    listaSorteios = listaSorteios.filter(s => s.id !== sorteio.id);
+                    alert('Sorteio deletado com sucesso!');
+                } catch (error) {
+                    console.error('Erro ao deletar sorteio:', error);
+                    alert('Erro ao deletar sorteio: ' + error.message);
                 }
             });
         }

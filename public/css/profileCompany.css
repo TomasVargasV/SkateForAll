@@ -602,31 +602,46 @@ form input:disabled {
 }
 
 .draw-card .status.finished {
-  background: red;
-  color: white;
+    background: red;
+    color: white;
 }
 
 /* AJUSTAR BOTÕES NO MODAL */
 .modal-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .btn-draw {
-  order: -1; /* COLOCAR BOTÃO DE SORTEAR EM PRIMEIRO */
+    order: -1;
+    /* COLOCAR BOTÃO DE SORTEAR EM PRIMEIRO */
+}
+
+/* Adicionar no profileCompany.css */
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .delete-btn {
+    order: 999; /* Garante que fique por último */
     background-color: #e74c3c;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-left: 8px;
-    margin-left: 0;
-  }
-  .delete-btn:hover {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.delete-btn:hover {
     background-color: #c0392b;
-  }
-  
+}
+
+.btn-close-modal {
+    order: 1000; /* Sempre o último */
+}

@@ -12,6 +12,7 @@ router.get('/users/', middleware.authenticateToken, UserController.getAll);
 router.get('/user/me', middleware.authenticateToken, UserController.getMe);
 router.put('/user/me', middleware.authenticateToken, UserController.update);
 router.get('/user/my-draws', middleware.authenticateToken, UserController.getUserDraws);
+router.delete('/user/me', middleware.authenticateToken, UserController.deleteMe);
 
 
 export default router;
