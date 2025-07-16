@@ -86,7 +86,7 @@ function onStateChange(event) {
 
 function updatePlaybackProgress() {
     if (playbackStartTime) {
-        const elapsedTime = (Date.now() - playbackStartTime) / 500;
+        const elapsedTime = (Date.now() - playbackStartTime) / 1000;
         const newTotal = totalPlayedTime + elapsedTime;
 
         watched = Math.min(videoDuration, newTotal);
@@ -106,7 +106,7 @@ function updatePlaybackProgress() {
 
         updateProgressUI();
 
-        if (newTotal >= videoDuration && currentPosition >= videoDuration - 1) {
+        if (newTotal >= videoDuration && currentPosition >= videoDuration - 2) {
             completeVideo();
         }
     }
@@ -212,9 +212,6 @@ function getDrawIdFromURL() {
     return urlParams.get('id');
 }
 
-// ========================================================
-// NOVO: Função para verificar se o usuário já está inscrito
-// ========================================================
 async function checkEnrollment(drawId) {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -241,9 +238,6 @@ async function checkEnrollment(drawId) {
     }
 }
 
-// ========================================================
-// NOVO: Função para realizar a inscrição
-// ========================================================
 async function enrollInDraw(drawId) {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -272,9 +266,6 @@ async function enrollInDraw(drawId) {
     }
 }
 
-// ========================================================
-// NOVO: Atualização do setupEventListeners
-// ========================================================
 function setupEventListeners() {
     const btn = document.getElementById('btn');
     const participationMessage = document.getElementById('participationMessage');
@@ -342,7 +333,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             items.forEach(item => {
                 if (item.trim()) {
                     const li = document.createElement('li');
-                    li.textContent = item.trim();
+                    li.textContent = "• " + item.trim();
                     prizesList.appendChild(li);
                 }
             });
@@ -367,9 +358,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             videoCompleted = true;
         }
 
-        // ========================================================
-        // NOVO: Verificar se usuário já está inscrito
-        // ========================================================
         const token = localStorage.getItem('token');
         const participationMessage = document.getElementById('participationMessage');
         const alreadyEnrolled = document.getElementById('alreadyEnrolled');

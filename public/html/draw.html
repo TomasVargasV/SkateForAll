@@ -14,23 +14,23 @@
 <body class="with-video">
 
   <header>
-        <a href="home.html" class="logo">
-            <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
-        </a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <div class="nav-container" id="navContainer">
-            <nav id="noLogin">
-                <a href="selectLogin.html">Login</a>
-                <a href="selectRegister.html">Cadastra-se</a>
-            </nav>
-            <nav id="loggedInNav" style="display:none;">
-                <ul>
-                    <li><a id="profileLink" href="#">Perfil</a></li>
-                    <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <a href="home.html" class="logo">
+      <img src="../img/logoSkateForAll-removebg-preview.png" alt="Skate For All" />
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-container" id="navContainer">
+      <nav id="noLogin">
+        <a href="selectLogin.html">Login</a>
+        <a href="selectRegister.html">Cadastra-se</a>
+      </nav>
+      <nav id="loggedInNav" style="display:none;">
+        <ul>
+          <li><a id="profileLink" href="#">Perfil</a></li>
+          <li id="logoutBtn" title="Sair da conta" class="logoutBtn">Sair do Perfil</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <div class="container">
     <div class="draw-banner">
@@ -64,23 +64,26 @@
           <h2 class="section-title">
             <span>Inscreva-se</span>
           </h2>
-
-
-          <button class="form_button" id="btn" disabled>
-            Inscrever-se
-          </button>
-          <div id="participationMessage" class="participation-message"></div>
-          <div id="alreadyEnrolled" style="display: none; margin-top: 15px;">
-            ✅ Você já está inscrito neste sorteio!
+          <div class="button-area">
+            <button class="form_button" id="btn" disabled>
+              Inscrever-se
+            </button>
+            <div id="participationMessage" class="participation-message"></div>
+            <div id="alreadyEnrolled" style="display: none; margin-top: 15px;">
+              ✅ Você já está inscrito neste sorteio!
+            </div>
           </div>
+          <span class="espacador"></span>
         </section>
 
         <section class="prizes-section card">
           <h2 class="section-title">
             <span>Itens do sorteio:</span>
           </h2>
-          <ul id="prizesList" class="prizes-list">
-          </ul>
+          <div class="listing-area">
+            <ul id="prizesList" class="prizes-list">
+            </ul>
+          </div>
         </section>
 
         <section class="instructions-section card">
