@@ -53,6 +53,12 @@ body {
   color: white;
 }
 
+.button-area{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .video-section {
   grid-area: video;
 }
@@ -104,6 +110,7 @@ body {
   grid-area: participate;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 20px;
 }
 
@@ -182,6 +189,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
+  justify-self: center;
 }
 
 .form_button:disabled {
@@ -205,11 +214,13 @@ body {
 }
 
 .prizes-list {
-  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
   color: white;
 }
 
 .prizes-list li {
+  display: flex;
   margin-bottom: 12px;
   position: relative;
   padding-left: 10px;

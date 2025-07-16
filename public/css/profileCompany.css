@@ -290,6 +290,9 @@ form input:disabled {
 }
 
 .draw-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: #333;
     border-radius: 8px;
     overflow: hidden;
@@ -317,18 +320,30 @@ form input:disabled {
     color: #ddd;
 }
 
+.draw-card-info {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
 .draw-card .enrolled-count {
     display: block;
     margin: 0 1rem;
+    margin-top: 4px;
+    margin-bottom: 4px;
     color: #aaa;
 }
 
 .draw-card .status {
+    width: fit-content;
     display: inline-block;
     padding: 0.25rem 0.5rem;
     background: #444;
     border-radius: 4px;
-    margin: 0 1rem 1rem;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
     font-size: 0.8rem;
 }
 
@@ -357,7 +372,7 @@ form input:disabled {
 
 .modal-content {
     position: relative;
-    background-color: #fff;
+    background-color: #1c1c1c;
     margin: 5% auto;
     padding: 30px;
     border-radius: 12px;
@@ -369,8 +384,8 @@ form input:disabled {
 
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 10px;
+    right: 15px;
     font-size: 30px;
     font-weight: bold;
     color: #aaa;
@@ -414,21 +429,21 @@ form input:disabled {
 }
 
 .modal-header {
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .modal-image {
     max-width: 100%;
-    height: 200px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
 }
 
 .modal-title {
-    color: #2c3e50;
+    color: white;
     margin: 0;
+    margin-left: -20px;
+    align-items: flex-start;
 }
 
 .modal-body {
@@ -438,27 +453,32 @@ form input:disabled {
 }
 
 .modal-body p {
+    color: white;
     margin: 10px 0;
 }
 
 .modal-footer {
+    display: flex;
+    justify-content: space-around;
     text-align: right;
     padding-top: 15px;
     border-top: 1px solid #eee;
+    gap: 20px;
 }
 
 .btn-close-modal {
-    background-color: #3498db;
+  background-color: #333;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 16px;
 }
 
 .btn-close-modal:hover {
-    background-color: #2980b9;
+    background-color: #444;
 }
 
 /* Responsividade (sem alterar layout original) */
@@ -578,7 +598,6 @@ form input:disabled {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    margin: 10px 5px;
     transition: background-color 0.3s;
 }
 
@@ -606,28 +625,23 @@ form input:disabled {
     color: white;
 }
 
-/* AJUSTAR BOTÕES NO MODAL */
-.modal-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .btn-draw {
     order: -1;
-    /* COLOCAR BOTÃO DE SORTEAR EM PRIMEIRO */
 }
 
-/* Adicionar no profileCompany.css */
-.modal-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.btn-toggle-status {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 .delete-btn {
-    order: 999; /* Garante que fique por último */
-    background-color: #e74c3c;
+    order: 999;
+    /* Garante que fique por último */
+    background-color: #333;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -635,13 +649,14 @@ form input:disabled {
     cursor: pointer;
     font-size: 16px;
     text-align: center;
-    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 .delete-btn:hover {
-    background-color: #c0392b;
+    background-color: #444;
 }
 
 .btn-close-modal {
-    order: 1000; /* Sempre o último */
+    order: 1000;
+    /* Sempre o último */
 }

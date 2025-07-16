@@ -167,11 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
         <p><strong>Data de inscrição:</strong> ${new Date(sorteio.createdAt).toLocaleDateString()}</p>
       </div>
       <div class="modal-footer">
+        
+        <button id="btnDetails" data-draw-id="${sorteio.id}" class="btn-details">Ver Detalhes</button>
+        
         <div class="button-group">
-          <button id="btnUnenroll" class="btn-unenroll">Desinscrever-se</button>
-          <button id="btnDetails" data-draw-id="${sorteio.id} class="btn-details">Ver Detalhes</button>
-        </div>
+        <button id="btnUnenroll" class="btn-unenroll">Desinscrever-se</button>
         <button class="btn-close-modal">Fechar</button>
+        </div>
       </div>
     `;
 

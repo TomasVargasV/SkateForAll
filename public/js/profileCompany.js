@@ -266,9 +266,11 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML = sorteios.map((sorteio, index) => `
             <div class="draw-card" data-id="${sorteio.id || index}">
                 ${sorteio.image ? `<img src="${sorteio.image}" alt="${sorteio.title}">` : ''}
-                <h3>${sorteio.title}</h3>
-                <span class="enrolled-count">Inscritos: ${sorteio.enrolledUsers?.length || 0}</span>
-                <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span>
+                <div class="draw-card-info">
+                    <h3>${sorteio.title}</h3>
+                    <span class="enrolled-count">Inscritos: ${sorteio.enrolledUsers?.length || 0}</span>
+                    <span class="status ${getStatusClass(sorteio)}">${getStatusText(sorteio)}</span>
+                </div>
             </div>
         `).join('');
         adicionarEventosCards();
