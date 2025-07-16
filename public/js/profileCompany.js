@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Elementos do perfil
     const logoutBtn = document.getElementById("logoutBtn");
     const form = document.getElementById("profile-form");
     const editarBtn = document.getElementById("editar");
@@ -115,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Eventos de drag and drop
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, e => {
                 e.preventDefault();
@@ -308,7 +306,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 </button>
             `;
 
-            // Adicionar botão de sorteio apenas se o sorteio estiver ativo
             if (sorteio.isActive) {
                 buttonsHTML += `<button id="btnDrawWinners" class="btn-draw">Sortear Vencedores</button>`;
             }
@@ -366,26 +363,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const updatedDraw = await response.json();
 
-                    // Atualizar estado local
                     sorteio.isActive = novoStatus;
 
-                    // Atualizar lista de sorteios
                     const index = listaSorteios.findIndex(s => s.id === sorteio.id);
                     if (index !== -1) {
                         listaSorteios[index] = { ...listaSorteios[index], isActive: novoStatus };
                     }
 
-                    // Atualizar status no modal
                     const statusElement = modalContent.querySelector('.status');
                     if (statusElement) {
                         statusElement.textContent = getStatusText(sorteio);
                         statusElement.className = 'status ' + getStatusClass(sorteio);
                     }
 
-                    // Atualizar botão
                     toggleButton.innerHTML = novoStatus ? 'Desativar Sorteio' : 'Ativar Sorteio';
 
-                    // Atualizar card na lista
                     atualizarCard(sorteio);
                 } catch (error) {
                     console.error('Erro na atualização:', error);
@@ -419,12 +411,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     const result = await response.json();
                     alert(`Sorteio realizado! Vencedores:\n${result.winners.map(w => `- ${w.name}`).join('\n')}`);
 
-                    // Atualizar estado local
                     sorteio.isActive = false;
                     sorteio.isFinished = true;
                     sorteio.winners = result.winners;
 
-                    // Atualizar lista de sorteios
                     const index = listaSorteios.findIndex(s => s.id === sorteio.id);
                     if (index !== -1) {
                         listaSorteios[index] = {
@@ -435,7 +425,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         };
                     }
 
-                    // Fechar modal e recarregar lista
                     fecharModal();
                     await carregarSorteiosDaEmpresa();
                 } catch (error) {
@@ -499,7 +488,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ============== INICIALIZAÇÃO ==============
     if (token) {
         carregarEmpresa();
         carregarSorteiosDaEmpresa();

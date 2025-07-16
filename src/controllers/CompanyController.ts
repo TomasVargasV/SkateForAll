@@ -10,16 +10,19 @@ const repo = new CompanyRepository();
 
 export class CompanyController {
 
+  // Register a new company
   static async register(req: Request, res: Response) {
     try {
       const { name, CNPJ, email, password, phone, BusinessAddress } = req.body;
 
+      // Check if email is already in use
       const existing = await repo.findCompanyByEmail(email);
       if (existing) {
         res.status(409).json({ message: "Email já em uso." });
         return;
       }
 
+      // Create company and generate auth token
       const company = await repo.createCompany(name, CNPJ, email, password, phone, BusinessAddress);
       const token = generateToken({
         id: company.id,
@@ -30,16 +33,19 @@ export class CompanyController {
       res.status(201).json({ company: company, token });
       return;
     } catch (error) {
+      // Handle registration errors
       res.status(500).json({ error: "Erro ao registrar empresa", details: error });
       return;
     }
   }
 
+  // Authenticate a company and return JWT token
   static async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
       console.log("Tentando login para:", email);
 
+      // Find company by email
       const company = await repo.findCompanyByEmail(email);
       if (!company) {
         console.log("Empresa não encontrado");
@@ -47,6 +53,7 @@ export class CompanyController {
         return;
       }
 
+      // Verify password
       const isValid = await bcrypt.compare(password, company.password);
       if (!isValid) {
         console.log("Senha inválida");
@@ -54,6 +61,7 @@ export class CompanyController {
         return;
       }
 
+      // Generate and return token
       const token = generateToken({
         id: company.id,
         email: company.email,
@@ -65,6 +73,7 @@ export class CompanyController {
       res.json({ message: "Login autorizado", token });
       return
     } catch (error: any) {
+      // Handle login errors
       console.error("Erro no login:", error);
       res.status(500).json({
         message: "Erro ao fazer login",
@@ -78,17 +87,20 @@ export class CompanyController {
     }
   }
 
+  // Retrieve all companies
   static async getAll(req: Request, res: Response) {
     try {
       const companys = await repo.findAllCompanys();
       res.json(companys);
       return;
     } catch (error) {
+      // Handle fetch all errors
       res.status(500).json({ message: "Erro ao buscar empresas", details: error });
       return;
     }
   }
 
+  // Retrieve a company by ID
   static async getById(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
@@ -100,11 +112,13 @@ export class CompanyController {
 
       res.json(company);
     } catch (error) {
+      // Handle fetch by id errors
       res.status(500).json({ message: "Erro ao buscar empresa", details: error });
       return;
     }
   }
 
+  // Update a company by ID
   static async update(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
@@ -120,11 +134,13 @@ export class CompanyController {
 
       res.json({ message: "Empresa atualizada com sucesso.", updated });
     } catch (error) {
+      // Handle update errors
       res.status(500).json({ message: "Erro ao atualizar empresa", details: error });
       return;
     }
   }
 
+  // Get authenticated company's profile and draws
   static async getMe(req: Request, res: Response): Promise<void> {
     try {
       if (!req.user) {
@@ -144,12 +160,14 @@ export class CompanyController {
       const draws = await drawRepo.getCompanyDraws(companyId);
       const { password, ...safeCompanyData } = company;
 
+      // Return company data without password and associated draws
       res.json({
         ...safeCompanyData,
         draws
       });
 
     } catch (error) {
+      // Handle getMe errors
       console.error('Erro no getMe:', error);
       res.status(500).json({
         message: "Erro ao buscar dados da empresa",
@@ -158,6 +176,7 @@ export class CompanyController {
     }
   }
 
+  // Update authenticated company's own profile
   static async updateMe(req: Request, res: Response): Promise<void> {
     try {
       if (!req.user) {
@@ -168,7 +187,7 @@ export class CompanyController {
       const companyId = req.user.id;
       const { name, CNPJ, email, phone, BusinessAddress, password } = req.body;
 
-      // Verifique se o email já está em uso
+      // If email is provided, ensure uniqueness
       if (email) {
         const existingCompany = await repo.findCompanyByEmail(email);
         if (existingCompany && existingCompany.id !== companyId) {
@@ -192,6 +211,7 @@ export class CompanyController {
       });
 
     } catch (error) {
+      // Handle updateMe errors
       console.error('Erro ao atualizar empresa:', error);
       res.status(500).json({
         message: "Erro ao atualizar empresa",
@@ -200,6 +220,7 @@ export class CompanyController {
     }
   }
 
+  // Delete a company and its draws
   static async delete(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
@@ -208,16 +229,17 @@ export class CompanyController {
       const company = await repo.findCompanyById(id);
       if (!company) return res.status(404).json({ message: "Empresa não encontrada" });
   
-      // 1. Exclui todos os draws da empresa
+      // Delete associated draws
       await AppDataSource
         .getRepository(Draw)
         .delete({ company: { id } });
   
-      // 2. Exclui a empresa
+      // Delete company record
       await repo.deleteCompany(id);
   
       return res.status(200).json({ message: "Conta removida com sucesso" });
     } catch (err) {
+      // Handle delete errors
       console.error(err);
       return res.status(500).json({ message: "Erro interno ao deletar conta" });
     }

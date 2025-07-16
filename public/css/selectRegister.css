@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #111;
   color: white;
 }
@@ -99,7 +99,6 @@ main h1 {
   background-color: #e60000;
 }
 
-/* RESPONSIVO */
 @media (max-width: 768px) {
   .options {
     flex-direction: column;
@@ -118,7 +117,7 @@ main h1 {
 
 @media (max-width: 480px) {
   header {
-    flex-direction: column;
+    display: flex;
     align-items: flex-start;
     gap: 10px;
   }

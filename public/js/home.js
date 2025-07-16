@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', async () => {
   await renderDraws();
 
-  // Adicionar evento de clique para os botões "Mais detalhes"
   document.querySelectorAll('.card-btn').forEach(button => {
     button.addEventListener('click', function () {
       const drawId = this.getAttribute('data-draw-id');
@@ -79,11 +78,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // Adicionar evento de clique para "Inscrever-se" (se necessário)
   document.querySelectorAll('.detail-btn').forEach(button => {
     button.addEventListener('click', function () {
       const drawId = this.getAttribute('data-draw-id');
-      // Lógica para inscrição direta se necessário
     });
   });
 });

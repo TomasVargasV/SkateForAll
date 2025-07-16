@@ -110,8 +110,6 @@ nav a:hover {
     transform: scale(1.05);
 }
 
-/* FIZ ISSO PRA DESTACAR NOSSO PATROCINADOR REAL */
-
 .carousel-slide img {
     max-height: 100px;
     width: auto;
@@ -124,7 +122,6 @@ nav a:hover {
     transform: scale(1.1);
 }
 
-/* ----------------------------------------------- */
 
 @keyframes carouselAnimation {
     0% {
@@ -469,7 +466,6 @@ footer {
     margin-top: 10px;
 }
 
-/* Responsivo para o footer */
 @media (max-width: 768px) {
     .footer-content {
         grid-template-columns: 1fr;
@@ -489,7 +485,6 @@ footer {
     }
 }
 
-/* RESPONSIVO */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;

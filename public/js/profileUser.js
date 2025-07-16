@@ -136,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       `).join('');
 
-      // Adicionar evento de clique aos cards
       document.querySelectorAll('.draw-card').forEach(card => {
         card.addEventListener('click', function () {
           const drawId = this.getAttribute('data-id');
@@ -179,12 +178,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modal.style.display = 'block';
 
-    // Fechar modal
     document.querySelector('.modal-close').addEventListener('click', fecharModal);
     document.querySelector('.btn-close-modal').addEventListener('click', fecharModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal() });
 
-    // Evento de desinscrição
     document.getElementById('btnUnenroll').addEventListener('click', async () => {
       const token = localStorage.getItem('token');
       try {
@@ -200,7 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
           throw new Error(errorResponse.error || "Erro ao desinscrever");
         }
 
-        // Atualizar a lista de sorteios
         await carregarSorteios(token);
         fecharModal();
         alert("Desinscrito com sucesso!");
@@ -246,7 +242,6 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(errorResponse.message || "Erro ao deletar conta");
       }
 
-      // Limpar dados e redirecionar
       localStorage.removeItem("token");
       alert("Conta deletada com sucesso!");
       window.location.href = "/public/html/home.html";
@@ -256,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Inicialização
   if (token) {
     carregarUsuario();
   } else {

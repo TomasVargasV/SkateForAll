@@ -21,7 +21,7 @@
   
   header {
     background: #000;
-    height: 60px; /* altura fixa */
+    height: 60px; 
     padding: 0 30px;
     display: flex;
     align-items: center;
@@ -132,7 +132,6 @@
   }
   
   
-  /* Responsivo */
   @media (max-width: 600px) {
     .form-cadastro {
       padding: 30px 20px;

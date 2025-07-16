@@ -92,7 +92,6 @@ header nav ul {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -112,7 +111,6 @@ header nav ul {
     padding: 20px 0;
     gap: 0;
     order: 3;
-    /* Coloca o menu abaixo dos outros elementos */
   }
 
   .nav-container.active {
