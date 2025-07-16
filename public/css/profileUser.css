@@ -121,7 +121,6 @@ select:disabled {
 
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     padding: 20px;
@@ -325,4 +324,88 @@ select:disabled {
 .button-group {
   display: flex;
   gap: 30px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+  padding: 15px;
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    margin: 10px auto;
+    padding: 18px;
+    padding-top: 30px;
+  }
+
+  .modal-header {
+    margin: 10px 0;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .button-group button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .btn-details {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 18px;
+    padding-top: 30px;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
 }
