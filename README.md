@@ -37,10 +37,8 @@ Levar inclusão, esporte e oportunidade para jovens e comunidades por meio da do
 ## 🎨 Tecnologias utilizadas
 
 - HTML, CSS, JavaScript (Front-end)
-- [Framework ou biblioteca usada se houver, ex: React, Next.js]
-- [Back-end: Node.js, PHP, etc.]
-- Banco de dados: [Ex: MySQL, Firebase, MongoDB]
-- WordPress com Elementor Pro (para a Skateshop integrada)
+- Node.js, TypeScript, Express.js, JWT(Back-End);
+- Banco de dados: MySQL;
 
 ## 🌈 Paleta de Cores
 
@@ -49,19 +47,19 @@ Levar inclusão, esporte e oportunidade para jovens e comunidades por meio da do
 
 ## 📌 Status do Projeto
 
-🚧 Projeto em desenvolvimento... novas atualizações em breve!
+Projeto Finalizado!
 
-## 🤝 Contribuições
+## 🤝 Contribuições/Parceiros
 
-Sinta-se à vontade para abrir issues, sugerir melhorias ou enviar pull requests!
+Cauã Soares;
+Gabriel de Graaf;
+Maurício Vieira;
+Murilo Rihan;
+Tomás Vieira;
 
-## 📧 Contato
 
-Entre em contato para parcerias, dúvidas ou sugestões:
 
-- Email: [seu-email@email.com]
-- Instagram: [@skateforall_]
-- Site: [link do site quando publicado]
+
 
 ---
 
