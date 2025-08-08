@@ -1,7 +1,15 @@
 # Projeto_SkateForAll
-https://pt.overleaf.com/read/ydbbtzzdqntj#0e4a63
 
-https://pt.overleaf.com/read/dffdjdydrbvq#25a2c0
+## 📄 Artigo Científico
+
+O projeto **SkateForAll** foi publicado como trabalho completo nos **Anais do VI Congresso Brasileiro Interdisciplinar em Ciência e Tecnologia (COBICET 2025)**.
+
+Você pode acessar a versão final do artigo aqui:
+➡️ [PDF oficial - Anais COBICET 2025](./caminho/do/pdf/artigoCobicetSKATEf96c05dac00a4253b8f3.pdf)
+
+Versões alternativas:
+- [Versão em português (Overleaf)](https://pt.overleaf.com/read/ydbbtzzdqntj)
+- [Versão em inglês (Overleaf)](https://pt.overleaf.com/read/dffdjdydrbvq)
 
 # 🛹 SkateForAll
 
@@ -44,10 +52,6 @@ Levar inclusão, esporte e oportunidade para jovens e comunidades por meio da do
 
 Este projeto foi **aprovado como trabalho completo** para apresentação no **VI Congresso Brasileiro Interdisciplinar em Ciência e Tecnologia (COBICET 2025)**.  
 Essa aprovação reconhece a relevância técnica e social do *SkateForAll*, uma iniciativa voltada à democratização do esporte por meio de soluções tecnológicas e inclusão social.
-
-## 📌 Status do Projeto
-
-Projeto Finalizado!
 
 ## 🤝 Contribuições/Parceiros
 
