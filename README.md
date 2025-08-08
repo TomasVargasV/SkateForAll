@@ -5,7 +5,7 @@
 O projeto **SkateForAll** foi publicado como trabalho completo nos **Anais do VI Congresso Brasileiro Interdisciplinar em Ciência e Tecnologia (COBICET 2025)**.
 
 Você pode acessar a versão final do artigo aqui:
-➡️ [PDF oficial - Anais COBICET 2025](./caminho/do/pdf/artigoCobicetSKATEf96c05dac00a4253b8f3.pdf)
+➡️ [PDF oficial - Anais COBICET 2025](./public/article/artigoCobicet.pdf)
 
 Versões alternativas:
 - [Versão em português (Overleaf)](https://pt.overleaf.com/read/ydbbtzzdqntj)
