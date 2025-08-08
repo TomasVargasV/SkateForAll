@@ -37,13 +37,13 @@ Levar inclusão, esporte e oportunidade para jovens e comunidades por meio da do
 ## 🎨 Tecnologias utilizadas
 
 - HTML, CSS, JavaScript (Front-end)
-- Node.js, TypeScript, Express.js, JWT(Back-End);
-- Banco de dados: MySQL;
+- Node.js, TypeScript, Express.js, JWT (Back-End)
+- Banco de dados: MySQL
 
-## 🌈 Paleta de Cores
+## 🏅 Reconhecimento
 
-- Preto, Vermelho, Branco e Cinza
-- Azul escuro para destaques
+Este projeto foi **aprovado como trabalho completo** para apresentação no **VI Congresso Brasileiro Interdisciplinar em Ciência e Tecnologia (COBICET 2025)**.  
+Essa aprovação reconhece a relevância técnica e social do *SkateForAll*, uma iniciativa voltada à democratização do esporte por meio de soluções tecnológicas e inclusão social.
 
 ## 📌 Status do Projeto
 
@@ -51,15 +51,11 @@ Projeto Finalizado!
 
 ## 🤝 Contribuições/Parceiros
 
-Cauã Soares;
-Gabriel de Graaf;
-Maurício Vieira;
-Murilo Rihan;
-Tomás Vieira;
-
-
-
-
+Cauã Soares  
+Gabriel de Graaf  
+Maurício Vieira  
+Murilo Rihan  
+Tomás Vieira  
 
 ---
 
